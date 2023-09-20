@@ -1,0 +1,42 @@
+﻿@model Project_BloodDonation.Models.MembersDesease
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4 class="mbdescrtmt">MembersDesease</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DeseaseId" class="control-label"></label>
+            <select asp-for="DeseaseId" name="did" id="multiselect" class="form-control" asp-items="ViewBag.DeseaseId" multiple></select>
+            </div>
+            <div class="form-group">
+                <label   class="control-label"> Upload Report</label>
+              <input type="file" name="img" multiple  />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+      $(function (){
+
+         $("#multiselect").chosen();
+        
+      });
+    </script>
+}

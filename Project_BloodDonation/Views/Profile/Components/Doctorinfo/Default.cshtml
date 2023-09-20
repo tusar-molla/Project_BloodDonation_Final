@@ -1,0 +1,71 @@
+﻿@model Doctor
+
+@*<div class="container">
+   <div class="row">
+        <div class="col-lg-6">
+         <label>Designation</label>
+         <p class="text-muted">@Model.Designation</p>
+
+         <label>RegistrationNumber</label>
+         <p class="text-muted">@Model.RegistrationNumber</p>
+         <label>CV </label>
+         <a href="@("/Doctor Docmunets/"+Model.CV)" asp-append-version="true" width="40px" height="35px"> View CV </a>
+         <br />
+         <label>Date Of Birth</label>
+         <p class="text-muted">@Model.DateOfBirth</p>
+
+         <label>Degree</label>
+         <p class="text-muted">@Model.Degree</p>
+        </div> 
+
+        <div class="col-lg-6">
+
+         <label>Institute</label>
+         <p class="text-muted">@Model.Institute</p>
+         <label>BMDC NO.</label>
+         <p class="text-muted">@Model.BMDCNO</p>
+         <label>Area Of Consultation</label>
+         <p class="text-muted">@Model.AreaOfConsultation</p>
+         <label>SpecialInterest</label>
+         <p class="text-muted">@Model.SpecialInterest</p>
+        </div>
+    </div>
+</div>
+*@
+<!-- Profile Edit Form -->
+
+<div class="tab-content pt-2">
+
+<div class="row">
+        <div class="col-lg-3 col-md-4 label">@Html.DisplayNameFor(model=> model.Designation)</div>
+    <div class="col-lg-9 col-md-8">@Model.Designation</div>
+</div>
+
+<div class="row">
+    <div class="col-lg-3 col-md-4 label ">@Html.DisplayNameFor(model=> model.RegistrationNumber)</div>
+    <div class="col-lg-9 col-md-8">@Model.RegistrationNumber</div>
+</div>
+
+    <div class="row">
+        <div class="col-lg-3 col-md-4 label ">@Html.DisplayNameFor(model=> model.DateOfBirth)</div>
+        <div class="col-lg-9 col-md-8">@Model.DateOfBirth</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-4 label ">@Html.DisplayNameFor(model=> model.Degree)</div>
+        <div class="col-lg-9 col-md-8">@Model.Degree</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-4 label ">@Html.DisplayNameFor(model=> model.Institute)</div>
+        <div class="col-lg-9 col-md-8">@Model.Institute</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-5 label ">@Html.DisplayNameFor(model=> model.AreaOfConsultation)</div>
+        <div class="col-lg-8 col-md-7">@Model.AreaOfConsultation</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-4 label ">@Html.DisplayNameFor(model=> model.SpecialInterest)</div>
+        <div class="col-lg-9 col-md-8">@Model.SpecialInterest</div>
+    </div>
+</div>
+
+<!-- End Profile Edit Form -->

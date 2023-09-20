@@ -1,0 +1,53 @@
+﻿@model Project_BloodDonation.Models.Patient
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="patientcrtmt">Create</h1>
+
+<h4>Patient</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+               <div class="col-lg-6">
+               <div class="form-group">
+                  <label asp-for="ChiefComplain" class="control-label"></label>
+                  <input asp-for="ChiefComplain" class="form-control" />
+                  <span asp-validation-for="ChiefComplain" class="text-danger"></span>
+               </div>
+
+               <div class="form-group">
+                  <label asp-for="DifferentDiagnosis" class="control-label"></label>
+                  <input asp-for="DifferentDiagnosis" class="form-control" />
+                  <span asp-validation-for="DifferentDiagnosis" class="text-danger"></span>
+               </div>
+               </div>
+            <div class="col-lg-6">
+               <div class="form-group">
+                  <label asp-for="LabrotoryFindings" class="control-label"></label>
+                  <input asp-for="LabrotoryFindings" class="form-control" />
+                  <span asp-validation-for="LabrotoryFindings" class="text-danger"></span>
+               </div>
+            </div>
+
+            </div>   
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

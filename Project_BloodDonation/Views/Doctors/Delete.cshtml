@@ -1,0 +1,84 @@
+﻿@model Project_BloodDonation.Models.Doctor
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Doctor</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DoctorTypeId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DoctorTypeId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Designation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Designation)
+        </dd>
+        
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Degree)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Degree)
+        </dd>
+
+      <dt class="col-sm-2">
+         @Html.DisplayNameFor(model => model.Institute)
+      </dt>
+      <dd class="col-sm-10">
+         @Html.DisplayFor(model => model.Institute)
+      </dd>
+      <dt class="col-sm-2">
+         @Html.DisplayNameFor(model => model.BMDCNO)
+      </dt>
+      <dd class="col-sm-10">
+         @Html.DisplayFor(model => model.BMDCNO)
+      </dd>
+      <dt class="col-sm-2">
+         @Html.DisplayNameFor(model => model.AreaOfConsultation)
+      </dt>
+      <dd class="col-sm-10">
+         @Html.DisplayFor(model => model.AreaOfConsultation)
+      </dd>
+      <dt class="col-sm-2">
+         @Html.DisplayNameFor(model => model.SpecialInterest)
+      </dt>
+      <dd class="col-sm-10">
+         @Html.DisplayFor(model => model.SpecialInterest)
+      </dd>
+      <dt class="col-sm-2">
+         @Html.DisplayNameFor(model => model.RegistrationNumber)
+      </dt>
+      <dd class="col-sm-10">
+         @Html.DisplayFor(model => model.RegistrationNumber)
+      </dd>
+      @*   <dt class="col-sm-2">
+            uploaded Image
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@("~/image/"+Model.ImageName)" asp-append-version="true" width="150px" height="150px"/>
+        </dd>*@
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

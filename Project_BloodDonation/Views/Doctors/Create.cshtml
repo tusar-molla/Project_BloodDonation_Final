@@ -1,0 +1,208 @@
+﻿@model Project_BloodDonation.Models.Doctor
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAuthorize.cshtml";
+}
+   
+<h1 class="doccretemt text-center">Enter Doctor Information</h1>
+
+
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Create" enctype ="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+             
+                <div class="row">
+                    <h2 class="Binfo">Basic Information</h2>
+                    <hr />
+
+                    <div class="col-lg-6">
+                         
+                        <div class="form-group">
+                            <label asp-for="DateOfBirth" class="control-label"></label>
+                            <input asp-for="DateOfBirth" class="form-control" />
+                            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="DoctorTypeId" class="control-label"></label>
+                            <select asp-for="DoctorTypeId" class="form-control" asp-items="@ViewBag.DoctorType">
+                                <option value="0" selected>Select Doctor Type</option>
+                            </select>
+                            <span asp-validation-for="DoctorType" class="text-danger"></span>
+                        </div>
+
+                  <div class="form-group">
+                     <label asp-for="Designation" class="control-label"></label>
+                     <input asp-for="Designation" class="form-control" />
+                     <span asp-validation-for="Designation" class="text-danger"></span>
+                  </div>
+                  <div class="form-group">
+                     <label asp-for="Institute" class="control-label"></label>
+                     <input asp-for="Institute" class="form-control" />
+                     <span asp-validation-for="Institute" class="text-danger"></span>
+                  </div>
+                  <div class="form-group">
+                     <label asp-for="BMDCNO" class="control-label"></label>
+                     <input asp-for="BMDCNO" class="form-control" />
+                     <span asp-validation-for="BMDCNO" class="text-danger"></span>
+                  </div>
+         </div>
+
+                    <div class="col-lg-6">
+                    
+                        <div class="form-group">
+                            <label asp-for="RegistrationNumber" class="control-label"></label>
+                            <input asp-for="RegistrationNumber" class="form-control" />
+                            <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
+                        </div>
+                   
+             @*   <div class="form-group">
+                            <label asp-for="CVFile" class="control-label">Upload File</label>
+                            <input asp-for="CVFile " class="form-control" />
+                            <span asp-validation-for="CVFile" class="text-danger"></span>
+                        </div>*@
+                  <div class="form-group">
+                     <label asp-for="Degree" class="control-label"></label>
+                     <input asp-for="Degree " class="form-control" />
+                     <span asp-validation-for="Degree" class="text-danger"></span>
+                  </div>
+                  <div class="form-group">
+                     <label asp-for="AreaOfConsultation" class="control-label"></label>
+                     <input asp-for="AreaOfConsultation" class="form-control" />
+                     <span asp-validation-for="AreaOfConsultation" class="text-danger"></span>
+                  </div>
+                  <div class="form-group">
+                     <label asp-for="SpecialInterest" class="control-label"></label>
+                     <input asp-for="SpecialInterest" class="form-control" />
+                     <span asp-validation-for="SpecialInterest" class="text-danger"></span>
+                  </div>
+                    </div>
+            </div>
+            <div class="row">
+               <div class="col-lg-6">
+                  <div class="form-group mt-3">
+                     <input type="submit" value="Create" class="btn btn-primary" />
+                  </div>
+               </div>
+               <div class="col-lg-6">
+                  <div class="form-group mt-3">
+                     <a asp-action="Index" class="btn btn-success">Back to List</a>
+                  </div>
+               </div>
+
+            </div>
+
+         </form>
+                </div>
+        </div>
+    </div>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+
+        function loadDivision(cid) {
+            console.log(cid)
+            console.log(cid.value)
+            let countryid = cid.value
+            console.log(countryid)
+            $.ajax({
+                url: "/Members/GetDivisionbyCountry?countryid=" + countryid,
+                method: "GET",
+
+                success: function (data) {
+                    console.log(data)
+                    var drp = $("#DivisionId");
+                    drp.empty();
+                    drp.append(' <option value="0">Select Division</option>')
+                    $.each(data, function (i, v) {
+                        drp.append("<option value='" + v.id + "'>" + v.name + "</option>")
+                    })
+                }
+            })
+        }
+
+        function loadDistrict(drp) {
+
+            let divId = drp.value
+
+            $.ajax({
+                url: "/Members/GetDistrictbyDivision?divid=" + divId,
+                method: "GET",
+
+                success: function (data) {
+                    console.log(data)
+                    var drp = $("#DistrictId");
+                    drp.empty();
+                    drp.append(' <option value="0">Select District</option>')
+                    $.each(data, function (i, v) {
+                        drp.append("<option value='" + v.id + "'>" + v.name + "</option>")
+                    })
+                },
+                error: function (er) {
+                    console.log(er.responseText)
+                }
+            })
+        }
+
+
+        function loadThana(drp) {
+
+            let distId = drp.value
+
+            $.ajax({
+                url: "/Members/GetThanabyDistrict?distid=" + distId,
+                method: "GET",
+
+                success: function (data) {
+                    console.log(data)
+                    var drp = $("#ThanaId");
+                    drp.empty();
+                    drp.append(' <option value="0">Select Thana</option>')
+                    $.each(data, function (i, v) {
+                        drp.append("<option value='" + v.id + "'>" + v.name + "</option>")
+                    })
+                },
+                error: function (er) {
+                    console.log(er.responseText)
+                }
+            })
+        }
+
+
+        function loadArea(drp) {
+
+            let thanaId = drp.value
+
+            $.ajax({
+                url: "/Members/GetAreabyThana?thnaid=" + thanaId,
+                method: "GET",
+
+                success: function (data) {
+                    console.log(data)
+                    var drp = $("#AreaId");
+                    drp.empty();
+                    drp.append(' <option value="0">Select Thana</option>')
+                    $.each(data, function (i, v) {
+                        drp.append("<option value='" + v.id + "'>" + v.name + "</option>")
+                    })
+                },
+                error: function (er) {
+                    console.log(er.responseText)
+                }
+            })
+        }
+
+
+    </script>
+}

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Project_BloodDonation.Models.Member>
+
+
+    <h2 class="Srchbymt text-center">Search</h2>
+
+<div class="container">
+    <div class="search">
+                 <form asp-action="SearchBy" asp-controller="Home">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <label class="control-label">Search By Area</label>
+                            <select class="form-control" asp-items="ViewBag.AreaId" name="AreaId" id="AreaId">
+                                <option>Select Area</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label"> Search By Blood Group</label>
+                            <select class="form-control" asp-items="ViewBag.BloodgroupId" name="BloodgroupId" id="BloodgroupId">
+                                <option>Select Blood Group</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2 mt-3">
+                        <input type="submit" value="Search" />
+                    </div>
+                </div>
+            </form>
+
+        
+            <div class="row">  
+                @foreach (var item in Model)
+                   {
+                   
+                    <div class="col-md-3 sercol text-center">
+                            @* <img src="@item.ImageName" class="card-img-top" >*@
+                            <h5>@item.FirstName</h5>
+                            <h6 class="mb-2 ">@item.Contact</h6>
+                            <p class="card-text">@item.Bloodgroup.Name</p>
+                    <a href="#">Details</a>
+                            <a href="#">Contact</a>
+                        </div>                
+                            }
+                         </div>
+                          
+                    </div>
+             </div>
+
+      
+
