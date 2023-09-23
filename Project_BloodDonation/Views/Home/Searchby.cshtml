@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Project_BloodDonation.Models.Member>
+﻿@*@model IEnumerable<Project_BloodDonation.Models.Member>
 
 
-    <h2 class="Srchbymt text-center">Search</h2>
+<h2 class="Srchbymt text-center">Search</h2>
 
 <div class="container">
     <div class="search">
@@ -36,7 +36,7 @@
                    {
                    
                     <div class="col-md-3 sercol text-center">
-                            @* <img src="@item.ImageName" class="card-img-top" >*@
+                             <img src="@item.ImageName" class="card-img-top" >
                             <h5>@item.FirstName</h5>
                             <h6 class="mb-2 ">@item.Contact</h6>
                             <p class="card-text">@item.Bloodgroup.Name</p>
@@ -51,3 +51,4 @@
 
       
 
+*@

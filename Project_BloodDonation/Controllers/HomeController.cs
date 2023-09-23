@@ -17,28 +17,40 @@ namespace Project_BloodDonation.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? AreaId, int? BloodgroupId)
         {
-            return View();
+         ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name");
+         ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name");
+
+         var data = _context.Members.Where(m => m.MemberTypes == Models.MemberTypes.Donar).ToList();
+
+         if (AreaId.HasValue)
+            data = data.Where(m => m.AreaId == AreaId.Value).ToList();
+
+         if (BloodgroupId.HasValue)
+            data = data.Where(m => m.BloodgroupId.Equals(BloodgroupId.Value)).ToList();
+         return View(data);
+
+         //return View();
         }
 
 
-        public IActionResult SearchBy(int? AreaId, int? BloodgroupId)
-        {
+        //public IActionResult SearchBy(int? AreaId, int? BloodgroupId)
+        //{
 
 
-            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name");
-            ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name");
+        //    ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name");
+        //    ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name");
 
-            var data = _context.Members.Where(m => m.MemberTypes == Models.MemberTypes.Donar).ToList();
+        //    var data = _context.Members.Where(m => m.MemberTypes == Models.MemberTypes.Donar).ToList();
 
-            if (AreaId.HasValue)
-                data = data.Where(m => m.AreaId == AreaId.Value).ToList();
+        //    if (AreaId.HasValue)
+        //        data = data.Where(m => m.AreaId == AreaId.Value).ToList();
 
-            if (BloodgroupId.HasValue)
-                data = data.Where(m => m.BloodgroupId.Equals(BloodgroupId.Value)).ToList();
-            return View(data);
-        }
+        //    if (BloodgroupId.HasValue)
+        //        data = data.Where(m => m.BloodgroupId.Equals(BloodgroupId.Value)).ToList();
+        //    return View(data);
+        //}
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
