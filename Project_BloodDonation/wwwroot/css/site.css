@@ -681,12 +681,22 @@ ul {
 }
 
 
+
+
+/*SearchBlood Start*/
+
+
+/*#Ser_blood  {
+   
+
+}*/
+/*SearchBlood End*/
 /*--------------------------------------------------------------
 # Sections General
 --------------------------------------------------------------*/
 section {
-    padding: 60px 0;
-    overflow: hidden;
+   padding: 60px 0;
+   overflow: hidden;
 }
 
 .section-bg {
@@ -1257,6 +1267,11 @@ section {
 
 
 /* For Margin top*/
+
+
+.Avl_Dnr {
+   margin-top: 110px;
+}
 
 .acc_info {
    margin-top: 80px;

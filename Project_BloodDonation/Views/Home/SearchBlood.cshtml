@@ -1,0 +1,27 @@
+﻿ @model IEnumerable<Project_BloodDonation.Models.Member>
+
+
+   <h2 class="Avl_Dnr text-center">Available Blood Donor</h2>
+<div class="container">
+   <div class="row" id="Ser_blood">
+         @foreach (var item in Model)
+         {
+      <div class="col-lg-4">
+            <div class="Serch_Blood">
+                  <h4>@item.FirstName</h4>
+                  <h5>@item.Bloodgroup.Name</h5>
+                  <a asp-controller="Members" asp-action="Details" asp-route-id="@item.Id">Details</a>
+               </div>
+            </div>
+         }
+      </div>
+   </div>
+
+@*<div class="card" style="width: 18rem;">
+   <img src="..." class="card-img-top" alt="...">
+   <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+   </div>
+</div>*@

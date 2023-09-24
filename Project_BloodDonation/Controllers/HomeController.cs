@@ -4,6 +4,8 @@ using Project_BloodDonation.Data;
 using Project_BloodDonation.Models;
 using System.Diagnostics;
 
+using Microsoft.EntityFrameworkCore;
+
 namespace Project_BloodDonation.Controllers
 {
     public class HomeController : Controller
@@ -17,43 +19,38 @@ namespace Project_BloodDonation.Controllers
             _context = context;
         }
 
-        public IActionResult Index(int? AreaId, int? BloodgroupId)
-        {
+      public IActionResult Index()
+      {
          ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name");
          ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name");
 
-         var data = _context.Members.Where(m => m.MemberTypes == Models.MemberTypes.Donar).ToList();
+         return View();
+      }
+
+
+      public IActionResult SearchBlood(int? AreaId, int? BloodgroupId)
+      {
+         ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name");
+         ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name");
+
+         var data = _context.Members.Include(c=>c.Area)
+                                    .Include(c=>c.Bloodgroup)                        
+                                    .Where(m => m.MemberTypes ==           Models.MemberTypes.Donar).ToList();
 
          if (AreaId.HasValue)
             data = data.Where(m => m.AreaId == AreaId.Value).ToList();
 
          if (BloodgroupId.HasValue)
             data = data.Where(m => m.BloodgroupId.Equals(BloodgroupId.Value)).ToList();
+         
+         
          return View(data);
 
          //return View();
-        }
+      }
 
 
-        //public IActionResult SearchBy(int? AreaId, int? BloodgroupId)
-        //{
-
-
-        //    ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name");
-        //    ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name");
-
-        //    var data = _context.Members.Where(m => m.MemberTypes == Models.MemberTypes.Donar).ToList();
-
-        //    if (AreaId.HasValue)
-        //        data = data.Where(m => m.AreaId == AreaId.Value).ToList();
-
-        //    if (BloodgroupId.HasValue)
-        //        data = data.Where(m => m.BloodgroupId.Equals(BloodgroupId.Value)).ToList();
-        //    return View(data);
-        //}
-
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+      [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

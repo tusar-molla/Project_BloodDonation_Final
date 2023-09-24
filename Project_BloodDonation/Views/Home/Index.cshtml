@@ -1,4 +1,4 @@
-﻿@*@model Member*@
+﻿
 
 <link href="./vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
 <link href="./vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
@@ -10,8 +10,7 @@
             <div class="row">
                <div class="col-lg-4">
                   <div class="hero_search">
-                     <h2>Get Blood</h2>
-               <form asp-action="Index" asp-controller="Home">                                
+                     <h2>Get Blood</h2>                                              
                         <div class="form-group">
                            <label class="control-label">By Area</label>
                            <select class="form-control" asp-items="ViewBag.AreaId" name="AreaId" id="AreaId">
@@ -25,26 +24,11 @@
                            </select>
                         </div>
                   <div class="col-lg-2 mt-2 hero_submit">
-                     <input type="submit" value="Search" />
+                  <a asp-controller="Home" asp-action="SearchBlood">Search</a>
                   </div>
-                     </form>
-
-
-            @*  <div class="row">
-                  @foreach (var item in Model)
-                  {
-
-                     <div class="col-md-3 sercol text-center">
-                         <img src="@item.ImageName" class="card-img-top" >
-                        <h5>@item.FirstName</h5>
-                        <h6 class="mb-2 ">@item.Contact</h6>
-                        <p class="card-text">@item.Bloodgroup.Name</p>
-                        <a href="#">Details</a>
-                        <a href="#">Contact</a>
-                     </div>
-                  }
-               </div>*@
                   </div>
+
+
                </div>
                <div class="col-lg-8">
                <div class="hero_inner">
@@ -56,6 +40,8 @@
             </div>
         </div>
     </section>
+
+
 
 <!-- End Hero -->
 
