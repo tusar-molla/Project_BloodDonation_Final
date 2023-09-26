@@ -1,8 +1,10 @@
 ﻿ @model IEnumerable<Project_BloodDonation.Models.Member>
 
-
+    @{
+   Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
    <h2 class="Avl_Dnr text-center">Available Blood Donor</h2>
-<div class="container">
+@*<div class="container">
    <div class="row" id="Ser_blood">
          @foreach (var item in Model)
          {
@@ -15,7 +17,7 @@
             </div>
          }
       </div>
-   </div>
+   </div>*@
 
 @*<div class="card" style="width: 18rem;">
    <img src="..." class="card-img-top" alt="...">
@@ -25,3 +27,38 @@
       <a href="#" class="btn btn-primary">Go somewhere</a>
    </div>
 </div>*@
+
+<div class="container">
+    
+   <div class="row">     
+      <div class="col-lg-12">
+         <main id="main" class="main">
+      <table class="table table-borderless datatable">
+                                    <thead>
+                                        <tr>                                          
+                                            <th scope="col">Image</th>
+                                             <th scope="col">@Html.DisplayNameFor(model=> model.FirstName)</th>
+                                               <th scope="col">@Html.DisplayNameFor(model=> model.Bloodgroup.Name)</th>
+                                                 <th scope="col">Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                       @foreach(var item in Model)
+                                       {
+                                        <tr>                                          
+                                 <td>
+                                 <img src="@("~/image/"+item.ImageName)" asp-append-version="true" width="80px" height="80px" />
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem=> item.FirstName)</td>
+                                    <td>@Html.DisplayFor(modelItem=> item.Bloodgroup.Name)</td>
+                                    <td><a class="btn btn-success" asp-controller="Members" asp-action="DonorDetails" asp-route-id="@item.Id">Details</a></td>
+                                        </tr>
+                                        
+                                        }
+                                    </tbody>
+                                </table>
+    </main
+      </div>       
+   </div> 
+</div>

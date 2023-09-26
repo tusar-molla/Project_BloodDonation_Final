@@ -1268,6 +1268,9 @@ section {
 
 /* For Margin top*/
 
+.Donor_details {
+   margin-top: 120px;
+}
 
 .Avl_Dnr {
    margin-top: 110px;
@@ -1530,13 +1533,15 @@ margin-top: 80px;
         margin-bottom: 30px;
     }
 
-  /*For patient page*/
-
+.Donor_Innerfst {
+   padding: 20px 20px;
+}
+/*For patient page*/
 .patient_head h3 {
-    margin-top: 130px;
-    font-size: 30px;
-    color: #444444;
-    margin-bottom: 20px;
+   margin-top: 130px;
+   font-size: 30px;
+   color: #444444;
+   margin-bottom: 20px;
 }
 
 .patient_head h2 {
