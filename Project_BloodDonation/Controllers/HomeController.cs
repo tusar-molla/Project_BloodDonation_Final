@@ -34,7 +34,7 @@ namespace Project_BloodDonation.Controllers
          ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name");
 
          var data = _context.Members.Include(c=>c.Area)
-                                    .Include(c=>c.Bloodgroup)                        
+                                    .Include(c=>c.Bloodgroup)                 
                                     .Where(m => m.MemberTypes ==           Models.MemberTypes.Donar).ToList();
 
          if (AreaId.HasValue)

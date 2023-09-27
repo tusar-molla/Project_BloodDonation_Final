@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Project_BloodDonation.Data;
+using System.IO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,14 @@ builder.Services.AddIdentity<ApplicationUser,IdentityRole>(option =>
 .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+// Add Identity path For Authorization in Controller.
+builder.Services.ConfigureApplicationCookie(option => {
+   option.LoginPath = "/Identity/Account/Login";
+   option.LogoutPath = "/Identity/Account/Logout";
+});
 builder.Services.AddRazorPages();
+
+
 //builder.Services.AddTransient<IEmailSender, EmailSender >();
 var app = builder.Build();
 

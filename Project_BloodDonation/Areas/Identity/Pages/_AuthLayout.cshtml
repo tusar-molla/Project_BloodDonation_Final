@@ -36,8 +36,12 @@
     <script>
         $(function () {
             const currentPage = location.pathname;
+      
+            console.log(currentPage)
+
             $('.nav-tabs li a').each(function () {
                 const $this = $(this);
+                console.log(currentPage.toLowerCase().indexOf($this.attr('href').toLowerCase()))
                 if (currentPage.toLowerCase().indexOf($this.attr('href').toLowerCase()) !== -1) {
                     $this.addClass('active');
                 }

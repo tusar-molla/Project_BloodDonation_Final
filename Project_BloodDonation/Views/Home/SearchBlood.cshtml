@@ -1,8 +1,33 @@
 ﻿ @model IEnumerable<Project_BloodDonation.Models.Member>
 
-    @{
+  @*  @{
    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    }
+    }*@
+
+    
+   @* For Admin Panel Start*@
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/vendor/bootstrap-icons//bootstrap-icons.css" rel="stylesheet" />
+    <link href="~/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link href="~/vendor//quill//quill.snow.css" rel="stylesheet" />
+    <link href="~/vendor/quill/quill.bubble.css" rel="stylesheet" />
+    <link href="~/vendor/remixicon//remixicon.css" rel="stylesheet" />
+    <link href="~/vendor/simple-datatables/style.css" rel="stylesheet" />
+
+    @* For Admin Panel End*@
+
+    <link rel="stylesheet" href="~/css/Admin_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
    <h2 class="Avl_Dnr text-center">Available Blood Donor</h2>
 @*<div class="container">
    <div class="row" id="Ser_blood">
@@ -30,9 +55,9 @@
 
 <div class="container">
     
-   <div class="row">     
+   <div class="row justify-content-end">     
       <div class="col-lg-12">
-         <main id="main" class="main">
+        @* <main id="main" class="main">*@
       <table class="table table-borderless datatable">
                                     <thead>
                                         <tr>                                          
@@ -52,13 +77,35 @@
                                     </td>
                                     <td>@Html.DisplayFor(modelItem=> item.FirstName)</td>
                                     <td>@Html.DisplayFor(modelItem=> item.Bloodgroup.Name)</td>
-                                    <td><a class="btn btn-success" asp-controller="Members" asp-action="DonorDetails" asp-route-id="@item.Id">Details</a></td>
+                     @*<td><a href="~/Identity/Account/Register/@item.Id?role=General Member" class="btn btn-success" asp-controller="Members" asp-action="DonorDetails" asp-route-id="@item.Id">Details</a></td>*@
+                     <td><a href="~/Members/DonorDetails/@item.Id?role=General Member" class="btn btn-success">Details</a></td>
                                         </tr>
                                         
                                         }
                                     </tbody>
                                 </table>
-    </main
-      </div>       
-   </div> 
-</div>
+@*    </main*@
+      </div>     
+      
+
+
+   </div>
+   </div>
+         <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+   @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+
+   <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/vendor/chart.js/chart.umd.js"></script>
+    <script src="~/vendor/echarts/echarts.min.js"></script>
+    <script src="~/vendor/quill/quill.min.js"></script>
+    <script src="~/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="~/vendor/tinymce/tinymce.min.js"></script>
+     <script src="~/js/main.js" asp-append-version="true"></script>
+@*   <script src="~/js/site.js" asp-append-version="true"></script>*@
+
+@*    @await RenderSectionAsync("Scripts", required: false)*@
+
+

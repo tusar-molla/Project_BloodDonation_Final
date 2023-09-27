@@ -148,6 +148,12 @@ namespace Project_BloodDonation.Areas.Identity.Pages.Account
                   {
                      return Redirect("~/User/Dashboard?role="+Input.Role);
                   }
+
+                  if (Input.Role.Equals("General Member"))
+
+                  {
+                     return Redirect("~/Profile/MyProfile?role=" + Input.Role);
+                  }
                }
                     else
                     {

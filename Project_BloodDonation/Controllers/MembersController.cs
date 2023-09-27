@@ -66,24 +66,34 @@ namespace Project_BloodDonation.Controllers
             return View(member);
         }
 
+      //[HttpGet]
 
-      [Authorize (Roles = "Admin, User")]
+      //public IActionResult DonorDetails(Member member) { 
+
+      //   return View();
+      //}                                                   
+
+      //[HttpPost]
+      [Authorize]
       public async Task<IActionResult> DonorDetails(int? id)
       {
          if (id == null || _context.Members == null)
          {
             return NotFound();
          }
-
          var member = await _context.Members
              .Include(m => m.Area)
              .Include(m => m.Bloodgroup)
              .FirstOrDefaultAsync(m => m.Id == id);
          if (member == null)
-         {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+         {                                                                   
             return NotFound();
          }
 
+         if (member.Role.Equals("General Member"))
+         {
+            return Redirect("~/Members/Create");
+         }
          return View(member);
       }
 
@@ -98,14 +108,11 @@ namespace Project_BloodDonation.Controllers
             ApplicationUser user = await userManager.FindByEmailAsync(User.Identity.Name);
             return View(new Member { Email = user.Email, Role = role, FirstName = user.FirstName, LastName= user.LastName});
          }
-
             catch (Exception ex) {
 
                 ModelState.AddModelError("", ex.Message);
-            }      
-            return View();
-       
-         
+            }            
+            return View();                
       }
 
         public JsonResult GetDivisionbyCountry(int countryid) { 

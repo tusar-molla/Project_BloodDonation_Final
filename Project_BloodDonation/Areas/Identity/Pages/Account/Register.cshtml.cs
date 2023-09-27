@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Project_BloodDonation.Data;
+using Project_BloodDonation.Models;
 
 namespace Project_BloodDonation.Areas.Identity.Pages.Account
 {
@@ -189,9 +190,18 @@ namespace Project_BloodDonation.Areas.Identity.Pages.Account
                //    await _signInManager.SignInAsync(user, isPersistent: false);
                //    return LocalRedirect(returnUrl);
                //}
+               string roleName = "";
+
                if (!string.IsNullOrEmpty(Input.Role))
                {
-                    var Roleresult=  await _userManager.AddToRoleAsync(user, Input.Role);
+                  roleName = Input.Role;
+               }
+               else
+               {
+                  roleName = "General Manager";
+               }
+               var Roleresult=  await _userManager.AddToRoleAsync(user, roleName);
+
                     if(Roleresult.Succeeded)
                     {
                       var data = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, false, lockoutOnFailure: false
@@ -215,15 +225,24 @@ namespace Project_BloodDonation.Areas.Identity.Pages.Account
                         
                         return Redirect("~/Members/Create?role=Admin");
                      }
-                     else
+
+                  else if(Input.Role.Equals("General Member"))
+                  {
+
+                     return Redirect("~/Members/Create?role= General Member");
+                  }
+
+                  else
                      {
                         
                         return Redirect("~/Members/Create?role=User");
                      }
-                  }
+
+                   
+               }
                     
                     
-                }
+              
                 foreach (var error in result.Errors) {
 
                     ModelState.AddModelError(string.Empty, error.Description);
