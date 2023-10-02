@@ -226,14 +226,14 @@ namespace Project_BloodDonation.Areas.Identity.Pages.Account
                         return Redirect("~/Members/Create?role=Admin");
                      }
 
-                  else if(Input.Role.Equals("General Member"))
+                  else if(Input.Role.Equals("GENERAL MEMBER"))
                   {
 
-                     return Redirect("~/Members/Create?role= General Member");
+                     return Redirect("~/Members/Create?role= GENERAL MEMBER");
                   }
 
                   else
-                     {
+                  {
                         
                         return Redirect("~/Members/Create?role=User");
                      }

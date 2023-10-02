@@ -27,8 +27,9 @@ namespace Project_BloodDonation.Controllers
          return View();
       }
 
-
+    
       public IActionResult SearchBlood(int? AreaId, int? BloodgroupId)
+      
       {
          ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name");
          ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name");
@@ -46,7 +47,7 @@ namespace Project_BloodDonation.Controllers
          
          return View(data);
 
-         //return View();
+       
       }
 
 

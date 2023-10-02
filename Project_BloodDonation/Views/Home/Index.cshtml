@@ -10,6 +10,7 @@
             <div class="row">
                <div class="col-lg-4">
                   <div class="hero_search">
+               <form asp-action="SearchBlood" asp-controller="Home" >
                      <h2>Get Blood</h2>                                              
                         <div class="form-group">
                            <label class="control-label">By Area</label>
@@ -24,9 +25,11 @@
                            </select>
                         </div>
                   <div class="col-lg-2 mt-2 hero_submit">
-                  <a class="btn btn-primary" asp-controller="Home" asp-action="SearchBlood">Search</a>
+                  @*<a class="btn btn-primary" asp-controller="Home" asp-route-AreaId=""  asp-action="SearchBlood">Search</a>*@
+                     <button type="submit" class="btn btn-primary" >Search</button>
                   </div>
-                  </div>
+               </form>
+            </div>
 
 
                </div>

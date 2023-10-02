@@ -166,7 +166,7 @@ namespace Project_BloodDonation.Controllers
                     }
                         _context.Add(member);
                     if (await _context.SaveChangesAsync() > 0)
-                    {
+                     {
                   if (member.Role.Equals("Doctor"))
                   {
 
