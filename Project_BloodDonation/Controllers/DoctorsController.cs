@@ -34,13 +34,10 @@ namespace Project_BloodDonation.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-
         public async Task<IActionResult> DocHome() { 
         
             return View();
         }
-
-
 
         // GET: Doctors/Details/5
         //[Authorize(Roles = "Admin,Doctor")]

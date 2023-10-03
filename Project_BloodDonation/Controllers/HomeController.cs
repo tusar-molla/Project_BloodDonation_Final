@@ -42,9 +42,7 @@ namespace Project_BloodDonation.Controllers
             data = data.Where(m => m.AreaId == AreaId.Value).ToList();
 
          if (BloodgroupId.HasValue)
-            data = data.Where(m => m.BloodgroupId.Equals(BloodgroupId.Value)).ToList();
-         
-         
+            data = data.Where(m => m.BloodgroupId.Equals(BloodgroupId.Value)).ToList();         
          return View(data);
 
        

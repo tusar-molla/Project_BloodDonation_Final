@@ -11,7 +11,6 @@ namespace Project_BloodDonation.Models
     public class Doctor
     {
         public int Id { get; set; }
-      //[Column(TypeName = "nvarchar(60)")]
       [DataType(DataType.Date)]
       [DisplayName("Date Of Birth")]
       public DateTime DateOfBirth { get; set; }
@@ -51,7 +50,7 @@ namespace Project_BloodDonation.Models
 
     public class DoctorType
     {
-        //Medical, Dental, Veterinary
+ 
         public int Id { get; set; }
         [StringLength(25)]
         public string Name { get; set; }

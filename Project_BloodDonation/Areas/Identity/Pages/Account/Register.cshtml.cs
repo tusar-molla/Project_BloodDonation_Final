@@ -198,7 +198,7 @@ namespace Project_BloodDonation.Areas.Identity.Pages.Account
                }
                else
                {
-                  roleName = "General Manager";
+                  roleName = "GENERAL MEMBER";
                }
                var Roleresult=  await _userManager.AddToRoleAsync(user, roleName);
 
@@ -206,39 +206,49 @@ namespace Project_BloodDonation.Areas.Identity.Pages.Account
                     {
                       var data = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, false, lockoutOnFailure: false
                      );
-                     if (Input.Role.Equals("Doctor"))
-                     {
-                        return Redirect("~/Members/Create?role=Doctor");
-                     }
-                    else if (Input.Role.Equals("Donor"))
-                     {
-                        
-                        return Redirect("~/Members/Create?role=Donor");
-                     }
-                     else if (Input.Role.Equals("Patient"))
-                     {
-                        
-                        return Redirect("~/Members/Create?role=Patient");
-                     }
-                    else if (Input.Role.Equals("Admin"))
-                     {
-                        
-                        return Redirect("~/Members/Create?role=Admin");
-                     }
+               var  ur=    _userManager.GetRolesAsync(user);
+                  return Redirect("~/Members/Create?role= "+ur.Result.FirstOrDefault());
 
-                  else if(Input.Role.Equals("GENERAL MEMBER"))
-                  {
+                  //if (string.IsNullOrEmpty (Input.Role)) {
+                  //   if (Input.Role.Equals("GENERAL MEMBER"))
+                  //   {
 
-                     return Redirect("~/Members/Create?role= GENERAL MEMBER");
-                  }
+                  //      return Redirect("~/Members/Create?role= GENERAL MEMBER");
+                  //   }
+                  //}
+                  //   if (Input.Role.Equals("Doctor"))
+                  //   {
+                  //      return Redirect("~/Members/Create?role=Doctor");
+                  //   }
+                  //  else if (Input.Role.Equals("Donor"))
+                  //   {
 
-                  else
-                  {
-                        
-                        return Redirect("~/Members/Create?role=User");
-                     }
+                  //      return Redirect("~/Members/Create?role=Donor");
+                  //   }
+                  //   else if (Input.Role.Equals("Patient"))
+                  //   {
 
-                   
+                  //      return Redirect("~/Members/Create?role=Patient");
+                  //   }
+                  //  else if (Input.Role.Equals("Admin"))
+                  //   {
+
+                  //      return Redirect("~/Members/Create?role=Admin");
+                  //   }
+
+                  //else if(Input.Role.Equals("GENERAL MEMBER"))
+                  //{
+
+                  //   return Redirect("~/Members/Create?role= GENERAL MEMBER");
+                  //}
+
+                  //else
+                  //{
+
+                  //      return Redirect("~/Members/Create?role=User");
+                  //   }
+
+
                }
                     
                     
