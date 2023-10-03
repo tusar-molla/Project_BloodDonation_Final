@@ -38,13 +38,34 @@ h6 {
   font-family: "Nunito", sans-serif;
 }
 
+
+/*--------------------------------------------------------------
+Changes By Tushar
+--------------------------------------------------------------*/
+.Reg_no {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*--------------------------------------------------------------
 # Main
 --------------------------------------------------------------*/
 #main {
-  margin-top: 60px;
-  padding: 20px 30px;
-  transition: all 0.3s;
+   margin-top: 60px;
+   padding: 20px 30px;
+   transition: all 0.3s;
 }
 
 @media (max-width: 1199px) {
@@ -1006,6 +1027,7 @@ h6 {
   font-weight: 700;
   color: #2c384e;
   margin: 10px 0 0 0;
+
 }
 
 .profile .profile-card h3 {
@@ -1026,12 +1048,15 @@ h6 {
 }
 
 .profile .profile-overview .row {
-  margin-bottom: 20px;
-  font-size: 15px;
+   margin-bottom: 20px;
+   font-size: 15px;
+   
 }
 
+.txt_trans
+
 .profile .profile-overview .card-title {
-  color: #012970;
+   color: #012970;
 }
 
 .profile .profile-overview .label {
