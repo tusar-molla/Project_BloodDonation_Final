@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project_BloodDonation.Data;
 
@@ -11,9 +12,10 @@ using Project_BloodDonation.Data;
 namespace Project_BloodDonation.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231005071553_bldref")]
+    partial class bldref
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -252,11 +254,8 @@ namespace Project_BloodDonation.Migrations
 
             modelBuilder.Entity("Project_BloodDonation.Models.BldReference", b =>
                 {
-                    b.Property<int>("BldReferenceId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BldReferenceId"), 1L, 1);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -293,7 +292,7 @@ namespace Project_BloodDonation.Migrations
                     b.Property<int>("ReferenceId")
                         .HasColumnType("int");
 
-                    b.HasKey("BldReferenceId");
+                    b.HasKey("Id");
 
                     b.HasIndex("BloodGroupId");
 
@@ -554,12 +553,13 @@ namespace Project_BloodDonation.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Age")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("AreaId")
+                    b.Property<int>("AreaId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BloodgroupId")
+                    b.Property<int>("BloodgroupId")
                         .HasColumnType("int");
 
                     b.Property<string>("Contact")
@@ -576,23 +576,26 @@ namespace Project_BloodDonation.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("ImageName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MemberGender")
+                    b.Property<int>("MemberGender")
                         .HasColumnType("int");
 
                     b.Property<int>("MemberTypes")
                         .HasColumnType("int");
 
                     b.Property<string>("NID")
+                        .IsRequired()
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
 
                     b.Property<string>("Passport")
+                        .IsRequired()
                         .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("RegistrationDate")
@@ -604,6 +607,7 @@ namespace Project_BloodDonation.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SmartCard")
+                        .IsRequired()
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
 
@@ -856,11 +860,15 @@ namespace Project_BloodDonation.Migrations
                 {
                     b.HasOne("Project_BloodDonation.Models.Area", "Area")
                         .WithMany()
-                        .HasForeignKey("AreaId");
+                        .HasForeignKey("AreaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Project_BloodDonation.Models.Bloodgroup", "Bloodgroup")
                         .WithMany("Members")
-                        .HasForeignKey("BloodgroupId");
+                        .HasForeignKey("BloodgroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Area");
 

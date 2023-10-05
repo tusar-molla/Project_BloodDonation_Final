@@ -32,59 +32,61 @@ namespace Project_BloodDonation.Models
       [Column(TypeName = "nvarchar(40)")] //, DisplayName("Passport Number")]
 
      
-      public string Passport { get; set; }
+      public string? Passport { get; set; }
         [Column(TypeName = "nvarchar(50)")]
         [StringLength(20)]
-      public string FirstName { get; set; }
+      [Required]
+        public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
         public string Contact { get; set; }
         //[Unique(ErrorMessage = "This already exist !!")]
         public string Email { get; set; }
-        public string Age { get; set; }
+        public string? Age{ get; set; }
 
         [StringLength(14), DisplayName("National ID")]
-        public string NID { get; set; }
+        public string? NID { get; set; }
 
         [StringLength(14), DisplayName("Smart ID")]
 
-        public string SmartCard { get; set; }
+        public string? SmartCard { get; set; }
         public MemberTypes MemberTypes { get; set; } = MemberTypes.Donar;
-        public MemberGender MemberGender { get; set; }
+        public MemberGender? MemberGender { get; set; }
       public string Role { get; set; }
 
       [Column (TypeName ="nvarchar(100)")]
         [DisplayName("Image Name")]
         [ValidateNever]
-        public string ImageName { get; set; }
+        public string? ImageName { get; set; }
 
         [NotMapped]
         [DisplayName("Upload File")]
-        public IFormFile ImageFile { get; set; }
+        public IFormFile? ImageFile { get; set; }
      
       public string RegistrationDate { get; set; } = DateTime.Now.ToShortDateString();
   
         [ForeignKey("Bloodgroup"),DisplayName("Blood Group")]
-        public int BloodgroupId { get; set; }
+        public int? BloodgroupId { get; set; }
         [ValidateNever]
-        public Bloodgroup Bloodgroup { get; set; }
+        public Bloodgroup? Bloodgroup { get; set; }
 
         [ForeignKey("Area"),DisplayName("Area")]
      
-      public int AreaId { get; set; }
+      public int? AreaId { get; set; }
       [ValidateNever]
-      public Area Area { get; set; }
+      public Area? Area { get; set; }
 
       [ValidateNever]
-      public ICollection<Donar> Donars { get; set; }
+      public ICollection<Donar>? Donars { get; set; }
 
       [ValidateNever]
-      public ICollection<Doctor> Doctors { get; set; }
+      public ICollection<Doctor>? Doctors { get; set; }
       [ValidateNever]
-      public ICollection<Patient> patients { get; set; }
+      public ICollection<Patient>? patients { get; set; }
       [ValidateNever]
-      public ICollection<MembersDesease> MembersDeseases {get; set;}
-    }
+      public ICollection<MembersDesease>? MembersDeseases {get; set;}
+      public ICollection<BldReference>? BldReferences { get; set; }
+   }
 
     public class Area { 
     

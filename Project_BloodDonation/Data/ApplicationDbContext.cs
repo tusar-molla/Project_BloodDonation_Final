@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Project_BloodDonation.Models;
 using System.ComponentModel.DataAnnotations.Schema;
+using Project_BloodDonation.ViewModels;
 
 namespace Project_BloodDonation.Data
 {
@@ -30,6 +31,8 @@ namespace Project_BloodDonation.Data
         public DbSet<Donar> Donars { get; set; }
         public DbSet<Patient> patients { get; set; }
         public DbSet<MemberDeseaseReports> MemberDeseaseReports { get; set; }
+      public  DbSet<BldReference> BldReferences { get; set; }
+    
 
 
    }

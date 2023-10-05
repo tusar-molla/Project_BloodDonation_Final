@@ -13,9 +13,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Identity/Account/Register">
+                       @* <a class="nav-link" href="/Identity/Account/Register">
                             Register
-                        </a>
+                        </a>*@
+
+                 
+                  <input class="nav-link" type="button" name="theButton" value="Register"
+                         id="btnRegi">
                     </li>
                 </ul>
             </div>
@@ -35,9 +39,30 @@
     @await RenderSectionAsync("Scripts", required: false)
     <script>
         $(function () {
-            const currentPage = location.pathname;
-      
-            console.log(currentPage)
+           
+         var currLoc = $(location).attr('href'); oc = $(location).attr('href');
+         console.log("here I am");
+         console.log(currLoc)
+
+         var url = currLoc.slice(window.location.href.indexOf('?') + 1).split('&');
+         console.log(url)
+         for (var i = 0; i < url.length; i++) {
+            var urlparam = url[i].split('=');
+            var returnUrl= urlparam[1]
+            console.log( "return Url: "+returnUrl.toString())
+            //if (urlparam[0] == param) {
+            //    urlparam[1];
+            //}
+            console.log(urlparam)
+         }
+         $("#btnRegi").click(function(){
+            var a = '/Identity/Account/Register?' + returnUrl;
+            console.log(a)
+            window.location = '/Identity/Account/Register?ReturnUrl=' + returnUrl;
+         })
+
+         const currentPage = location.pathname;
+         console.log(currentPage)
 
             $('.nav-tabs li a').each(function () {
                 const $this = $(this);

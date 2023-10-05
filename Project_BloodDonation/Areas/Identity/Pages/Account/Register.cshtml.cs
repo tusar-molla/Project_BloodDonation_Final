@@ -206,9 +206,17 @@ namespace Project_BloodDonation.Areas.Identity.Pages.Account
                     {
                       var data = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, false, lockoutOnFailure: false
                      );
-               var  ur=    _userManager.GetRolesAsync(user);
-                  return Redirect("~/Members/Create?role= "+ur.Result.FirstOrDefault());
-
+               var  ur= await    _userManager.GetRolesAsync(user);
+                  string roleTocheck = "GENERAL MEMBER";
+                  if (ur.FirstOrDefault().ToString().ToLower().Equals(roleTocheck.ToLower()))
+                  {
+                    // return RedirectToAction("Create", "BldrfrenceandPatientdtlsViewModels");
+                     return Redirect("~/BldrfrenceandPatientdtlsViewModels/Create?role= " + ur.FirstOrDefault().ToString() + "&returnUrl="+ returnUrl);
+                  }
+                  else
+                  {
+                     return Redirect("~/Members/Create?role= " + ur.FirstOrDefault().ToString());
+                  }
                   //if (string.IsNullOrEmpty (Input.Role)) {
                   //   if (Input.Role.Equals("GENERAL MEMBER"))
                   //   {

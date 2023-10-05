@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project_BloodDonation.Data;
 
@@ -11,9 +12,10 @@ using Project_BloodDonation.Data;
 namespace Project_BloodDonation.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231005112506_nukll")]
+    partial class nukll
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -252,11 +254,8 @@ namespace Project_BloodDonation.Migrations
 
             modelBuilder.Entity("Project_BloodDonation.Models.BldReference", b =>
                 {
-                    b.Property<int>("BldReferenceId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BldReferenceId"), 1L, 1);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -293,7 +292,7 @@ namespace Project_BloodDonation.Migrations
                     b.Property<int>("ReferenceId")
                         .HasColumnType("int");
 
-                    b.HasKey("BldReferenceId");
+                    b.HasKey("Id");
 
                     b.HasIndex("BloodGroupId");
 
@@ -556,10 +555,10 @@ namespace Project_BloodDonation.Migrations
                     b.Property<string>("Age")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("AreaId")
+                    b.Property<int>("AreaId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BloodgroupId")
+                    b.Property<int>("BloodgroupId")
                         .HasColumnType("int");
 
                     b.Property<string>("Contact")
@@ -593,6 +592,7 @@ namespace Project_BloodDonation.Migrations
                         .HasColumnType("nvarchar(14)");
 
                     b.Property<string>("Passport")
+                        .IsRequired()
                         .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("RegistrationDate")
@@ -717,6 +717,48 @@ namespace Project_BloodDonation.Migrations
                     b.HasIndex("DistricId");
 
                     b.ToTable("Thanas");
+                });
+
+            modelBuilder.Entity("Project_BloodDonation.ViewModels.BldrfrenceandPatientdtlsViewModels", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BldReferenceId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Contact")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BldReferenceId");
+
+                    b.ToTable("BldrfrenceandPatientdtlsViewModels");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -856,11 +898,15 @@ namespace Project_BloodDonation.Migrations
                 {
                     b.HasOne("Project_BloodDonation.Models.Area", "Area")
                         .WithMany()
-                        .HasForeignKey("AreaId");
+                        .HasForeignKey("AreaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Project_BloodDonation.Models.Bloodgroup", "Bloodgroup")
                         .WithMany("Members")
-                        .HasForeignKey("BloodgroupId");
+                        .HasForeignKey("BloodgroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Area");
 
@@ -917,6 +963,15 @@ namespace Project_BloodDonation.Migrations
                         .IsRequired();
 
                     b.Navigation("District");
+                });
+
+            modelBuilder.Entity("Project_BloodDonation.ViewModels.BldrfrenceandPatientdtlsViewModels", b =>
+                {
+                    b.HasOne("Project_BloodDonation.Models.BldReference", "BldReference")
+                        .WithMany()
+                        .HasForeignKey("BldReferenceId");
+
+                    b.Navigation("BldReference");
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Bloodgroup", b =>
