@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +15,12 @@ namespace Project_BloodDonation.Controllers
     public class BldrfrenceandPatientdtlsViewModelsController : Controller
     {
         private readonly ApplicationDbContext _context;
+      private readonly UserManager<ApplicationUser> userManager;
 
-        public BldrfrenceandPatientdtlsViewModelsController(ApplicationDbContext context)
+        public BldrfrenceandPatientdtlsViewModelsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
-            _context = context;
+         _context = context;
+         this.userManager = userManager;
         }
 
         // GET: BldrfrenceandPatientdtlsViewModels
@@ -33,13 +36,25 @@ namespace Project_BloodDonation.Controllers
 
             return View();
         }
-
-        // GET: BldrfrenceandPatientdtlsViewModels/Create
-        public IActionResult Create(string returnUrl = null)
+      public string ReturnUrl {get; set;}
+      // GET: BldrfrenceandPatientdtlsViewModels/Create
+      public async Task<IActionResult> Create(string role,string returnUrl = "")
         {
+         try
+         {
+            ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name");
+            ViewBag.ReturnUrl = returnUrl;
+            ApplicationUser user = await userManager.FindByEmailAsync(User.Identity.Name);
+            return View(new Project_BloodDonation.ViewModels.BldrfrenceandPatientdtlsViewModels { Email = user.Email, Role = role, FirstName = user.FirstName, LastName = user.LastName });
+         }
 
-            return View();
-        }
+         catch (Exception ex)
+         {
+
+            ModelState.AddModelError("", ex.Message);
+         }
+         return View();
+      }
 
         // POST: BldrfrenceandPatientdtlsViewModels/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -83,11 +98,13 @@ namespace Project_BloodDonation.Controllers
             if(    await _context.SaveChangesAsync()>0)
             {
                //return RedirectToAction("Profile","Myprofile");
-               return Redirect(returnUrl);
+               return LocalRedirect(returnUrl);
             }
-             
-            //}
-            return View(bvm); 
+
+         //}
+         ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name", member.BloodgroupId);
+
+         return View(bvm); 
         }
         // GET: BldrfrenceandPatientdtlsViewModels/Edit/5
         public async Task<IActionResult> Edit(int? id)

@@ -66,14 +66,6 @@ namespace Project_BloodDonation.Controllers
             return View(member);
         }
 
-      //[HttpGet]
-
-      //public IActionResult DonorDetails(Member member) { 
-
-      //   return View();
-      //}                                                   
-
-      //[HttpPost]
       [Authorize]
       public async Task<IActionResult> DonorDetails(int? id)
       {
@@ -106,7 +98,7 @@ namespace Project_BloodDonation.Controllers
                 ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name");
                 ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name");
             ApplicationUser user = await userManager.FindByEmailAsync(User.Identity.Name);
-            return View(new Member { Email = user.Email, Role = role, FirstName = user.FirstName, LastName= user.LastName});
+            return View(new Project_BloodDonation.ViewModels.BldrfrenceandPatientdtlsViewModels { Email = user.Email, Role = role, FirstName = user.FirstName, LastName= user.LastName});
          }
             catch (Exception ex) {
 

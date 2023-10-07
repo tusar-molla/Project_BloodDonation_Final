@@ -1587,6 +1587,38 @@ margin-top: 80px;
    /* margin: 0 20px;*/
 }
 
+/*For Donor Page*/
+
+#Donor_sec {
+   background: #000000; /* fallback for old browsers */
+   background: -webkit-linear-gradient(to right, #434343, #000000); /* Chrome 10-25, Safari 5.1-6 */
+   background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#donor_details {
+   padding-top: 80px;
+   
+}
+
+.Donr_img img {
+   object-fit: cover;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*For Profile Page*/
 /*
 #acc_info {
@@ -1621,8 +1653,8 @@ margin-top: 80px;
 }*/
 /*Search By */
 #Search {
-    padding: 10px 10px;
-    border: 1px solid #d5e1ed;
+   padding: 10px 10px;
+   border: 1px solid #d5e1ed;
 }
 
 .sercol {
