@@ -79,7 +79,7 @@ namespace Project_BloodDonation.Controllers
             _context.Members.Add(member);
             await _context.SaveChangesAsync();
 
-         var breference = new BldReference
+         var breference = new BloodReqst
          {
           
                 PatientName= bvm.BldReference.PatientName,
@@ -94,7 +94,7 @@ namespace Project_BloodDonation.Controllers
             };
 
          
-            _context.BldReferences.Add(breference);
+            _context.BloodReqsts.Add(breference);
             if(    await _context.SaveChangesAsync()>0)
             {
                //return RedirectToAction("Profile","Myprofile");
@@ -167,7 +167,7 @@ namespace Project_BloodDonation.Controllers
 
         private bool BldrfrenceandPatientdtlsViewModelsExists(int id)
         {
-          return (_context.BldReferences?.Any(e => e.BldReferenceId == id)).GetValueOrDefault();
+          return (_context.BloodReqsts?.Any(e => e.BloodReqstId == id)).GetValueOrDefault();
         }
     }
 }

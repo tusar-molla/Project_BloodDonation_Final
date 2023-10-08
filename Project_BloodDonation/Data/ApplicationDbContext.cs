@@ -15,7 +15,6 @@ namespace Project_BloodDonation.Data
         {
         }
 
-       
         public DbSet<Bloodgroup> Bloodgroups { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<Area> Areas { get; set; }
@@ -31,7 +30,7 @@ namespace Project_BloodDonation.Data
         public DbSet<Donar> Donars { get; set; }
         public DbSet<Patient> patients { get; set; }
         public DbSet<MemberDeseaseReports> MemberDeseaseReports { get; set; }
-      public  DbSet<BldReference> BldReferences { get; set; }
+        public  DbSet<BloodReqst> BloodReqsts { get; set; }
     
 
 

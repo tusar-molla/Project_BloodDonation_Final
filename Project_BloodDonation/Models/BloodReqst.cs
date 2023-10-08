@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.InteropServices;
 
 namespace Project_BloodDonation.Models
 {
-   public class BldReference
+   public class BloodReqst
    {
-      
-      public int BldReferenceId { get; set;}
+      [Key]
+      public int BloodReqstId { get; set;}
       public string PatientName {get; set;}
       public string PatientPhoneNo { get; set;}
       public string Address { get; set;}

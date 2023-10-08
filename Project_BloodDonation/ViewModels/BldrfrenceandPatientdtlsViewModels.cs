@@ -5,7 +5,7 @@ namespace Project_BloodDonation.ViewModels
 {
    public class BldrfrenceandPatientdtlsViewModels
    {
-      public BldReference? BldReference { get; set; }
+      public BloodReqst? BldReference { get; set; }
       //public Member? Member { get; set; }
 
       public int Id { get; set; }//MemberId

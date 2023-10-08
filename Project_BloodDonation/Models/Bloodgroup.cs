@@ -85,7 +85,7 @@ namespace Project_BloodDonation.Models
       public ICollection<Patient>? patients { get; set; }
       [ValidateNever]
       public ICollection<MembersDesease>? MembersDeseases {get; set;}
-      public ICollection<BldReference>? BldReferences { get; set; }
+      public ICollection<BloodReqst>? BldReferences { get; set; }
    }
 
     public class Area { 
