@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Framework;
 using Microsoft.EntityFrameworkCore;
 using Project_BloodDonation.Data;
@@ -13,6 +14,8 @@ namespace Project_BloodDonation.Controllers
         
             _context = context;
         }
+
+      [Authorize]
         public IActionResult Myprofile()
         {
 

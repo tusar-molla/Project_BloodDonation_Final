@@ -21,21 +21,13 @@
    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
    <link rel="stylesheet" href="~/Project_BloodDonation.styles.css" asp-append-version="true" />
    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-
    @* <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
    *@
-
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
    <link href="~/chosen/chosen.min.css" rel="stylesheet" />
- 
 </head>
-
-
 <body>
-
-
    <!-- ======= Top Bar ======= -->
    <div id="topbar" class="d-flex align-items-center fixed-top">
       <div class="container d-flex justify-content-between">
@@ -51,7 +43,6 @@
          </div>
       </div>
    </div>
-
    <!-- ======= Header ======= -->
    <header id="header" class="fixed-top">
       <div class="container d-flex align-items-center">
@@ -59,19 +50,16 @@
          <h1 class="logo me-auto"><a asp-controller="Home" asp-action="Index">Medihelp</a></h1>
          <!-- Uncomment below if you prefer to use an image logo -->
          <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
          <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
-               <li>  <a class="nav-link" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-               @* <li> <a class="nav-link" asp-controller="Doctors" asp-action="DocHome">For Doctor</a></li>
-               <li><a class="nav-link" asp-controller="Members" asp-action="Index">Member</a></li>
-               <li><a class="nav-link" asp-controller="Donars" asp-action="Donarview">For Donar</a></li>
-               <li> <a class="nav-link" asp-controller="Patients" asp-action="PatientView">For Patient</a></li>*@
-               @*<li> <a class="nav-link" asp-controller="Thanas" asp-action="Index">Thanas</a></li>
-               <li> <a class="nav-link" asp-controller="Diseases" asp-action="Index">Diseaase</a></li>*@
-               <li> <a class="nav-link" asp-controller="MemberDeseaseReports" asp-action="Index">Get Doctor</a></li>
-               <li> <a class="nav-link" asp-controller="MembersDeseases" asp-action="Index">Get Blood</a></li>
-
+               <li>  <a class="nav-link" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>               
+               <li> <a class="nav-link" asp-controller="Home" asp-action="SearchBlood">Get Doctor</a></li>
+               <li> <a class="nav-link" asp-controller="Home" asp-action="SearchBlood">Get Blood</a></li>
+               @if (User.Identity.IsAuthenticated)
+               {
+                  @await Component.InvokeAsync("Sidebar")
+               }
+               else{
                <li class="dropdown">
                   <a class="custom_link">Sign in or Create Account</a>
                   <ul>
@@ -79,20 +67,15 @@
                         <div class="menu_card">
                            <h5><i class="fa-solid fa-user-doctor"></i> For Doctor</h5>
                            <p>sign in or create<span>to manage your profile</span></p>
-                          @* <a class="menu_navaction" href="~/Identity/Account/login?role=Doctor">sign in</a>
-                           <a class="menu_navaction" href="~/Identity/Account/Register?role=Doctor">create account</a>*@
-
                            <a class="menu_navaction" href="~/Identity/Account/Login?role=Doctor">Sign in</a>
                            <a class="menu_navaction" href="~/Identity/Account/Register?role=Doctor">Create Account</a>
-                        </div>
-                      
+                        </div>                      
                         <div class="menu_card">
                         <h5><i class="fa-solid fa-person"></i> For Donor</h5>
                         <p>Sign in or create<span>to manage your profile</span></p>
                            <a class="menu_navaction" href="~/Identity/Account/Login?role=Donor">Sign in</a>
                            <a class="menu_navaction" href="~/Identity/Account/Register?role=Donor">Create Account</a>
                         </div>
-
                         <div class="menu_card">
                         <h5><i class="fa-solid fa-hospital-user"></i> For Patient</h5>
                         <p>Sign in or create<span>to manage your profile</span></p>
@@ -102,6 +85,7 @@
                      </li>
                   </ul>
                </li>
+               }
                @*<li><a class="nav-link" asp-controller="Thanas" asp-action="Index">Sing in Or Create</a></li>*@
 
 

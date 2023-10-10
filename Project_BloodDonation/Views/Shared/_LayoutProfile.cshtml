@@ -244,10 +244,9 @@
                   </li>
 
                   <li>
-                     <a href="~/Identity/Account/Logout" class="dropdown-item d-flex align-items-center">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Sign Out</span>
-                     </a>
+                     <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                        <button type="submit" class="nav-link btn btn-link text-dark">Sign out</button>
+                     </form>
                   </li>
 
                </ul>

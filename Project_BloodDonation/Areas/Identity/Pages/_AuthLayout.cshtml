@@ -1,14 +1,13 @@
 ﻿@{
     Layout = "/Views/Shared/_Layout.cshtml";
 }
-
 <div class="row justify-content-center">
     <div class="col-5 Authmt">
         <div class="card login-logout-card">
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link" href="/Identity/Account/Login">
+                  <a class="nav-link"   id="btnLogin">
                             Log In
                         </a>
                     </li>
@@ -42,24 +41,97 @@
            
          var currLoc = $(location).attr('href'); oc = $(location).attr('href');
          console.log("here I am");
-         console.log(currLoc)
+          
 
-         var url = currLoc.slice(window.location.href.indexOf('?') + 1).split('&');
-         console.log(url)
-         for (var i = 0; i < url.length; i++) {
-            var urlparam = url[i].split('=');
-            var returnUrl= urlparam[1]
-            console.log( "return Url: "+returnUrl.toString())
-            //if (urlparam[0] == param) {
-            //    urlparam[1];
-            //}
-            console.log(urlparam)
-         }
+         //var url = currLoc.slice(window.location.href.indexOf('?') + 1).split('&');
+         //console.log(url)
+         //var returnUrl ="";
+         //var role="";
+         //for (var i = 0; i < url.length; i++) {
+         //   var urlparam = url[i].split('=');
+         //      console.log(urlparam[0] === "role")
+         //   if (urlparam[0] === "returnUrl")
+         //   {
+         //      returnUrl = urlparam[1]
+         //   }
+         //   if (urlparam[0] === "role") {
+         //      role = urlparam[1]
+         //      console.log(role)
+         //   }
+         //}
+         //var qstring= "";
+         //console.log(role.length)
+         //if(returnUrl.length>0)
+         //{
+         //   qstring = 'ReturnUrl=' + returnUrl;
+         //   console.log(qstring)
+         //}
+         //if (role.length>0) {
+         //   qstring = 'role=' + returnUrl;
+         //   console.log("role st")
+         //   console.log(qstring)
+         //}
+         
          $("#btnRegi").click(function(){
-            var a = '/Identity/Account/Register?' + returnUrl;
-            console.log(a)
-            window.location = '/Identity/Account/Register?ReturnUrl=' + returnUrl;
+            var url = currLoc.slice(window.location.href.indexOf('?') + 1).split('&');
+            console.log(url)
+            var returnUrl = "";
+            var role = "";
+            for (var i = 0; i < url.length; i++) {
+               var urlparam = url[i].split('=');
+               console.log(urlparam[0] === "role")
+               if (urlparam[0] === "returnUrl") {
+                  returnUrl = urlparam[1]
+               }
+               if (urlparam[0] === "role") {
+                  role = urlparam[1]
+                  console.log(role)
+               }
+            }
+            var qstring = "";
+            console.log(role.length)
+            if (returnUrl.length > 0) {
+               qstring = 'ReturnUrl=' + returnUrl;
+               console.log(qstring)
+            }
+            if (role.length > 0) {
+               qstring = 'role=' + returnUrl;
+               console.log("role st")
+               console.log(qstring)
+            }
+            window.location = '/Identity/Account/Register?'+ qstring;
          })
+         $("#btnLogin").click(function () {
+            var url = currLoc.slice(window.location.href.indexOf('?') + 1).split('&');
+            console.log(url)
+            var returnUrl = "";
+            var role = "";
+            for (var i = 0; i < url.length; i++) {
+               var urlparam = url[i].split('=');
+               console.log(urlparam[0] === "role")
+               if (urlparam[0] === "returnUrl") {
+                  returnUrl = urlparam[1]
+               }
+               if (urlparam[0] === "role") {
+                  role = urlparam[1]
+                  console.log(role)
+               }
+            }
+            var qstring = "";
+            console.log(role.length)
+            if (returnUrl.length > 0) {
+               qstring = 'ReturnUrl=' + returnUrl;
+               console.log(qstring)
+            }
+            if (role.length > 0) {
+               qstring = 'role=' + returnUrl;
+               console.log("role st")
+               console.log(qstring)
+            }
+
+                      window.location = '/Identity/Account/Login?' + qstring;
+         })
+
 
          const currentPage = location.pathname;
          console.log(currentPage)

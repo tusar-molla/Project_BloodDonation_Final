@@ -1,9 +1,7 @@
-﻿@model Member
-
+﻿
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Project_BloodDonation</title>
@@ -195,9 +193,10 @@
 
                     </ul><!-- End Messages Dropdown Items -->
 
-                </li><!-- End Messages Nav -->
+                </li>
+                <!-- End Messages Nav -->
 
-                <li class="nav-item dropdown pe-3 text-capitalize">
+               @* <li class="nav-item dropdown pe-3 text-capitalize">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                   <img src="@("~/image/"+Model.ImageName)" class="rounded-circle" asp-append-version="true" width="40px" height="40px">
@@ -243,17 +242,16 @@
                             <hr class="dropdown-divider">
                         </li>
 
-                        <li>
-                     <a asp-area="Identity" asp-page="/Account/Logout" class="dropdown-item d-flex align-items-center">
-                                <i class="bi bi-box-arrow-right"></i>
-                                <span>Sign Out</span>
-                            </a>
+                        <li>                    
+                     <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                        <button type="submit" class="nav-link btn btn-link text-dark">Sign out</button>
+                     </form>
                         </li>
 
                     </ul>
                     <!-- End Profile Dropdown Items -->
                 </li><!-- End Profile Nav -->
-
+*@
             </ul>
         </nav><!-- End Icons Navigation -->
 
@@ -392,7 +390,7 @@
                 </ul>
             </li>*@
             <!-- End Icons Nav -->
-
+         @await Component.InvokeAsync("Sidebar")
             <li class="nav-heading">Pages</li>
 
             <li class="nav-item">

@@ -1589,7 +1589,7 @@ margin-top: 80px;
 
 /*For Donor Page*/
 
-#Donor_sec {
+#Donor_sec{
     background:#F6F9FF ;
 }
 
@@ -1609,8 +1609,6 @@ margin-top: 80px;
    border: 3px solid #fff;
    border-radius: 5px;
 }
-
-
 
 .Donor_details {
    font-size: 35px;

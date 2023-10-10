@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project_BloodDonation.Data;
 
@@ -12,16 +13,13 @@ namespace Project_BloodDonation.Controllers
 
             _context = context;
         }
+      [Authorize]
         public IActionResult Dashboard()
         {
-            var applicationDbContext = _context.Members
-                //.Include(m => m.Area)
-                .Include(m => m.Bloodgroup);
+         var applicationDbContext = _context.Members            
+                .Include(m => m.Bloodgroup).ToList();
                 //.Include(m => m.Country)
-                //.Include(m => m.District)
-                //.Include(m => m.Division)
-                //.Include(m => m.Thana);
-            return View(applicationDbContext.ToList());
+            return View(applicationDbContext );
 
         }
     }

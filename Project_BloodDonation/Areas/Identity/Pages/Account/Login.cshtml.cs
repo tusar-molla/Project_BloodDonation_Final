@@ -130,7 +130,8 @@ namespace Project_BloodDonation.Areas.Identity.Pages.Account
                  // var roleName = _userManager.GetRolesAsync();
                   if (Input.Role.Equals("Doctor"))
                   {
-                     return Redirect("~/Profile/MyProfile?role=" + Input.Role);
+                     return Redirect("~/Home/Index" +
+                        "?role=" + Input.Role);
                   }
                   if (Input.Role.Equals("Donor"))
                   {
