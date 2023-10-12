@@ -243,9 +243,9 @@
                      <hr class="dropdown-divider">
                   </li>
 
-                  <li>
-                     <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                        <button type="submit" class="nav-link btn btn-link text-dark">Sign out</button>
+                  <li class="sign_outMar">
+                     <form class="form-inline dropdown-item d-flex align-items-center" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                        <button type="submit" class="nav-link text-center btn btn-link text-dark" style="margin-left: 50px;font-size: 14px;font-weight: 600;">Sign out</button>
                      </form>
                   </li>
 

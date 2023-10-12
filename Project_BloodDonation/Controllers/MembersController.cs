@@ -13,58 +13,58 @@ using Project_BloodDonation.Models;
 
 namespace Project_BloodDonation.Controllers
 {
-   
-    public class MembersController : Controller
-    {
-        private readonly ApplicationDbContext _context;
-        private readonly IWebHostEnvironment _hostEnvironment;
-        private readonly UserManager<ApplicationUser> userManager;
-        public MembersController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment, UserManager<ApplicationUser> userManager)
-        {
-            _context = context;
-            this._hostEnvironment = hostEnvironment;
-            this.userManager = userManager;
-        }
 
-        //GET: Members
-        //[Authorize/*(Roles = "Admin,User")*/]
+   public class MembersController : Controller
+   {
+      private readonly ApplicationDbContext _context;
+      private readonly IWebHostEnvironment _hostEnvironment;
+      private readonly UserManager<ApplicationUser> userManager;
+      public MembersController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment, UserManager<ApplicationUser> userManager)
+      {
+         _context = context;
+         this._hostEnvironment = hostEnvironment;
+         this.userManager = userManager;
+      }
 
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.Members
-                                .Include(m => m.Area)
-                                .Include(m => m.Bloodgroup)
-                                 .Include(m => m.Doctors)
-                                 .Include(m => m.Donars)
-                                 .Include(m => m.patients);
-                              
-            return View(await applicationDbContext.ToListAsync());
-        }
+      //GET: Members
+      //[Authorize/*(Roles = "Admin,User")*/]
+
+      public async Task<IActionResult> Index()
+      {
+         var applicationDbContext = _context.Members
+                             .Include(m => m.Area)
+                             .Include(m => m.Bloodgroup)
+                              .Include(m => m.Doctors)
+                              .Include(m => m.Donars)
+                              .Include(m => m.patients);
+
+         return View(await applicationDbContext.ToListAsync());
+      }
 
       //public async Task<IActionResult> Changepassword()
       //{
-         
+
       // }
       // GET: Members/Details/5
       //[Authorize/*(Roles = "Admin,User")*/]
       public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Members == null)
-            {
-                return NotFound();
-            }
+      {
+         if (id == null || _context.Members == null)
+         {
+            return NotFound();
+         }
 
-            var member = await _context.Members
-                .Include(m => m.Area)
-                .Include(m => m.Bloodgroup)         
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (member == null)
-            {
-                return NotFound();
-            }
+         var member = await _context.Members
+             .Include(m => m.Area)
+             .Include(m => m.Bloodgroup)
+             .FirstOrDefaultAsync(m => m.Id == id);
+         if (member == null)
+         {
+            return NotFound();
+         }
 
-            return View(member);
-        }
+         return View(member);
+      }
 
       [Authorize]
       public async Task<IActionResult> DonorDetails(int? id)
@@ -78,7 +78,7 @@ namespace Project_BloodDonation.Controllers
              .Include(m => m.Bloodgroup)
              .FirstOrDefaultAsync(m => m.Id == id);
          if (member == null)
-         {                                                                   
+         {
             return NotFound();
          }
 
@@ -91,77 +91,75 @@ namespace Project_BloodDonation.Controllers
 
       // GET: Members/Create
       //[Authorize/*(Roles = "Admin,User")*/]
-      public async Task <IActionResult> Create(string role)
-        {
-            try
-            {
-                ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name");
-                ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name");
+      public async Task<IActionResult> Create(string role)
+      {
+         try
+         {
+            ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name");
+            ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name");
             ApplicationUser user = await userManager.FindByEmailAsync(User.Identity.Name);
-            return View(new Project_BloodDonation.ViewModels.BldrfrenceandPatientdtlsViewModels { Email = user.Email, Role = role, FirstName = user.FirstName, LastName= user.LastName});
+            return View(new Member { Email = user.Email, Role = role, FirstName = user.FirstName, LastName = user.LastName });
          }
-            catch (Exception ex) {
+         catch (Exception ex)
+         {
 
-                ModelState.AddModelError("", ex.Message);
-            }            
-            return View();                
+            ModelState.AddModelError("", ex.Message);
+         }
+         return View();
       }
 
-        public JsonResult GetDivisionbyCountry(int countryid) { 
-        
-            var data = _context.Divisions.Where(d => d.CountryId.Equals(countryid)).OrderBy(d=> d.Name).ToList();
-            return Json(data);
-        }
+      public JsonResult GetDivisionbyCountry(int countryid)
+      {
 
-        public JsonResult GetDistrictbyDivision(int divid) {
+         var data = _context.Divisions.Where(d => d.CountryId.Equals(countryid)).OrderBy(d => d.Name).ToList();
+         return Json(data);
+      }
 
-            var data = _context.Districts.Where(d => d.DivisionId.Equals(divid)).OrderBy(d => d.Name).ToList();
-            return Json(data);
-        }
+      public JsonResult GetDistrictbyDivision(int divid)
+      {
 
-        public JsonResult GetThanabyDistrict(int distid)
-        {
+         var data = _context.Districts.Where(d => d.DivisionId.Equals(divid)).OrderBy(d => d.Name).ToList();
+         return Json(data);
+      }
 
-            var data = _context.Thanas.Where(d => d.DistricId.Equals(distid)).OrderBy(d => d.Name).ToList();
-            return Json(data);
-        }
+      public JsonResult GetThanabyDistrict(int distid)
+      {
 
-        public JsonResult GetAreabyThana(int thnaid) { 
-        
-            var data = _context.Areas.Where(a => a.ThanaId.Equals(thnaid)).OrderBy(a => a.Name).ToList();
-            return Json(data);
-        }
+         var data = _context.Thanas.Where(d => d.DistricId.Equals(distid)).OrderBy(d => d.Name).ToList();
+         return Json(data);
+      }
+      public JsonResult GetAreabyThana(int thnaid)
+      {
 
+         var data = _context.Areas.Where(a => a.ThanaId.Equals(thnaid)).OrderBy(a => a.Name).ToList();
+         return Json(data);
+      }
+      [HttpPost]
+      [ValidateAntiForgeryToken]
+      //[Authorize/*(Roles = "Admin,User")*/]
+      public async Task<IActionResult> Create(Member member)
+      {
+         try
+         {
 
+            if (ModelState.IsValid)
+            {
+               string wwwRootPath = _hostEnvironment.WebRootPath;
+               string fileName = Path.GetFileNameWithoutExtension(member.ImageFile.FileName);
+               string extension = Path.GetExtension(member.ImageFile.FileName);
+               member.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+               string path = Path.Combine(wwwRootPath + "/Image/", fileName);
 
-        // POST: Members/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        //[Authorize/*(Roles = "Admin,User")*/]
-        public async Task<IActionResult> Create(Member member)
-        {
-            try {
+               using (var fileStream = new FileStream(path, FileMode.Create))
+               {
 
-                if (ModelState.IsValid)
-                {
-                    string wwwRootPath = _hostEnvironment.WebRootPath;
-                    string fileName = Path.GetFileNameWithoutExtension(member.ImageFile.FileName);
-                    string extension = Path.GetExtension(member.ImageFile.FileName);
-                    member.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    string path = Path.Combine(wwwRootPath + "/Image/", fileName);
-
-                    using (var fileStream = new FileStream(path, FileMode.Create)) { 
-                    
-                        await member.ImageFile.CopyToAsync(fileStream);
-                    }
-                        _context.Add(member);
-                    if (await _context.SaveChangesAsync() > 0)
-                     {
-                  if (member.Role.Equals("Doctor"))
+                  await member.ImageFile.CopyToAsync(fileStream);
+               }
+               _context.Add(member);
+               if (await _context.SaveChangesAsync() > 0)
+               {
+                  if (member.Role == "Doctor")
                   {
-
                      return Redirect("~/Doctors/Create");
                   }
 
@@ -172,13 +170,19 @@ namespace Project_BloodDonation.Controllers
                   }
 
 
-                  else if (member.Role.Equals("Patient")) {
+                  else if (member.Role.Equals("Patient"))
+                  {
 
                      return Redirect("~/Patients/Create");
                   }
-                    };
-                }
-         else
+                  else 
+                  {
+                     return Redirect("~/Doctors/Create");
+                  }
+
+               };
+            }
+            else
             {
                var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.ErrorMessage));
 
@@ -186,139 +190,139 @@ namespace Project_BloodDonation.Controllers
             }
          }
 
-            catch (Exception ex)
-            {   
-                ModelState.AddModelError("", ex.Message);
-                
-            }
-            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", member.AreaId);
-            ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name", member.BloodgroupId);
-            //ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id", member.CountryId);
-            //ViewData["DistrictId"] = new SelectList(_context.Districts, "Id", "Id", member.DistrictId);
-            //ViewData["DivisionId"] = new SelectList(_context.Divisions, "Id", "Id", member.DivisionId);
-            //ViewData["ThanaId"] = new SelectList(_context.Thanas, "Id", "Id", member.ThanaId);
-            return View(member);
-        }
+         catch (Exception ex)
+         {
+            ModelState.AddModelError("", ex.Message);
 
-        // GET: Members/Edit/5
+         }
+         ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", member.AreaId);
+         ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name", member.BloodgroupId);
+         //ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id", member.CountryId);
+         //ViewData["DistrictId"] = new SelectList(_context.Districts, "Id", "Id", member.DistrictId);
+         //ViewData["DivisionId"] = new SelectList(_context.Divisions, "Id", "Id", member.DivisionId);
+         //ViewData["ThanaId"] = new SelectList(_context.Thanas, "Id", "Id", member.ThanaId);
+         return View(member);
+      }
+
+      // GET: Members/Edit/5
       //  [Authorize(Roles = "Admin,User")]
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Members == null)
+      public async Task<IActionResult> Edit(int? id)
+      {
+         if (id == null || _context.Members == null)
+         {
+            return NotFound();
+         }
+
+         var member = await _context.Members.FindAsync(id);
+         if (member == null)
+         {
+            return NotFound();
+         }
+         ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", member.AreaId);
+         ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name", member.BloodgroupId);
+         //ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name", member.CountryId);
+         //ViewData["DistrictId"] = new SelectList(_context.Districts, "Id", "Name", member.DistrictId);
+         //ViewData["DivisionId"] = new SelectList(_context.Divisions, "Id", "Name", member.DivisionId);
+         //ViewData["ThanaId"] = new SelectList(_context.Thanas, "Id", "Name", member.ThanaId);
+         return View(member);
+      }
+
+      // POST: Members/Edit/5
+      // To protect from overposting attacks, enable the specific properties you want to bind to.
+      // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+      [HttpPost]
+      [ValidateAntiForgeryToken]
+      //[Authorize(Roles = "Admin,User")]
+      public async Task<IActionResult> Edit(int id, Member member)
+      {
+         if (id != member.Id)
+         {
+            return NotFound();
+         }
+
+         if (ModelState.IsValid)
+         {
+            try
             {
-                return NotFound();
+               _context.Update(member);
+               await _context.SaveChangesAsync();
             }
-
-            var member = await _context.Members.FindAsync(id);
-            if (member == null)
+            catch (DbUpdateConcurrencyException)
             {
-                return NotFound();
+               if (!MemberExists(member.Id))
+               {
+                  return NotFound();
+               }
+               else
+               {
+                  throw;
+               }
             }
-            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", member.AreaId);
-            ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name", member.BloodgroupId);
-            //ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name", member.CountryId);
-            //ViewData["DistrictId"] = new SelectList(_context.Districts, "Id", "Name", member.DistrictId);
-            //ViewData["DivisionId"] = new SelectList(_context.Divisions, "Id", "Name", member.DivisionId);
-            //ViewData["ThanaId"] = new SelectList(_context.Thanas, "Id", "Name", member.ThanaId);
-            return View(member);
-        }
-
-        // POST: Members/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Admin,User")]
-        public async Task<IActionResult> Edit(int id,Member member)
-        {
-            if (id != member.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(member);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MemberExists(member.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", member.AreaId);
-            ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name", member.BloodgroupId);
-            //ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name", member.CountryId);
-            //ViewData["DistrictId"] = new SelectList(_context.Districts, "Id", "Name", member.DistrictId);
-            //ViewData["DivisionId"] = new SelectList(_context.Divisions, "Id", "Name", member.DivisionId);
-            //ViewData["ThanaId"] = new SelectList(_context.Thanas, "Id", "Name", member.ThanaId);
-            return View(member);
-        }
-
-        // GET: Members/Delete/5
-       // [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Members == null)
-            {
-                return NotFound();
-            }
-
-            var member = await _context.Members
-                .Include(m => m.Area)
-                .Include(m => m.Bloodgroup)
-                //.Include(m => m.Country)
-                //.Include(m => m.District)
-                //.Include(m => m.Division)
-                //.Include(m => m.Thana)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (member == null)
-            {
-                return NotFound();
-            }
-
-            return View(member);
-        }
-
-        // POST: Members/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Members == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Members'  is null.");
-            }
-            var member = await _context.Members.FindAsync(id);
-            var imagepath = Path.Combine(_hostEnvironment.WebRootPath, "image", member.ImageName);
-
-            if(System.IO.File.Exists(imagepath))
-                System.IO.File.Delete(imagepath);
-
-
-            if (member != null)
-            {
-                _context.Members.Remove(member);
-            }
-            
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
+         }
+         ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", member.AreaId);
+         ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name", member.BloodgroupId);
+         //ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name", member.CountryId);
+         //ViewData["DistrictId"] = new SelectList(_context.Districts, "Id", "Name", member.DistrictId);
+         //ViewData["DivisionId"] = new SelectList(_context.Divisions, "Id", "Name", member.DivisionId);
+         //ViewData["ThanaId"] = new SelectList(_context.Thanas, "Id", "Name", member.ThanaId);
+         return View(member);
+      }
 
-        private bool MemberExists(int id)
-        {
-          return (_context.Members?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
-    }
+      // GET: Members/Delete/5
+      // [Authorize(Roles = "Admin")]
+      public async Task<IActionResult> Delete(int? id)
+      {
+         if (id == null || _context.Members == null)
+         {
+            return NotFound();
+         }
+
+         var member = await _context.Members
+             .Include(m => m.Area)
+             .Include(m => m.Bloodgroup)
+             //.Include(m => m.Country)
+             //.Include(m => m.District)
+             //.Include(m => m.Division)
+             //.Include(m => m.Thana)
+             .FirstOrDefaultAsync(m => m.Id == id);
+         if (member == null)
+         {
+            return NotFound();
+         }
+
+         return View(member);
+      }
+
+      // POST: Members/Delete/5
+      [HttpPost, ActionName("Delete")]
+      [ValidateAntiForgeryToken]
+      [Authorize(Roles = "Admin")]
+      public async Task<IActionResult> DeleteConfirmed(int id)
+      {
+         if (_context.Members == null)
+         {
+            return Problem("Entity set 'ApplicationDbContext.Members'  is null.");
+         }
+         var member = await _context.Members.FindAsync(id);
+         var imagepath = Path.Combine(_hostEnvironment.WebRootPath, "image", member.ImageName);
+
+         if (System.IO.File.Exists(imagepath))
+            System.IO.File.Delete(imagepath);
+
+
+         if (member != null)
+         {
+            _context.Members.Remove(member);
+         }
+
+         await _context.SaveChangesAsync();
+         return RedirectToAction(nameof(Index));
+      }
+
+      private bool MemberExists(int id)
+      {
+         return (_context.Members?.Any(e => e.Id == id)).GetValueOrDefault();
+      }
+   }
 }

@@ -17,7 +17,7 @@ namespace Project_BloodDonation.ViewComponents
          var record = _context.Members.Where(d => d.Email.Equals(User.Identity.Name)).FirstOrDefault();
 
 
-         return await Task.FromResult((IViewComponentResult)View(record));
+         return await Task.FromResult((IViewComponentResult)View(record ?? new Models.Member()));
       }
 
    }

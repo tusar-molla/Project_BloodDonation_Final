@@ -14,10 +14,10 @@
    <link href="~/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
    <link href="~/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
    @*<link href="~/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">*@
-   <link href="./vendor/glightbox/css/glightbox.min.css">
+   <link href="~/vendor/glightbox/css/glightbox.min.css">
    <link href="~/vendor/remixicon/remixicon.css" rel="stylesheet">
    @*<link href="~/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">*@
-   <link href="./vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+   <link href="~/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
    <link rel="stylesheet" href="~/Project_BloodDonation.styles.css" asp-append-version="true" />
    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -52,40 +52,47 @@
          <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
          <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
-               <li>  <a class="nav-link" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>               
-               <li> <a class="nav-link" asp-controller="Home" asp-action="SearchBlood">Get Doctor</a></li>
-               <li> <a class="nav-link" asp-controller="Home" asp-action="SearchBlood">Get Blood</a></li>
-               @if (User.Identity.IsAuthenticated)
-               {
-                  @await Component.InvokeAsync("Sidebar")
-               }
-               else{
-               <li class="dropdown">
-                  <a class="custom_link">Sign in or Create Account</a>
-                  <ul>
-                     <li class="login_form">
-                        <div class="menu_card">
-                           <h5><i class="fa-solid fa-user-doctor"></i> For Doctor</h5>
-                           <p>sign in or create<span>to manage your profile</span></p>
-                           <a class="menu_navaction" href="~/Identity/Account/Login?role=Doctor">Sign in</a>
-                           <a class="menu_navaction" href="~/Identity/Account/Register?role=Doctor">Create Account</a>
-                        </div>                      
-                        <div class="menu_card">
-                        <h5><i class="fa-solid fa-person"></i> For Donor</h5>
-                        <p>Sign in or create<span>to manage your profile</span></p>
-                           <a class="menu_navaction" href="~/Identity/Account/Login?role=Donor">Sign in</a>
-                           <a class="menu_navaction" href="~/Identity/Account/Register?role=Donor">Create Account</a>
-                        </div>
-                        <div class="menu_card">
-                        <h5><i class="fa-solid fa-hospital-user"></i> For Patient</h5>
-                        <p>Sign in or create<span>to manage your profile</span></p>
-                           <a class="menu_navaction" href="~/Identity/Account/Login?role=Patient">Sign in</a>
-                           <a class="menu_navaction" href="~/Identity/Account/Register?role=Patient">Create Account</a>
-                        </div>
-                     </li>
-                  </ul>
-               </li>
-               }
+               <li>  <a class="nav-links" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>               
+               <li> <a class="nav-links" asp-controller="Home" asp-action="SearchBlood">Get Doctor</a></li>
+               <li> <a class="nav-links" asp-controller="Home" asp-action="SearchBlood">Get Blood</a></li>
+
+                  @if (User.Identity.IsAuthenticated)
+                  {
+                     @await Component.InvokeAsync("Sidebar")
+                  }
+             
+                  else
+                  {
+                  <li class="dropdown">
+                     <a class="custom_link">Sign in or Create Account</a>
+                     <ul>
+                        <li class="login_form">
+                           <div class="menu_card">
+                              <h5><i class="fa-solid fa-user-doctor"></i> For Doctor</h5>
+                              <p>sign in or create<span>to manage your profile</span></p>
+                              <a class="menu_navaction" href="~/Identity/Account/Login?role=Doctor">Sign in</a>
+                              <a class="menu_navaction" href="~/Identity/Account/Register?role=Doctor">Create Account</a>
+                           </div>
+                           <div class="menu_card">
+                              <h5><i class="fa-solid fa-person"></i> For Donor</h5>
+                              <p>Sign in or create<span>to manage your profile</span></p>
+                              <a class="menu_navaction" href="~/Identity/Account/Login?role=Donor">Sign in</a>
+                              <a class="menu_navaction" href="~/Identity/Account/Register?role=Donor">Create Account</a>
+                           </div>
+                           <div class="menu_card">
+                              <h5><i class="fa-solid fa-hospital-user"></i> For Patient</h5>
+                              <p>Sign in or create<span>to manage your profile</span></p>
+                              <a class="menu_navaction" href="~/Identity/Account/Login?role=Patient">Sign in</a>
+                              <a class="menu_navaction" href="~/Identity/Account/Register?role=Patient">Create Account</a>
+                           </div>
+                        </li>
+                     </ul>
+                  </li>
+                  }
+                
+
+
+              
                @*<li><a class="nav-link" asp-controller="Thanas" asp-action="Index">Sing in Or Create</a></li>*@
 
 
@@ -210,9 +217,9 @@
    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
    <script src="~/vendor/purecounter/purecounter_vanilla.js"></script>
    @*<script src="~/vendor/glightbox/js/glightbox.min.js"></script>*@
-   <script src="./vendor/glightbox/js/glightbox.min.js"></script>
+   <script src="~/vendor/glightbox/js/glightbox.min.js"></script>
    @*<script src="~/vendor/swiper/swiper-bundle.min.js"></script>*@
-   <script src="./vendor/swiper/swiper-bundle.min.js"></script>
+   <script src="~/vendor/swiper/swiper-bundle.min.js"></script>
    <script src="~/js/site.js" asp-append-version="true"></script>
    <script src="~/js/main.js" asp-append-version="true"></script>
 
@@ -229,7 +236,7 @@
 
 
    <!-- Template Main JS File -->
-   <script src="assets/js/main.js"></script>
+  
 
 </body>
 </html>

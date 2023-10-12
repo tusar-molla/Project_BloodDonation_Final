@@ -176,7 +176,7 @@ ul {
     width: 50%;
 }
 
-.login-logout-card a.nav-link {
+.login-logout-card a.nav-links {
     font-size: 1rem;
     color: #495057;
     text-align: center;
@@ -1644,7 +1644,11 @@ margin-top: 80px;
    }
    
    /*For Profile Page*/
-   /*
+
+.profile_Up {
+   font-size: 30px;
+}
+/*
 #acc_info {
    background: rgb(241, 247, 253);
    padding: 10px;
@@ -1675,11 +1679,11 @@ margin-top: 80px;
    background: rgb(241, 247, 253);
    padding: 10px;
 }*/
-   /*Search By */
-   #Search {
-      padding: 10px 10px;
-      border: 1px solid #d5e1ed;
-   }
+/*Search By */
+#Search {
+   padding: 10px 10px;
+   border: 1px solid #d5e1ed;
+}
 
 .sercol {
     margin-top: 30px;

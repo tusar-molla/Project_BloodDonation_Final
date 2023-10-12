@@ -77,10 +77,11 @@
             console.log(url)
             var returnUrl = "";
             var role = "";
+            debugger;
             for (var i = 0; i < url.length; i++) {
                var urlparam = url[i].split('=');
                console.log(urlparam[0] === "role")
-               if (urlparam[0] === "returnUrl") {
+               if (urlparam[0] === "ReturnUrl") {
                   returnUrl = urlparam[1]
                }
                if (urlparam[0] === "role") {
@@ -95,7 +96,7 @@
                console.log(qstring)
             }
             if (role.length > 0) {
-               qstring = 'role=' + returnUrl;
+               qstring = 'role=' + role;
                console.log("role st")
                console.log(qstring)
             }
@@ -109,7 +110,7 @@
             for (var i = 0; i < url.length; i++) {
                var urlparam = url[i].split('=');
                console.log(urlparam[0] === "role")
-               if (urlparam[0] === "returnUrl") {
+               if (urlparam[0] === "ReturnUrl") {
                   returnUrl = urlparam[1]
                }
                if (urlparam[0] === "role") {
@@ -124,7 +125,7 @@
                console.log(qstring)
             }
             if (role.length > 0) {
-               qstring = 'role=' + returnUrl;
+               qstring   = 'role=' + role  ;
                console.log("role st")
                console.log(qstring)
             }

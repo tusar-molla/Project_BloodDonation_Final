@@ -1,27 +1,33 @@
 ﻿@model Member
-<li class="nav-item dropdown pe-3 text-capitalize">
 
+
+<li class="nav-item dropdown pe-3 text-capitalize">
    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+      @if (Model.ImageName != null)
+      {
       <img src="@("~/image/"+Model.ImageName)" class="rounded-circle" asp-append-version="true" width="40px" height="40px">
-      <span class="d-none d-md-block dropdown-toggle ps-2">@Model.FirstName</span>
+      } <span class="d-none d-md-block dropdown-toggle ps-2">@Model.FirstName</span>
    </a><!-- End Profile Iamge Icon -->
 
    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile text-capitalize">
-      <li class="dropdown-header">
+      <li class="dropdown-header text-center">
+         @if (Model  != null)
+         {
          <h6>@Model.FirstName</h6>
          <span>@Model.Role</span>
+         }
       </li>
       <li>
          <hr class="dropdown-divider">
       </li>
 
       <li>
-         <a asp-controller="Profile" asp-action="Myprofile" class="dropdown-item d-flex align-items-center">
+         <a asp-controller="Profile" asp-action="Myprofile" class="dropdown-itemd-flex align-items-center">
             <i class="bi bi-person"></i>
             <span>My Profile</span>
          </a>
       </li>
-      <li>
+ <li>
          <hr class="dropdown-divider">
       </li>
 
@@ -36,21 +42,23 @@
       </li>
 
       <li>
-         <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+         <a class="dropdown-item d-flex align-items-center" style="">
             <i class="bi bi-question-circle"></i>
             <span>Need Help?</span>
          </a>
       </li>
       <li>
          <hr class="dropdown-divider">
-      </li>
-
+      </li>    
       <li>
-         <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-            <button type="submit" class="nav-link btn btn-link text-dark">Sign out</button>
-         </form>
-      </li>
 
+            <form class="form-inline dropdown-item d-flex align-items-center" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+           <button type="submit" class="nav-link btn btn-link text-dark">Sign out</button>
+            </form>
+      </li>
    </ul>
    <!-- End Profile Dropdown Items -->
-</li><!-- End Profile Nav -->
+</li>
+
+<!-- End Profile Nav -->
+
