@@ -156,30 +156,25 @@ namespace Project_BloodDonation.Controllers
                   await member.ImageFile.CopyToAsync(fileStream);
                }
                _context.Add(member);
+              
                if (await _context.SaveChangesAsync() > 0)
-               {
-                  if (member.Role == "Doctor")
+               {                                   
+                  if (member.Role.ToLower().Trim()== "Doctor".ToLower().Trim())
                   {
                      return Redirect("~/Doctors/Create");
                   }
-
-                  else if (member.Role.Equals("Donor"))
+                  else if (member.Role.ToLower().Trim()=="Donor".ToLower().Trim())
                   {
-
                      return Redirect("~/Donars/Create");
                   }
-
-
-                  else if (member.Role.Equals("Patient"))
+                  else if (member.Role.ToLower().Trim()=="Patient".ToLower().Trim()) 
                   {
-
                      return Redirect("~/Patients/Create");
                   }
-                  else 
+                  else if (member.Role.ToLower().Trim()=="Admin".ToLower().Trim())     
                   {
-                     return Redirect("~/Doctors/Create");
+                     return Redirect("~/Admins/Create");
                   }
-
                };
             }
             else

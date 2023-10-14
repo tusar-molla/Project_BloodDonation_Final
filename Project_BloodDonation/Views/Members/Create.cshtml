@@ -20,14 +20,10 @@
     {
         Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     }
-
 }
 *@
-
     <h4 class="cen">Enter Your Information</h4>
-   
-
-<hr />
+<hr /
 <div class="container">
    <main class="main" id="main">
     <div class="row">
@@ -48,23 +44,23 @@
                             <input asp-for="LastName" class="form-control" />
                             <span asp-validation-for="LastName" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
+                 @*       <div class="form-group">
                             <label asp-for="Address" class="control-label"></label>
                             <input asp-for="Address" class="form-control"/>
                             <span asp-validation-for="Address" class="text-danger"></span>
-                        </div>
+                        </div>*@
                         <div class="form-group">
                             <label asp-for="Contact" class="control-label"></label>
                             <input asp-for="Contact" class="form-control"/>
                             <span asp-validation-for="Contact" class="text-danger"></span>
                         </div>
-                       <div class="form-group">
+                 @*      <div class="form-group">
                             <label asp-for="Age" class="control-label"></label>
                             <input asp-for="Age" class="form-control" />
                             <span asp-validation-for="Age" class="text-danger"></span>
-                        </div>
+                        </div>*@
 
-                  <div class="form-group">
+     @*             <div class="form-group">
                      <label asp-for="NID" class="control-label"></label>
                      <input asp-for="NID" class="form-control" />
                      <span asp-validation-for="NID" class="text-danger"></span>
@@ -81,20 +77,14 @@
                      <label asp-for="Passport" class="control-label"></label>
                      <input asp-for="Passport" class="form-control" />
                      <span asp-validation-for="Passport" class="text-danger"></span>
-                  </div>
+                  </div>*@
                     </div>
-
                     <div class="col-lg-6">
-
-                  <div class="form-group">
-                     <label asp-for="Role" class="control-label"></label>
-                     <input asp-for="Role" class="form-control" />
-                     <span asp-validation-for="Role" class="text-danger"></span>
-                  </div>
                         <div class="form-group">
                             <label asp-for="Email" class="control-label"></label>
                             <input asp-for="Email" class="form-control" />
                             <span asp-validation-for="Email" class="text-danger"></span>
+                        <input asp-for="Role" class="form-control" hidden />
                         </div>
 
 
@@ -102,28 +92,23 @@
                             <label asp-for="BloodgroupId" class="control-label"></label>
                             <select asp-for="BloodgroupId" class="form-control" asp-items="@ViewBag.BloodgroupId"></select>
                         </div>
-
-                        <div class="form-group">
+                @*        <div class="form-group">
                             <label asp-for="MemberTypes" class="control-label"></label>
                             <select asp-for="MemberTypes" class="form-control" asp-items="Html.GetEnumSelectList<MemberTypes>()">
                                 <option value="0" selected>Please select Type</option>
-
                             </select>
-                        </div>
-
+                        </div>*@
                         <div class="form-group mt-4 memimg">
                             <label asp-for="ImageFile" class="control-label">Upload Image</label>
                             <input asp-for="ImageFile" accept="image/png,image/jpeg,image/jpg"/>
                             <span asp-validation-for="ImageFile" class="text-danger"></span>
                         </div>
 
-                        <div class="form-group memgndrmt">
+                   @*     <div class="form-group memgndrmt">
                             <label asp-for="MemberGender" class="control-label"></label>
                            <select asp-for="MemberGender" class="form-control" asp-items="Html.GetEnumSelectList<MemberGender>()"></select>
                             <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-
-                
+                        </div> *@              
                     </div>
                 </div>
 
@@ -151,7 +136,6 @@
                      </select>
                         </div>                                           
                     </div>
-
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label  class="control-label"></label>
@@ -166,8 +150,7 @@
                             </select>
                         </div>
                     </div>
-                </div>   
-                
+                </div>                   
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group mt-3">
@@ -179,7 +162,6 @@
                             <a asp-action="Index" class="btn btn-success">Back to List</a>
                         </div>
                     </div>
-
                 </div>
             </form>
         </div>

@@ -14,15 +14,13 @@ namespace Project_BloodDonation.Data
             : base(options)
         {
         }
-
         public DbSet<Bloodgroup> Bloodgroups { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<Area> Areas { get; set; }
         public DbSet<Thana> Thanas { get; set; }
         public DbSet<District> Districts { get; set; }
         public DbSet<Division> Divisions { get; set; }
-        public DbSet<Country> Countries { get; set; }
-        public DbSet<BloodDonationDtls> BloodDonationDtls { get; set; }
+        public DbSet<Country> Countries { get; set; }        
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<DoctorType> DoctorTypes { get; set; }
         public DbSet<Disease> Diseases { get; set; }
@@ -31,8 +29,5 @@ namespace Project_BloodDonation.Data
         public DbSet<Patient> patients { get; set; }
         public DbSet<MemberDeseaseReports> MemberDeseaseReports { get; set; }
         public  DbSet<BloodReqst> BloodReqsts { get; set; }
-    
-
-
    }
 }

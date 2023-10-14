@@ -38,27 +38,6 @@ h6 {
   font-family: "Nunito", sans-serif;
 }
 
-
-/*--------------------------------------------------------------
-Changes By Tushar
---------------------------------------------------------------*/
-.Reg_no {
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*--------------------------------------------------------------
 # Main
 --------------------------------------------------------------*/
@@ -67,27 +46,23 @@ Changes By Tushar
    padding: 20px 30px;
    transition: all 0.3s;
 }
-
 @media (max-width: 1199px) {
   #main {
     padding: 20px;
   }
 }
-
 /*--------------------------------------------------------------
 # Page Title
 --------------------------------------------------------------*/
 .pagetitle {
   margin-bottom: 10px;
 }
-
 .pagetitle h1 {
   font-size: 24px;
   margin-bottom: 0;
   font-weight: 600;
   color: #012970;
 }
-
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -582,7 +557,7 @@ Changes By Tushar
   background-color: #f6f9ff;
 }
 
-.header-nav .profile {
+/.header-nav .profile {
   min-width: 240px;
   padding-bottom: 0;
   top: 8px !important;

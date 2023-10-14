@@ -36,7 +36,7 @@ namespace Project_BloodDonation.Controllers
 
          var data = _context.Members.Include(c=>c.Area)
                                     .Include(c=>c.Bloodgroup)                 
-                                    .Where(m => m.MemberTypes ==           Models.MemberTypes.Donar).ToList();
+                                   /* .Where(m => m.MemberTypes ==           Models.MemberTypes.Donar)*/.ToList();
 
          if (AreaId.HasValue)
             data = data.Where(m => m.AreaId == AreaId.Value).ToList();

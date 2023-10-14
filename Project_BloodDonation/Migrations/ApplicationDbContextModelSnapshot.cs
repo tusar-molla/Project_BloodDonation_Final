@@ -250,36 +250,6 @@ namespace Project_BloodDonation.Migrations
                     b.ToTable("Areas");
                 });
 
-            modelBuilder.Entity("Project_BloodDonation.Models.BloodDonationDtls", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("DonarId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DonateQty")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Donateplace")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DonationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("RecieverId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("BloodDonationDtls");
-                });
-
             modelBuilder.Entity("Project_BloodDonation.Models.Bloodgroup", b =>
                 {
                     b.Property<int>("Id")
@@ -550,7 +520,6 @@ namespace Project_BloodDonation.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Age")
@@ -563,7 +532,6 @@ namespace Project_BloodDonation.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Contact")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -585,9 +553,6 @@ namespace Project_BloodDonation.Migrations
                     b.Property<int?>("MemberGender")
                         .HasColumnType("int");
 
-                    b.Property<int>("MemberTypes")
-                        .HasColumnType("int");
-
                     b.Property<string>("NID")
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
@@ -600,7 +565,6 @@ namespace Project_BloodDonation.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SmartCard")
