@@ -85,13 +85,13 @@ namespace Project_BloodDonation.Areas.Identity.Pages.Account
             [Required]
             [DataType(DataType.Text)]
             [Display(Name = "First Name")]
-            public string FirstName { get; set; }
+            public string FirstName {get; set;}
 
 
             [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Last Name")]
-            public string LastName { get; set; }
+            public string LastName {get; set;}
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -149,10 +149,11 @@ namespace Project_BloodDonation.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-         //returnUrl ??= Url.Content("~/");
+
          string msg = "";
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
+
             {
                 var user = CreateUser();
                              
@@ -167,29 +168,6 @@ namespace Project_BloodDonation.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
-
-               //var userId = await _userManager.GetUserIdAsync(user);
-               //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-               //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-               //var callbackUrl = Url.Page(
-               //    "/Account/ConfirmEmail",
-               //    pageHandler: null,
-               //    values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
-               //    protocol: Request.Scheme);
-
-               //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-               //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-               //if (_userManager.Options.SignIn.RequireConfirmedAccount)
-               //{
-               //    return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-               //}
-               //else
-               //{
-               //    await _signInManager.SignInAsync(user, isPersistent: false);
-               //    return LocalRedirect(returnUrl);
-               //}
                string roleName = "";
 
                if (!string.IsNullOrEmpty(Input.Role))
@@ -210,57 +188,13 @@ namespace Project_BloodDonation.Areas.Identity.Pages.Account
                   string roleTocheck = "GENERAL MEMBER";
                   if (ur.FirstOrDefault().ToString().ToLower().Equals(roleTocheck.ToLower()))
                   {
-                    // return RedirectToAction("Create", "BldrfrenceandPatientdtlsViewModels");
                      return Redirect("~/BldrfrenceandPatientdtlsViewModels/Create?role= " + ur.FirstOrDefault().ToString() + "&returnUrl="+ returnUrl);
                   }
                   else
                   {
                      return Redirect("~/Members/Create?role= " + ur.FirstOrDefault().ToString());
                   }
-                  //if (string.IsNullOrEmpty (Input.Role)) {
-                  //   if (Input.Role.Equals("GENERAL MEMBER"))
-                  //   {
-
-                  //      return Redirect("~/Members/Create?role= GENERAL MEMBER");
-                  //   }
-                  //}
-                  //   if (Input.Role.Equals("Doctor"))
-                  //   {
-                  //      return Redirect("~/Members/Create?role=Doctor");
-                  //   }
-                  //  else if (Input.Role.Equals("Donor"))
-                  //   {
-
-                  //      return Redirect("~/Members/Create?role=Donor");
-                  //   }
-                  //   else if (Input.Role.Equals("Patient"))
-                  //   {
-
-                  //      return Redirect("~/Members/Create?role=Patient");
-                  //   }
-                  //  else if (Input.Role.Equals("Admin"))
-                  //   {
-
-                  //      return Redirect("~/Members/Create?role=Admin");
-                  //   }
-
-                  //else if(Input.Role.Equals("GENERAL MEMBER"))
-                  //{
-
-                  //   return Redirect("~/Members/Create?role= GENERAL MEMBER");
-                  //}
-
-                  //else
-                  //{
-
-                  //      return Redirect("~/Members/Create?role=User");
-                  //   }
-
-
                }
-                    
-                    
-              
                 foreach (var error in result.Errors) {
 
                     ModelState.AddModelError(string.Empty, error.Description);
@@ -276,10 +210,15 @@ namespace Project_BloodDonation.Areas.Identity.Pages.Account
                ModelState.AddModelError("", msg);
             }
          }
-           // If we got this far, something failed, redisplay form
-         return Page();
-        }
 
+			else
+			{
+				var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.ErrorMessage));
+
+				ModelState.AddModelError("", string.Join(",", errors));
+			}
+			return Page();
+        }
         private ApplicationUser CreateUser()
         {
             try
