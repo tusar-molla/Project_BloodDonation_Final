@@ -1279,6 +1279,10 @@ section {
    margin-top: 80px;
 }
 
+.auth_logmt {
+   margin-top: 100px;
+}
+
 .Authmt {
    margin-top: 143px;
 }
@@ -1373,6 +1377,17 @@ margin-top: 80px;
 .mbdescrtmt {
 
    margin-top: 120px;
+}
+
+.log_mt {
+   margin-top: 100px;
+}
+.Edt_info {
+   margin-top: 130px;
+}
+/*For log And Reg page*/
+.log_butt {
+   font-size: 100px;
 }
 /*For Internal page*/
 .Binfo {

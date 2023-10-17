@@ -54,10 +54,6 @@ namespace Project_BloodDonation.Controllers
             //ViewData["MemberDeseaseId"] = new SelectList(_context.MembersDeseases, "Id", "Name");
             return View();
         }
-
-        // POST: MemberDeseaseReports/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(MemberDeseaseReports memberDeseaseReports)
@@ -118,13 +114,9 @@ namespace Project_BloodDonation.Controllers
             ViewData["MemberDeseaseId"] = new SelectList(_context.MembersDeseases, "Id", "Id", memberDeseaseReports.MemberDeseaseId);
             return View(memberDeseaseReports);
         }
-
-        // POST: MemberDeseaseReports/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ReportsName,ReportsPath,MemberDeseaseId,ReportDeliveryDate")] MemberDeseaseReports memberDeseaseReports)
+        public async Task<IActionResult> Edit(int id, MemberDeseaseReports memberDeseaseReports)
         {
             if (id != memberDeseaseReports.Id)
             {

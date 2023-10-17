@@ -37,16 +37,10 @@ namespace Project_BloodDonation.Controllers
                               .Include(m => m.Doctors)
                               .Include(m => m.Donars)
                               .Include(m => m.patients);
+                              
 
          return View(await applicationDbContext.ToListAsync());
       }
-
-      //public async Task<IActionResult> Changepassword()
-      //{
-
-      // }
-      // GET: Members/Details/5
-      //[Authorize/*(Roles = "Admin,User")*/]
       public async Task<IActionResult> Details(int? id)
       {
          if (id == null || _context.Members == null)
@@ -141,7 +135,6 @@ namespace Project_BloodDonation.Controllers
       {
          try
          {
-
             if (ModelState.IsValid)
             {
                string wwwRootPath = _hostEnvironment.WebRootPath;
@@ -184,7 +177,6 @@ namespace Project_BloodDonation.Controllers
                ModelState.AddModelError("", string.Join(",", errors));
             }
          }
-
          catch (Exception ex)
          {
             ModelState.AddModelError("", ex.Message);
@@ -192,10 +184,6 @@ namespace Project_BloodDonation.Controllers
          }
          ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", member.AreaId);
          ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name", member.BloodgroupId);
-         //ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id", member.CountryId);
-         //ViewData["DistrictId"] = new SelectList(_context.Districts, "Id", "Id", member.DistrictId);
-         //ViewData["DivisionId"] = new SelectList(_context.Divisions, "Id", "Id", member.DivisionId);
-         //ViewData["ThanaId"] = new SelectList(_context.Thanas, "Id", "Id", member.ThanaId);
          return View(member);
       }
 
@@ -203,11 +191,12 @@ namespace Project_BloodDonation.Controllers
       //  [Authorize(Roles = "Admin,User")]
       public async Task<IActionResult> Edit(int? id)
       {
+    
          if (id == null || _context.Members == null)
          {
             return NotFound();
          }
-
+         ApplicationUser user = await userManager.FindByEmailAsync(User.Identity.Name);
          var member = await _context.Members.FindAsync(id);
          if (member == null)
          {
@@ -215,16 +204,8 @@ namespace Project_BloodDonation.Controllers
          }
          ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", member.AreaId);
          ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name", member.BloodgroupId);
-         //ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name", member.CountryId);
-         //ViewData["DistrictId"] = new SelectList(_context.Districts, "Id", "Name", member.DistrictId);
-         //ViewData["DivisionId"] = new SelectList(_context.Divisions, "Id", "Name", member.DivisionId);
-         //ViewData["ThanaId"] = new SelectList(_context.Thanas, "Id", "Name", member.ThanaId);
          return View(member);
       }
-
-      // POST: Members/Edit/5
-      // To protect from overposting attacks, enable the specific properties you want to bind to.
-      // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
       [HttpPost]
       [ValidateAntiForgeryToken]
       //[Authorize(Roles = "Admin,User")]
@@ -239,7 +220,7 @@ namespace Project_BloodDonation.Controllers
          {
             try
             {
-               _context.Update(member);
+					_context.Update(member);
                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -255,15 +236,17 @@ namespace Project_BloodDonation.Controllers
             }
             return RedirectToAction(nameof(Index));
          }
+         else
+         {
+            var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.ErrorMessage));
+
+            ModelState.AddModelError("", string.Join(",", errors));
+         }
+
          ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", member.AreaId);
          ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name", member.BloodgroupId);
-         //ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name", member.CountryId);
-         //ViewData["DistrictId"] = new SelectList(_context.Districts, "Id", "Name", member.DistrictId);
-         //ViewData["DivisionId"] = new SelectList(_context.Divisions, "Id", "Name", member.DivisionId);
-         //ViewData["ThanaId"] = new SelectList(_context.Thanas, "Id", "Name", member.ThanaId);
          return View(member);
       }
-
       // GET: Members/Delete/5
       // [Authorize(Roles = "Admin")]
       public async Task<IActionResult> Delete(int? id)
@@ -276,10 +259,6 @@ namespace Project_BloodDonation.Controllers
          var member = await _context.Members
              .Include(m => m.Area)
              .Include(m => m.Bloodgroup)
-             //.Include(m => m.Country)
-             //.Include(m => m.District)
-             //.Include(m => m.Division)
-             //.Include(m => m.Thana)
              .FirstOrDefaultAsync(m => m.Id == id);
          if (member == null)
          {

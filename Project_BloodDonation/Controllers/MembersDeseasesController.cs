@@ -21,22 +21,17 @@ namespace Project_BloodDonation.Controllers
             _context = context;
          this._hostEnvironment = hostEnvironment;
       }
-
-        // GET: MembersDeseases
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.MembersDeseases.Include(m => m.Disease).Include(m => m.Member);
             return View(await applicationDbContext.ToListAsync());
         }
-
-        // GET: MembersDeseases/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.MembersDeseases == null)
             {
                 return NotFound();
             }
-
             var membersDesease = await _context.MembersDeseases
                 .Include(m => m.Disease)
                 .Include(m => m.Member)
@@ -48,7 +43,6 @@ namespace Project_BloodDonation.Controllers
 
             return View(membersDesease);
         }
-
         // GET: MembersDeseases/Create
         public IActionResult Create()
         {
@@ -56,10 +50,6 @@ namespace Project_BloodDonation.Controllers
             ViewData["MemberId"] = new SelectList(_context.Members, "Id", "Name");
             return View();
         }
-
-        // POST: MembersDeseases/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(MembersDesease membersDesease,List< IFormFile> img, List<int> did)
@@ -100,10 +90,7 @@ namespace Project_BloodDonation.Controllers
                   };
                   _context.MemberDeseaseReports.Add(reports);
                }
-            }
-            
-
-         
+            }                    
             if (await _context.SaveChangesAsync() > 0)
             {
                return RedirectToAction(nameof(Index));
@@ -114,7 +101,6 @@ namespace Project_BloodDonation.Controllers
             ViewData["MemberId"] = new SelectList(_context.Members, "Id", "Name", membersDesease.MemberId);
             return View(membersDesease);
         }
-
         // GET: MembersDeseases/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -132,13 +118,9 @@ namespace Project_BloodDonation.Controllers
             ViewData["MemberId"] = new SelectList(_context.Members, "Id", "Id", membersDesease.MemberId);
             return View(membersDesease);
         }
-
-        // POST: MembersDeseases/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,DeseaseId,MemberId")] MembersDesease membersDesease)
+        public async Task<IActionResult> Edit(int id,MembersDesease membersDesease)
         {
             if (id != membersDesease.Id)
             {

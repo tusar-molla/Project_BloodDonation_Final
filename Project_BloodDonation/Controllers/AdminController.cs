@@ -13,14 +13,13 @@ namespace Project_BloodDonation.Controllers
 
             _context = context;
         }
-      [Authorize]
+      [Authorize(Roles = "Admin")]
         public IActionResult Dashboard()
         {
          var applicationDbContext = _context.Members            
                 .Include(m => m.Bloodgroup).ToList();
                 //.Include(m => m.Country)
-            return View(applicationDbContext );
-
+            return View(applicationDbContext);
         }
     }
 }
