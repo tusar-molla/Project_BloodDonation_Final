@@ -14,7 +14,6 @@ namespace Project_BloodDonation.Controllers
         
             _context = context;
         }
-
       [Authorize]
         public IActionResult Myprofile()
         {

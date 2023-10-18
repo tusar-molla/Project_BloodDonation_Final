@@ -1,20 +1,15 @@
 ﻿@model Project_BloodDonation.Models.Doctor
-
 @{
     ViewData["Title"] = "Create";
     //Layout = "~/Views/Shared/_LayoutDoctor.cshtml";
-}
-   
+}  
 <h1 class="doccretemt text-center">Enter Doctor Information</h1>
-
-
 <hr />
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <form asp-action="Create" enctype ="multipart/form-data">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-             
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>             
                 <div class="row">
                     <h2 class="Binfo">Basic Information</h2>
                     <hr />
@@ -93,9 +88,7 @@
                      <a asp-action="Index" class="btn btn-success">Back to List</a>
                   </div>
                </div>
-
             </div>
-
          </form>
                 </div>
         </div>

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -18,12 +19,14 @@ namespace Project_BloodDonation.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostEnvironment;
+      private readonly UserManager<ApplicationUser> userManager;
 
-        public DoctorsController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment)
+      public DoctorsController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             this._hostEnvironment = hostEnvironment;
-        }
+         this.userManager = userManager;
+      }
 
         // GET: Doctors
       //[Authorize(Roles = "Admin,Doctor")]
@@ -66,8 +69,7 @@ namespace Project_BloodDonation.Controllers
             try
             {
                 ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name");
-                ViewBag.DoctorType = new SelectList(_context.DoctorTypes, "Id", "Name");
-              //  ViewData["TitleId"] = new SelectList(_context.Set<Title>(), "Id", "TitleName");
+                ViewBag.DoctorType = new SelectList(_context.DoctorTypes, "Id", "Name");              
             }
 
             catch (Exception ex) {
@@ -78,8 +80,7 @@ namespace Project_BloodDonation.Controllers
             return View();
         
         }
-
-        //[Authorize(Roles = "Admin,Doctor")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Doctor doctor)
@@ -105,9 +106,7 @@ namespace Project_BloodDonation.Controllers
                     {
                         return Redirect("~/Profile/MyProfile");
                     };
-
                 }
-
                 else
                 {
                     var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.ErrorMessage));
@@ -115,35 +114,29 @@ namespace Project_BloodDonation.Controllers
                     ModelState.AddModelError("", string.Join(",", errors));
                 }
             }  
-
             catch (Exception ex) {
 
                 ModelState.AddModelError("", ex.Message);
             }   
-            //ViewData["TitleId"] = new SelectList(_context.Titles, "Id", "TitleName", doctor.TitleId);
             return View(doctor);
         }
-
-        // GET: Doctors/Edit/5
-        [Authorize/*(Roles = "Admin,User")*/]
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Doctors == null)
             {
-                return NotFound();
+            return NotFound();
             }
+         ApplicationUser user = await userManager.FindByEmailAsync(User.Identity.Name);
+         var member = await _context.Members.FindAsync(id);
 
-            var doctor = await _context.Doctors.FindAsync(id);
+         var doctor = await _context.Doctors.FindAsync(id);
             if (doctor == null)
             {
                 return NotFound();
             }
-            //ViewData["TitleId"] = new SelectList(_context.Set<Title>(), "Id", "TitleName", doctor.TitleId);
             return View(doctor);
         }
-
-    
-      //  [Authorize(Roles = "Admin,User")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id,Doctor doctor)
@@ -171,22 +164,17 @@ namespace Project_BloodDonation.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return Redirect("~/Profile/MyProfile");
             }
-     
-            //ViewData["TitleId"] = new SelectList(_context.Set<Title>(), "Id", "TitleName", doctor.TitleId);
             return View(doctor);
         }
-
-        // GET: Doctors/Delete/5
-       // [Authorize(Roles = "Admin")]
+       [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Doctors == null)
             {
                 return NotFound();
             }
-
             var doctor = await _context.Doctors
                 //.Include(d => d.Title)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -197,9 +185,7 @@ namespace Project_BloodDonation.Controllers
 
             return View(doctor);
         }
-
-        // POST: Doctors/Delete/5
-        //[Authorize(Roles = "Admin")]
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -215,7 +215,6 @@ namespace Project_BloodDonation.Controllers
          {
             return NotFound();
          }
-
          if (ModelState.IsValid)
          {
             try
@@ -234,7 +233,7 @@ namespace Project_BloodDonation.Controllers
                   throw;
                }
             }
-            return RedirectToAction(nameof(Index));
+            return Redirect("~/Profile/MyProfile");
          }
          else
          {

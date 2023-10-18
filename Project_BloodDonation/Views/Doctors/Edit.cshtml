@@ -1,4 +1,4 @@
-﻿@*@model Project_BloodDonation.Models.Doctor
+﻿@model Project_BloodDonation.Models.Doctor
 
 @{
     ViewData["Title"] = "Edit";
@@ -9,80 +9,91 @@
 
 <h4>Doctor</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="container">
+   <div class="row">
+      <div class="col-md-12">
+         <form asp-action="Create" enctype="multipart/form-data">
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="TitleId" class="control-label"></label>
-                <select asp-for="TitleId" class="form-control" asp-items="ViewBag.TitleId"></select>
-                <span asp-validation-for="TitleId" class="text-danger"></span>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+               <h2 class="Binfo">Basic Information</h2>
+               <hr />
+               <div class="col-lg-6">
+                  <div class="form-group">
+                     <label asp-for="DateOfBirth" class="control-label"></label>
+                     <input asp-for="DateOfBirth" class="form-control" />
+                     <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                  </div>
+                  <div class="form-group">
+                     <label asp-for="DoctorTypeId" class="control-label"></label>
+                     <select asp-for="DoctorTypeId" class="form-control" asp-items="@ViewBag.DoctorType">
+                        <option value="0" selected>Select Doctor Type</option>
+                     </select>
+                     <span asp-validation-for="DoctorType" class="text-danger"></span>
+                  </div>
+                  <div class="form-group">
+                     <label asp-for="Designation" class="control-label"></label>
+                     <input asp-for="Designation" class="form-control" />
+                     <span asp-validation-for="Designation" class="text-danger"></span>
+                  </div>
+                  <div class="form-group">
+                     <label asp-for="Institute" class="control-label"></label>
+                     <input asp-for="Institute" class="form-control" />
+                     <span asp-validation-for="Institute" class="text-danger"></span>
+                  </div>
+                  <div class="form-group">
+                     <label asp-for="BMDCNO" class="control-label"></label>
+                     <input asp-for="BMDCNO" class="form-control" />
+                     <span asp-validation-for="BMDCNO" class="text-danger"></span>
+                  </div>
+               </div>
+               <div class="col-lg-6">
+                  <div class="form-group">
+                     <label asp-for="RegistrationNumber" class="control-label"></label>
+                     <input asp-for="RegistrationNumber" class="form-control" />
+                     <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
+                  </div>
+                  <div class="form-group">
+                     <label asp-for="CVFile" class="control-label">Upload File</label>
+                     <input asp-for="CVFile " class="form-control" />
+                     <span asp-validation-for="CVFile" class="text-danger"></span>
+                  </div>
+                  <div class="form-group">
+                     <label asp-for="Degree" class="control-label"></label>
+                     <input asp-for="Degree " class="form-control" />
+                     <span asp-validation-for="Degree" class="text-danger"></span>
+                  </div>
+                  <div class="form-group">
+                     <label asp-for="AreaOfConsultation" class="control-label"></label>
+                     <input asp-for="AreaOfConsultation" class="form-control" />
+                     <span asp-validation-for="AreaOfConsultation" class="text-danger"></span>
+                  </div>
+                  <div class="form-group">
+                     <label asp-for="SpecialInterest" class="control-label"></label>
+                     <input asp-for="SpecialInterest" class="form-control" />
+                     <span asp-validation-for="SpecialInterest" class="text-danger"></span>
+                  </div>
+               </div>
             </div>
-
-            <div class="form-group">
-                <label asp-for="DateOfBirth" class="control-label"></label>
-                <input asp-for="DateOfBirth" class="form-control" />
-                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            <div class="row">
+               <div class="col-lg-6">
+                  <div class="form-group mt-3">
+                     <input type="submit" value="Create" class="btn btn-primary" />
+                  </div>
+               </div>
+               <div class="col-lg-6">
+                  <div class="form-group mt-3">
+                     <a asp-action="Index" class="btn btn-success">Back to List</a>
+                  </div>
+               </div>
             </div>
-            <div class="form-group">
-                <label asp-for="MemberGender" class="control-label"></label>
-                <select asp-for="MemberGender" class="form-control"></select>
-                <span asp-validation-for="MemberGender" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DoctorType" class="control-label"></label>
-                <select asp-for="DoctorType" class="form-control"></select>
-                <span asp-validation-for="DoctorType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NationalIdOrPassport" class="control-label"></label>
-                <input asp-for="NationalIdOrPassport" class="form-control" />
-                <span asp-validation-for="NationalIdOrPassport" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RegistrationNumber" class="control-label"></label>
-                <input asp-for="RegistrationNumber" class="form-control" />
-                <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Age" class="control-label"></label>
-                <input asp-for="Age" class="form-control" />
-                <span asp-validation-for="Age" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImageName" class="control-label"></label>
-                <input asp-for="ImageName" class="form-control" />
-                <span asp-validation-for="ImageName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+         </form>
+      </div>
+   </div>
 </div>
-
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
-@section Scripts {
+@section Scripts{
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-*@

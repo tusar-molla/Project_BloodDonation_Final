@@ -3,7 +3,6 @@
    Layout = "~/Views/Shared/_LayoutProfile.cshtml";
 }
 <main id="main" class="main">
-
    <div class="pagetitle">
       <h1>Profile</h1>
       <nav>
@@ -86,23 +85,19 @@
                                     <div class="col-lg-3 col-md-4 label">@Html.DisplayNameFor(model=> model.NID)</div>
                            <div class="col-lg-9 col-md-8">@Model.NID</div>
                         </div>
-
                         <div class="row">
                                     <div class="col-lg-3 col-md-4 label">@Html.DisplayNameFor(model=> model.SmartCard)</div>
                            <div class="col-lg-9 col-md-8">@Model.SmartCard</div>
                         </div>
-
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label">@Html.DisplayNameFor(model=> model.RegistrationDate)</div>
                                     <div class="col-lg-9 col-md-8">@Model.RegistrationDate</div>
                                 </div>
-
-                                <div class="row">
+                             <div class="row">
                                     <div class="col-lg-3 col-md-4 label">@Html.DisplayNameFor(model=> model.BloodgroupId)</div>
                                     <div class="col-lg-9 col-md-8">@Model.Bloodgroup.Name</div>
-                                </div>                           
+                                </div>                 
                      </div>
-
                      <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                         <!-- Profile Edit Form -->

@@ -7,8 +7,7 @@ namespace Project_BloodDonation.ViewModels
    {
       public BloodReqst? BldReference { get; set; }
       //public Member? Member { get; set; }
-
-      public int Id { get; set; }//MemberId
+      public int Id { get; set;}//MemberId
       [Required]
       public string FirstName { get; set; }
       public string LastName { get; set; }

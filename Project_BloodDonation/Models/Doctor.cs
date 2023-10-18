@@ -13,12 +13,12 @@ namespace Project_BloodDonation.Models
         public int Id { get; set; }
       [DataType(DataType.Date)]
       [DisplayName("Date Of Birth")]
-      public DateTime DateOfBirth { get; set; }
+      public DateTime? DateOfBirth { get; set; }
       [ForeignKey("DoctorType"), Display(Name = "Doctor Type")]
       [ValidateNever]
-      public int DoctorTypeId { get; set; }
+      public int? DoctorTypeId { get; set; }
       [ValidateNever]
-      public DoctorType DoctorType { get; set; }
+      public DoctorType? DoctorType { get; set; }
       [Column(TypeName = "nvarchar(60)")]
       public string Designation { get; set;}
       [Column(TypeName = "nvarchar(40)")]
@@ -36,11 +36,11 @@ namespace Project_BloodDonation.Models
       public string RegistrationNumber { get; set; }
       [Column(TypeName = "varchar(100)")]
       [ValidateNever]
-      public string CV { get; set; }
+      public string? CV { get; set; }
       [NotMapped]
       [DisplayName("Upload CV")]
       [ValidateNever]
-      public IFormFile CVFile { get; set; }
+      public IFormFile? CVFile { get; set; }
       [ValidateNever]
       [ForeignKey("Member")]     
       public int MemberId { get; set; }
