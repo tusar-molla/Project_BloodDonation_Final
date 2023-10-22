@@ -40,9 +40,7 @@ namespace Project_BloodDonation.Controllers
         public async Task<IActionResult> DocHome() { 
         
             return View();
-        }
-
-        // GET: Doctors/Details/5
+        }        
         //[Authorize(Roles = "Admin,Doctor")]
         public async Task<IActionResult> Details(int? id)
         {
