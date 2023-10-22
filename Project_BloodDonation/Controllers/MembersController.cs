@@ -56,10 +56,8 @@ namespace Project_BloodDonation.Controllers
          {
             return NotFound();
          }
-
          return View(member);
       }
-
       [Authorize]
       public async Task<IActionResult> DonorDetails(int? id)
       {
@@ -189,19 +187,15 @@ namespace Project_BloodDonation.Controllers
 
       // GET: Members/Edit/5
       //  [Authorize(Roles = "Admin,User")]
-      public async Task<IActionResult> Edit(int? id)
+      public async Task<IActionResult> Edit()
       {
-    
-         if (id == null || _context.Members == null)
+         
+         if (string.IsNullOrEmpty(User.Identity.Name) || _context.Members == null)
          {
             return NotFound();
          }
-         ApplicationUser user = await userManager.FindByEmailAsync(User.Identity.Name);
-         var member = await _context.Members.FindAsync(id);
-         if (member == null)
-         {
-            return NotFound();
-         }
+         var member = _context.Members.Where(u => u.Email.Equals(User.Identity.Name)).FirstOrDefault();
+         var memberId = _context.Members.Where(i => i.Id.Equals(member.Id));
          ViewData["AreaId"] = new SelectList(_context.Areas, "Id", "Name", member.AreaId);
          ViewData["BloodgroupId"] = new SelectList(_context.Bloodgroups, "Id", "Name", member.BloodgroupId);
          return View(member);
@@ -214,12 +208,34 @@ namespace Project_BloodDonation.Controllers
          if (id != member.Id)
          {
             return NotFound();
+
          }
          if (ModelState.IsValid)
          {
             try
             {
-					_context.Update(member);
+               var existingObj = await _context.Set<Member>().FindAsync(id);
+               if (existingObj == null)
+               {
+                  return NotFound();
+               }
+               //_context.ChangeTracker.AutoDetectChangesEnabled = true;
+               existingObj.FirstName = member.FirstName;
+               existingObj.LastName = member.LastName;
+               existingObj.Address = member.Address;
+               existingObj.Contact = member.Contact;
+               existingObj.Age = member.Age;
+               existingObj.NID = member.NID;
+               existingObj.SmartCard = member.SmartCard;
+
+               _context.Entry(existingObj).Property(i => i.FirstName).IsModified = true;
+               _context.Entry(existingObj).Property(i => i.LastName).IsModified = true;
+               _context.Entry(existingObj).Property(i => i.Address).IsModified = true;
+               _context.Entry(existingObj).Property(i => i.Contact).IsModified = true;
+               _context.Entry(existingObj).Property(i => i.Age).IsModified = true;
+               _context.Entry(existingObj).Property(i => i.NID).IsModified = true;
+               _context.Entry(existingObj).Property(i => i.SmartCard).IsModified = true;
+
                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)

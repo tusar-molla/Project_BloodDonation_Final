@@ -8,8 +8,9 @@
       <form asp-action="Edit">
          <div asp-validation-summary="ModelOnly" class="text-danger"></div>
          <input type="hidden" asp-for="Id" />            
-          <input asp-for="Email" class="form-control" hidden/>            
-         <div class="row">
+          <input asp-for="Email" class="form-control" hidden/>
+            <input asp-for="Role" class="form-control" hidden />
+            <div class="row">
                <h2 class="Edt_info">Update Your Info</h2>
             <div class="col-lg-6">
                <div class="form-group">

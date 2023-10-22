@@ -9,8 +9,8 @@ namespace Project_BloodDonation.Models
     public class Bloodgroup
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
         public ICollection<Member> Members { get; set; }
     }
     public enum MemberGender

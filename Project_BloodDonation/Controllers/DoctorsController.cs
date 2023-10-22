@@ -121,16 +121,20 @@ namespace Project_BloodDonation.Controllers
             return View(doctor);
         }
         [Authorize]
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit()
         {
-            if (id == null || _context.Doctors == null)
-            {
+         //if (id == null || _context.Doctors == null)
+         //{
+         //return NotFound();
+         //}
+         // ApplicationUser user = await userManager.FindByEmailAsync(User.Identity.Name);
+         if (string.IsNullOrEmpty(User.Identity.Name) || _context.Doctors == null)
+         {
             return NotFound();
-            }
-         ApplicationUser user = await userManager.FindByEmailAsync(User.Identity.Name);
-         var member = await _context.Members.FindAsync(id);
+         }
+         var member = await _context.Members.Where(u=>u.Email.Equals(User.Identity.Name)).FirstOrDefaultAsync();
 
-         var doctor = await _context.Doctors.FindAsync(id);
+         var doctor = await _context.Doctors.Where(d=>d.MemberId.Equals(member.Id)).SingleOrDefaultAsync();
             if (doctor == null)
             {
                 return NotFound();
@@ -147,10 +151,19 @@ namespace Project_BloodDonation.Controllers
             }
 
             if (ModelState.IsValid)
-            {
+            {            
                 try
                 {
-                    _context.Update(doctor);
+               var existingObj = await _context.Set<Doctor>().FindAsync(id);
+               if (existingObj == null)
+               {
+                  return NotFound();
+               }
+                  existingObj.RegistrationNumber = "RegistrationNumber";
+                  _context.Entry(existingObj).Property(d=> d.RegistrationNumber).IsModified = true;
+                  
+
+                  _context.Update(doctor);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
