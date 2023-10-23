@@ -28,8 +28,8 @@ namespace Project_BloodDonation.Controllers
          this.userManager = userManager;
       }
 
-        // GET: Doctors
-      //[Authorize(Roles = "Admin,Doctor")]
+
+      [Authorize]
         public async Task<IActionResult> Index()
         {
           var applicationDbContext = _context.Doctors.Include(d => d.Member)
@@ -40,9 +40,9 @@ namespace Project_BloodDonation.Controllers
         public async Task<IActionResult> DocHome() { 
         
             return View();
-        }        
-        //[Authorize(Roles = "Admin,Doctor")]
-        public async Task<IActionResult> Details(int? id)
+        }
+      [Authorize]
+      public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Doctors == null)
             {
@@ -60,9 +60,9 @@ namespace Project_BloodDonation.Controllers
             return View(doctor);
         }
 
-        // GET: Doctors/Create
-        //[Authorize(Roles = "Admin,Doctor")]
-        public IActionResult Create()
+      // GET: Doctors/Create
+      [Authorize]
+      public IActionResult Create()
         {
             try
             {
@@ -157,11 +157,21 @@ namespace Project_BloodDonation.Controllers
                {
                   return NotFound();
                }
-                  existingObj.RegistrationNumber = "RegistrationNumber";
-                  _context.Entry(existingObj).Property(d=> d.RegistrationNumber).IsModified = true;
-                  
+                  existingObj.RegistrationNumber = doctor.RegistrationNumber;
+                  existingObj.AreaOfConsultation = doctor.AreaOfConsultation;
+                  existingObj.Institute = doctor.Institute;
+                  existingObj.BMDCNO = doctor.BMDCNO;
+                  //existingObj.RegistrationNumber = "RegistrationNumber";
+                  //existingObj.AreaOfConsultation = "AreaOfConsultation";
 
-                  _context.Update(doctor);
+
+               _context.Entry(existingObj).Property(d=> d.RegistrationNumber).IsModified = true;
+               _context.Entry(existingObj).Property(d => d.AreaOfConsultation).IsModified = true;
+               _context.Entry(existingObj).Property(d => d.Institute).IsModified = true;
+               _context.Entry(existingObj).Property(d => d.BMDCNO).IsModified = true;
+
+
+               _context.Update(doctor);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

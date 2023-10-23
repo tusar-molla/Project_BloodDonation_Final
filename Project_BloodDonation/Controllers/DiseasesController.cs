@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,16 +20,18 @@ namespace Project_BloodDonation.Controllers
             _context = context;
         }
 
-        // GET: Diseases
-        public async Task<IActionResult> Index()
+      // GET: Diseases
+      [Authorize]
+      public async Task<IActionResult> Index()
         {
               return _context.Diseases != null ? 
                           View(await _context.Diseases.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Diseases'  is null.");
         }
 
-        // GET: Diseases/Details/5
-        public async Task<IActionResult> Details(int? id)
+      // GET: Diseases/Details/5
+      [Authorize]
+      public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Diseases == null)
             {
@@ -45,8 +48,9 @@ namespace Project_BloodDonation.Controllers
             return View(disease);
         }
 
-        // GET: Diseases/Create
-        public IActionResult Create()
+      // GET: Diseases/Create
+      [Authorize]
+      public IActionResult Create()
         {
             return View();
         }
@@ -56,7 +60,8 @@ namespace Project_BloodDonation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Symptoms")] Disease disease)
+      [Authorize]
+      public async Task<IActionResult> Create([Bind("Id,Name,Description,Symptoms")] Disease disease)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +72,9 @@ namespace Project_BloodDonation.Controllers
             return View(disease);
         }
 
-        // GET: Diseases/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+      // GET: Diseases/Edit/5
+      [Authorize]
+      public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Diseases == null)
             {
@@ -88,7 +94,8 @@ namespace Project_BloodDonation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Symptoms")] Disease disease)
+      [Authorize]
+      public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Symptoms")] Disease disease)
         {
             if (id != disease.Id)
             {
@@ -118,8 +125,9 @@ namespace Project_BloodDonation.Controllers
             return View(disease);
         }
 
-        // GET: Diseases/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+      // GET: Diseases/Delete/5
+      [Authorize]
+      public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Diseases == null)
             {
@@ -139,7 +147,8 @@ namespace Project_BloodDonation.Controllers
         // POST: Diseases/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+      [Authorize]
+      public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Diseases == null)
             {

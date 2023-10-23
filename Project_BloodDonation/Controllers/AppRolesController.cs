@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Project_BloodDonation.Controllers
 {
- //   [Authorize (Roles = "Admin")]
-    public class AppRolesController : Controller
+   [Authorize]
+   public class AppRolesController : Controller
     {
         public readonly RoleManager<IdentityRole> _roleManager;
 
@@ -19,14 +19,14 @@ namespace Project_BloodDonation.Controllers
             
             return View(roles);
         }
-
-        [HttpGet]
+      [Authorize]
+      [HttpGet]
         public IActionResult Create() { 
         
             return View(); 
         }
-
-        [HttpPost]
+      [Authorize]
+      [HttpPost]
         public async Task<IActionResult> Create(IdentityRole model) {
 
             // Avoid Duplicate Role

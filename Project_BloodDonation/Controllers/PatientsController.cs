@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -32,8 +33,9 @@ namespace Project_BloodDonation.Controllers
             return View();
         }
 
-        // GET: Patients/Details/5
-        public async Task<IActionResult> Details(int? id)
+      // GET: Patients/Details/5
+      [Authorize]
+      public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.patients == null)
             {
@@ -51,8 +53,10 @@ namespace Project_BloodDonation.Controllers
             return View(patient);
         }
 
-        // GET: Patients/Create
-        public IActionResult Create()
+      // GET: Patients/Create
+      [Authorize]
+
+      public IActionResult Create()
         {
             ViewData["MemberId"] = new SelectList(_context.Members, "Id", "Name");
             return View();
@@ -63,7 +67,9 @@ namespace Project_BloodDonation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Patient patient)
+      [Authorize]
+
+      public async Task<IActionResult> Create(Patient patient)
         {
             if (ModelState.IsValid)
          {
@@ -81,8 +87,10 @@ namespace Project_BloodDonation.Controllers
             return View(patient);
         }
 
-        // GET: Patients/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+      // GET: Patients/Edit/5
+      [Authorize]
+
+      public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.patients == null)
             {
@@ -103,7 +111,8 @@ namespace Project_BloodDonation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ReportDeliveryDate,MemberId")] Patient patient)
+        [Authorize]
+      public async Task<IActionResult> Edit(int id, [Bind("Id,ReportDeliveryDate,MemberId")] Patient patient)
         {
             if (id != patient.Id)
             {
@@ -134,8 +143,9 @@ namespace Project_BloodDonation.Controllers
             return View(patient);
         }
 
-        // GET: Patients/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+      // GET: Patients/Delete/5
+      [Authorize]
+      public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.patients == null)
             {
@@ -156,7 +166,9 @@ namespace Project_BloodDonation.Controllers
         // POST: Patients/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+         [Authorize]
+
+      public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.patients == null)
             {

@@ -27,7 +27,7 @@ namespace Project_BloodDonation.Controllers
       }
 
       //GET: Members
-      //[Authorize/*(Roles = "Admin,User")*/]
+      [Authorize]
 
       public async Task<IActionResult> Index()
       {
@@ -82,7 +82,7 @@ namespace Project_BloodDonation.Controllers
       }
 
       // GET: Members/Create
-      //[Authorize/*(Roles = "Admin,User")*/]
+      [Authorize]
       public async Task<IActionResult> Create(string role)
       {
          try
@@ -128,7 +128,7 @@ namespace Project_BloodDonation.Controllers
       }
       [HttpPost]
       [ValidateAntiForgeryToken]
-      //[Authorize/*(Roles = "Admin,User")*/]
+      [Authorize]
       public async Task<IActionResult> Create(Member member)
       {
          try
@@ -186,7 +186,7 @@ namespace Project_BloodDonation.Controllers
       }
 
       // GET: Members/Edit/5
-      //  [Authorize(Roles = "Admin,User")]
+      [Authorize]
       public async Task<IActionResult> Edit()
       {
          
@@ -202,7 +202,7 @@ namespace Project_BloodDonation.Controllers
       }
       [HttpPost]
       [ValidateAntiForgeryToken]
-      //[Authorize(Roles = "Admin,User")]
+      [Authorize]
       public async Task<IActionResult> Edit(int id, Member member)
       {
          if (id != member.Id)
@@ -227,6 +227,7 @@ namespace Project_BloodDonation.Controllers
                existingObj.Age = member.Age;
                existingObj.NID = member.NID;
                existingObj.SmartCard = member.SmartCard;
+               existingObj.BloodgroupId = member.BloodgroupId;
 
                _context.Entry(existingObj).Property(i => i.FirstName).IsModified = true;
                _context.Entry(existingObj).Property(i => i.LastName).IsModified = true;
@@ -235,6 +236,7 @@ namespace Project_BloodDonation.Controllers
                _context.Entry(existingObj).Property(i => i.Age).IsModified = true;
                _context.Entry(existingObj).Property(i => i.NID).IsModified = true;
                _context.Entry(existingObj).Property(i => i.SmartCard).IsModified = true;
+               _context.Entry(existingObj).Property(i => i.BloodgroupId).IsModified = true;
 
                await _context.SaveChangesAsync();
             }
@@ -263,7 +265,7 @@ namespace Project_BloodDonation.Controllers
          return View(member);
       }
       // GET: Members/Delete/5
-      // [Authorize(Roles = "Admin")]
+      [Authorize]
       public async Task<IActionResult> Delete(int? id)
       {
          if (id == null || _context.Members == null)

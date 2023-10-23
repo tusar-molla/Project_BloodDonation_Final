@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -22,15 +23,17 @@ namespace Project_BloodDonation.Controllers
            this._hostEnvironment = hostEnvironment;
         }
 
-        // GET: MemberDeseaseReports
-        public async Task<IActionResult> Index()
+      // GET: MemberDeseaseReports
+      [Authorize]
+      public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.MemberDeseaseReports.Include(m => m.MembersDesease);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: MemberDeseaseReports/Details/5
-        public async Task<IActionResult> Details(int? id)
+      // GET: MemberDeseaseReports/Details/5
+      [Authorize]
+      public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.MemberDeseaseReports == null)
             {
@@ -48,15 +51,17 @@ namespace Project_BloodDonation.Controllers
             return View(memberDeseaseReports);
         }
 
-        // GET: MemberDeseaseReports/Create
-        public IActionResult Create()
+      // GET: MemberDeseaseReports/Create
+      [Authorize]
+      public IActionResult Create()
         {
             //ViewData["MemberDeseaseId"] = new SelectList(_context.MembersDeseases, "Id", "Name");
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(MemberDeseaseReports memberDeseaseReports)
+      [Authorize]
+      public async Task<IActionResult> Create(MemberDeseaseReports memberDeseaseReports)
         {
          try
          {
@@ -116,7 +121,8 @@ namespace Project_BloodDonation.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, MemberDeseaseReports memberDeseaseReports)
+      [Authorize]
+      public async Task<IActionResult> Edit(int id, MemberDeseaseReports memberDeseaseReports)
         {
             if (id != memberDeseaseReports.Id)
             {
@@ -147,8 +153,9 @@ namespace Project_BloodDonation.Controllers
             return View(memberDeseaseReports);
         }
 
-        // GET: MemberDeseaseReports/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+      // GET: MemberDeseaseReports/Delete/5
+      [Authorize]
+      public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.MemberDeseaseReports == null)
             {
@@ -169,7 +176,8 @@ namespace Project_BloodDonation.Controllers
         // POST: MemberDeseaseReports/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+      [Authorize]
+      public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.MemberDeseaseReports == null)
             {

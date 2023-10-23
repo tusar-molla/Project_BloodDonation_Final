@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,8 @@ namespace Project_BloodDonation.Controllers
             _context = context;
          this._hostEnvironment = hostEnvironment;
       }
-        public async Task<IActionResult> Index()
+      [Authorize]
+      public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.MembersDeseases.Include(m => m.Disease).Include(m => m.Member);
             return View(await applicationDbContext.ToListAsync());
@@ -43,15 +45,17 @@ namespace Project_BloodDonation.Controllers
 
             return View(membersDesease);
         }
-        // GET: MembersDeseases/Create
-        public IActionResult Create()
+      // GET: MembersDeseases/Create
+      [Authorize]
+      public IActionResult Create()
         {
             ViewData["DeseaseId"] = new SelectList(_context.Diseases, "Id", "Name");
             ViewData["MemberId"] = new SelectList(_context.Members, "Id", "Name");
             return View();
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
+      [Authorize]
+      [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(MembersDesease membersDesease,List< IFormFile> img, List<int> did)
         {
          if (ModelState.IsValid)
@@ -101,8 +105,9 @@ namespace Project_BloodDonation.Controllers
             ViewData["MemberId"] = new SelectList(_context.Members, "Id", "Name", membersDesease.MemberId);
             return View(membersDesease);
         }
-        // GET: MembersDeseases/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+      // GET: MembersDeseases/Edit/5
+      [Authorize]
+      public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.MembersDeseases == null)
             {
@@ -120,7 +125,8 @@ namespace Project_BloodDonation.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,MembersDesease membersDesease)
+      [Authorize]
+      public async Task<IActionResult> Edit(int id,MembersDesease membersDesease)
         {
             if (id != membersDesease.Id)
             {
@@ -152,8 +158,9 @@ namespace Project_BloodDonation.Controllers
             return View(membersDesease);
         }
 
-        // GET: MembersDeseases/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+      // GET: MembersDeseases/Delete/5
+      [Authorize]
+      public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.MembersDeseases == null)
             {
@@ -172,8 +179,10 @@ namespace Project_BloodDonation.Controllers
             return View(membersDesease);
         }
 
-        // POST: MembersDeseases/Delete/5
-        [HttpPost, ActionName("Delete")]
+      // POST: MembersDeseases/Delete/5
+      [Authorize]
+
+      [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

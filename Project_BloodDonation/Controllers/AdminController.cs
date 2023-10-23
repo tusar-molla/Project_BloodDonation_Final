@@ -18,7 +18,10 @@ namespace Project_BloodDonation.Controllers
         {
          var applicationDbContext = _context.Members            
                 .Include(m => m.Bloodgroup).ToList();
-                //.Include(m => m.Country)
+         //.Include(m => m.Country)
+         ViewBag.Doctors = _context.Doctors.Count();
+         ViewBag.Patients = _context.patients.Count();
+         ViewBag.Donnars = _context.Donars.Count();
             return View(applicationDbContext);
         }
     }

@@ -31,8 +31,8 @@ namespace Project_BloodDonation.Controllers
 
             return View(data);
         }
-
-        public IActionResult DashBoard()
+      [Authorize]
+      public IActionResult DashBoard()
         { 
         
             return View();

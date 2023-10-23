@@ -24,10 +24,11 @@ namespace Project_BloodDonation.Areas.Identity.Pages.Account
         private readonly ILogger<LoginModel> _logger;
       private readonly  UserManager<ApplicationUser> _userManager;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, UserManager<ApplicationUser> userManager)
         {
             _signInManager = signInManager;
             _logger = logger;
+         _userManager = userManager;
         }
 
         /// <summary>
@@ -88,7 +89,8 @@ namespace Project_BloodDonation.Areas.Identity.Pages.Account
       }
 
         public async Task OnGetAsync(string returnUrl = null, string role = "")
-        {
+        
+      {
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
@@ -126,33 +128,35 @@ namespace Project_BloodDonation.Areas.Identity.Pages.Account
                   ////    return Redirect("~/Doctors/Create");
                   // }
 
-                 // var roleName = _userManager.GetRolesAsync();
-                  if (Input.Role.Equals("Doctor"))
+                  var roleName = _userManager.GetRolesAsync(await _userManager.FindByEmailAsync(Input.Email)).Result.FirstOrDefault();
+                  string role = !String.IsNullOrEmpty(Input.Role) ? Input.Role : roleName ;
+              if ( role.Equals("Admin"))
+                  {
+                     return Redirect("~/Admin/Dashboard?role=" + role);
+                  }
+                  if (role.Equals("Doctor"))
                   {
                      return Redirect("~/Home/Index" +
-                        "?role=" + Input.Role);
+                        "?role=" + role);
                   }
-                  if (Input.Role.Equals("Donor"))
+                  if (role.Equals("Donor"))
                   {
-                     return Redirect("~/Profile/MyProfile?role=" + Input.Role);
+                     return Redirect("~/Profile/MyProfile?role=" + role);
                   }
-                  if (Input.Role.Equals("Patient"))
+                  if (role.Equals("Patient"))
                   {
-                     return Redirect("~/Profile/Myprofile?role="+Input.Role);
+                     return Redirect("~/Profile/Myprofile?role="+ role);
                   }
-                  if (Input.Role.Equals("Admin"))
+            
+                  if (role.Equals("User"))
                   {
-                     return Redirect("~/Members/Create?role="+Input.Role);
-                  }
-                  if (Input.Role.Equals("User"))
-                  {
-                     return Redirect("~/User/Dashboard?role="+Input.Role);
+                     return Redirect("~/User/Dashboard?role="+role);
                   }
 
-                  if (Input.Role.Equals("General Member"))
+                  if (role.Equals("General Member"))
 
                   {
-                     return Redirect("~/Profile/MyProfile?role=" + Input.Role);
+                     return Redirect("~/Profile/MyProfile?role=" + role);
                   }
                }
                     else

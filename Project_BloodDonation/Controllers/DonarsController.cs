@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,22 +20,23 @@ namespace Project_BloodDonation.Controllers
             _context = context;
         }
 
-        // GET: Donars
-        public async Task<IActionResult> Index()
+      // GET: Donars
+      [Authorize]
+      public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Donars.Include(d => d.Member);
             return View(await applicationDbContext.ToListAsync());
 
         }
-
             public async Task<IActionResult> Donarview()
             {
                 
                 return View();
             }
 
-            // GET: Donars/Details/5
-            public async Task<IActionResult> Details(int? id)
+      // GET: Donars/Details/5
+      [Authorize]
+      public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Donars == null)
             {
@@ -52,8 +54,9 @@ namespace Project_BloodDonation.Controllers
             return View(donar);
         }
 
-        // GET: Donars/Create
-        public IActionResult Create()
+      // GET: Donars/Create
+      [Authorize]
+      public IActionResult Create()
         {
          ViewBag.MemberId = new SelectList(_context.Members, "Id", "Name");
             return View();
@@ -64,7 +67,8 @@ namespace Project_BloodDonation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Donar donar)
+      [Authorize]
+      public async Task<IActionResult> Create(Donar donar)
         {
             if (ModelState.IsValid)
             {
@@ -81,8 +85,9 @@ namespace Project_BloodDonation.Controllers
             return View(donar);
         }
 
-        // GET: Donars/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+      // GET: Donars/Edit/5
+      [Authorize]
+      public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Donars == null)
             {
@@ -103,7 +108,8 @@ namespace Project_BloodDonation.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,DonarName,Weight,MemberId")] Donar donar)
+      [Authorize]
+      public async Task<IActionResult> Edit(int id, [Bind("Id,DonarName,Weight,MemberId")] Donar donar)
         {
             if (id != donar.Id)
             {
@@ -134,8 +140,9 @@ namespace Project_BloodDonation.Controllers
             return View(donar);
         }
 
-        // GET: Donars/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+      // GET: Donars/Delete/5
+      [Authorize]
+      public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Donars == null)
             {
@@ -156,7 +163,8 @@ namespace Project_BloodDonation.Controllers
         // POST: Donars/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+      [Authorize]
+      public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Donars == null)
             {
