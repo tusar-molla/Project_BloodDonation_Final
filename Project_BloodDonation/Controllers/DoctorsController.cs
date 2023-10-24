@@ -161,7 +161,7 @@ namespace Project_BloodDonation.Controllers
                   existingObj.AreaOfConsultation = doctor.AreaOfConsultation;
                   existingObj.Institute = doctor.Institute;
                   existingObj.BMDCNO = doctor.BMDCNO;
-                  //existingObj.RegistrationNumber = "RegistrationNumber";
+                  existingObj.CVFile = doctor.CVFile;
                   //existingObj.AreaOfConsultation = "AreaOfConsultation";
 
 
@@ -169,9 +169,9 @@ namespace Project_BloodDonation.Controllers
                _context.Entry(existingObj).Property(d => d.AreaOfConsultation).IsModified = true;
                _context.Entry(existingObj).Property(d => d.Institute).IsModified = true;
                _context.Entry(existingObj).Property(d => d.BMDCNO).IsModified = true;
+			    _context.Entry(existingObj).Property(d => d.CVFile).IsModified = true;
 
-
-               _context.Update(doctor);
+					_context.Update(doctor);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

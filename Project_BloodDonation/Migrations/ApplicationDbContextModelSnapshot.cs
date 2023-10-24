@@ -247,7 +247,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("ThanaId");
 
-                    b.ToTable("Areas");
+                    b.ToTable("Areas", (string)null);
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Bloodgroup", b =>
@@ -266,7 +266,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Bloodgroups");
+                    b.ToTable("Bloodgroups", (string)null);
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.BloodReqst", b =>
@@ -318,7 +318,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("ReferenceId");
 
-                    b.ToTable("BloodReqsts");
+                    b.ToTable("BloodReqsts", (string)null);
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Country", b =>
@@ -335,7 +335,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Countries");
+                    b.ToTable("Countries", (string)null);
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Disease", b =>
@@ -360,7 +360,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Diseases");
+                    b.ToTable("Diseases", (string)null);
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.District", b =>
@@ -382,7 +382,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("DivisionId");
 
-                    b.ToTable("Districts");
+                    b.ToTable("Districts", (string)null);
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Division", b =>
@@ -404,7 +404,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("Divisions");
+                    b.ToTable("Divisions", (string)null);
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Doctor", b =>
@@ -461,7 +461,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("MemberId");
 
-                    b.ToTable("Doctors");
+                    b.ToTable("Doctors", (string)null);
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.DoctorType", b =>
@@ -483,7 +483,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DoctorTypes");
+                    b.ToTable("DoctorTypes", (string)null);
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Donar", b =>
@@ -505,7 +505,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("MemberId");
 
-                    b.ToTable("Donars");
+                    b.ToTable("Donars", (string)null);
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Member", b =>
@@ -574,7 +574,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("BloodgroupId");
 
-                    b.ToTable("Members");
+                    b.ToTable("Members", (string)null);
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.MemberDeseaseReports", b =>
@@ -602,7 +602,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("MemberDeseaseId");
 
-                    b.ToTable("MemberDeseaseReports");
+                    b.ToTable("MemberDeseaseReports", (string)null);
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.MembersDesease", b =>
@@ -625,7 +625,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("MemberId");
 
-                    b.ToTable("MembersDeseases");
+                    b.ToTable("MembersDeseases", (string)null);
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Patient", b =>
@@ -655,7 +655,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("MemberId");
 
-                    b.ToTable("patients");
+                    b.ToTable("patients", (string)null);
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Thana", b =>
@@ -677,7 +677,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("DistricId");
 
-                    b.ToTable("Thanas");
+                    b.ToTable("Thanas", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -1605,6 +1605,12 @@ margin-top: 80px;
    /* margin: 0 20px;*/
 }
 
+.Donr_img img {
+    object-fit: cover;
+    border: 3px solid #fff;
+    border-radius: 5px;
+}
+
 /*For Donor Page*/
 
 /*#Donor_sec{

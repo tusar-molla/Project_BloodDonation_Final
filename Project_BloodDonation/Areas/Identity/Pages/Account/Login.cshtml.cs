@@ -136,7 +136,7 @@ namespace Project_BloodDonation.Areas.Identity.Pages.Account
                   }
                   if (role.Equals("Doctor"))
                   {
-                     return Redirect("~/Home/Index" +
+                     return Redirect("~/Profile/MyProfile" +
                         "?role=" + role);
                   }
                   if (role.Equals("Donor"))
