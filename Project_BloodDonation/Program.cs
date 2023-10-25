@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Project_BloodDonation.Data;
 using System.IO;
 
@@ -9,11 +11,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("BloodConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+{
+   options.UseSqlServer(connectionString);
+   options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+   });
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentity<ApplicationUser,IdentityRole>(option =>
-
 {
     option.SignIn.RequireConfirmedEmail = false;
     option.SignIn.RequireConfirmedAccount = false;

@@ -1,103 +1,97 @@
 ﻿@model IEnumerable<Project_BloodDonation.Models.Doctor>
 @{
     ViewData["Title"] = "Index";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@*@{
-   Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
-}*@
-@*<div class="container">
-   <div class="row">
+@{
+   Layout = "~/Views/Shared/_LayoutProfile.cshtml";
+}
+    <div class="container">
    <main class="main" id="main">
-      <div class="col-lg-12">*@
-            <p class="docindxmt">
-               <a asp-action="Create">Create New</a>
-            </p>
+      <div class="row">
+          <div class="col-lg-12">
+         <p class="docindxmt">
+            <a asp-action="Create">Create New</a>
+         </p>                  
             <table class="table table-borderless datatable">
-               <thead>
+            <thead>
+               <tr>
+                  <th>
+                     @Html.DisplayNameFor(model => model.Member.FirstName)
+                  </th>
+                  <th>
+                     @Html.DisplayNameFor(model => model.DateOfBirth)
+                  </th>
+                  <th>
+                     @Html.DisplayNameFor(model => model.DoctorTypeId)
+                  </th>
+                  <th>
+                     @Html.DisplayNameFor(model => model.Designation)
+                  </th>
+                  <th>
+                     @Html.DisplayNameFor(model => model.Degree)
+                  </th>
+                  <th>
+                     @Html.DisplayNameFor(model => model.Institute)
+                  </th>
+                  <th>
+                     @Html.DisplayNameFor(model => model.BMDCNO)
+                  </th>
+                  <th>
+                     @Html.DisplayNameFor(model => model.AreaOfConsultation)
+                  </th>
+                  <th>
+                     @Html.DisplayNameFor(model => model.SpecialInterest)
+                  </th>
+                  <th>
+                     @Html.DisplayNameFor(model => model.RegistrationNumber)
+                  </th>
+                  <th></th>
+               </tr>
+            </thead>
+            <tbody>
+               @foreach (var item in Model)
+               {
                   <tr>
-                     <th>
-                        @Html.DisplayNameFor(model => model.Member.FirstName)
-                     </th>
-                     <th>
-                        @Html.DisplayNameFor(model => model.DateOfBirth)
-                     </th>
-                     <th>
-                        @Html.DisplayNameFor(model => model.DoctorTypeId)
-                     </th>
-                     <th>
-                        @Html.DisplayNameFor(model => model.Designation)
-                     </th>
-                     <th>
-                        @Html.DisplayNameFor(model => model.Degree)
-                     </th>
-                     <th>
-                        @Html.DisplayNameFor(model => model.Institute)
-                     </th>
-                     <th>
-                        @Html.DisplayNameFor(model => model.BMDCNO)
-                     </th>
-                     <th>
-                        @Html.DisplayNameFor(model => model.AreaOfConsultation)
-                     </th>
-                     <th>
-                        @Html.DisplayNameFor(model => model.SpecialInterest)
-                     </th>
-                     <th>
-                        @Html.DisplayNameFor(model => model.RegistrationNumber)
-                     </th>
-                     <th></th>
-                  </tr>
-               </thead>
-               <tbody>
-                  @foreach (var item in Model)
-                  {
-                     <tr>
 
-                        <td>
-                           @Html.DisplayFor(modelItem => item.Member.FirstName)
-                        </td>
-                        <td>
-                           @Html.DisplayFor(modelItem => item.DateOfBirth)
-                        </td>
-                        <td>
-                           @Html.DisplayFor(modelItem => item.DoctorType.Name)
-                        </td>
-                        <td>
-                           @Html.DisplayFor(modelItem => item.Designation)
-                        </td>
-                        <td>
-                           @Html.DisplayFor(modelItem => item.Degree)
-                        </td>
-                        <td>
-                           @Html.DisplayFor(modelItem => item.Institute)
-                        </td>
-                        <td>
-                           @Html.DisplayFor(modelItem => item.BMDCNO)
-                        </td>
-                        <td>
-                           @Html.DisplayFor(modelItem => item.AreaOfConsultation)
-                        </td>
-                        <td>
-                           @Html.DisplayFor(modelItem => item.SpecialInterest)
-                        </td>
-                        <td>
-                           @Html.DisplayFor(modelItem => item.RegistrationNumber)
-                        </td>
-                        @*        <td>
-                     <img src="@("~/image/"+item.ImageName)" asp-append-version="true" width="150px" height="150px" />
-                     </td>*@
-                        <td>
-                           <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                           <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                           <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </td>
-                     </tr>
-                  }
-               </tbody>
-            </table>
-@*      </div>
-      </main>
-   </div>  
-</div>
-*@
+                     <td>
+                        @Html.DisplayFor(modelItem => item.Member.FirstName)
+                     </td>
+                     <td>
+                        @Html.DisplayFor(modelItem => item.DateOfBirth)
+                     </td>
+                     <td>
+                        @Html.DisplayFor(modelItem => item.DoctorType.Name)
+                     </td>
+                     <td>
+                        @Html.DisplayFor(modelItem => item.Designation)
+                     </td>
+                     <td>
+                        @Html.DisplayFor(modelItem => item.Degree)
+                     </td>
+                     <td>
+                        @Html.DisplayFor(modelItem => item.Institute)
+                     </td>
+                     <td>
+                        @Html.DisplayFor(modelItem => item.BMDCNO)
+                     </td>
+                     <td>
+                        @Html.DisplayFor(modelItem => item.AreaOfConsultation)
+                     </td>
+                     <td>
+                        @Html.DisplayFor(modelItem => item.SpecialInterest)
+                     </td>
+                     <td>
+                        @Html.DisplayFor(modelItem => item.RegistrationNumber)
+                     </td>
+                     <td>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                     </td>
+                  </tr>
+               }
+            </tbody>
+         </table>  
+         
+          </div>
+      </div>
+   </main>
+    </div>

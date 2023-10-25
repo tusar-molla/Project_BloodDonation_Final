@@ -228,6 +228,7 @@ namespace Project_BloodDonation.Controllers
                existingObj.NID = member.NID;
                existingObj.SmartCard = member.SmartCard;
                existingObj.BloodgroupId = member.BloodgroupId;
+               existingObj.Passport = member.Passport;
 
                _context.Entry(existingObj).Property(i => i.FirstName).IsModified = true;
                _context.Entry(existingObj).Property(i => i.LastName).IsModified = true;
@@ -237,6 +238,7 @@ namespace Project_BloodDonation.Controllers
                _context.Entry(existingObj).Property(i => i.NID).IsModified = true;
                _context.Entry(existingObj).Property(i => i.SmartCard).IsModified = true;
                _context.Entry(existingObj).Property(i => i.BloodgroupId).IsModified = true;
+               _context.Entry(existingObj).Property(i => i.Passport).IsModified = true;
 
                await _context.SaveChangesAsync();
             }

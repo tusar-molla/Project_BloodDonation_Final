@@ -12,7 +12,7 @@
 <div class="container">
    <div class="row">
       <div class="col-md-12">
-         <form asp-action="Create" enctype="multipart/form-data">
+         <form asp-action="Edit" enctype="multipart/form-data">
             <input type="hidden" asp-for="Id" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row">
@@ -24,13 +24,13 @@
                      <input asp-for="DateOfBirth" class="form-control" />
                      <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                   </div>
-                  <div class="form-group">
+        @*          <div class="form-group">
                      <label asp-for="DoctorTypeId" class="control-label"></label>
                      <select asp-for="DoctorTypeId" class="form-control" asp-items="@ViewBag.DoctorType">
                         <option value="0" selected>Select Doctor Type</option>
                      </select>
                      <span asp-validation-for="DoctorType" class="text-danger"></span>
-                  </div>
+                  </div>*@
                   <div class="form-group">
                      <label asp-for="Designation" class="control-label"></label>
                      <input asp-for="Designation" class="form-control" />
@@ -53,11 +53,11 @@
                      <input asp-for="RegistrationNumber" class="form-control" />
                      <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
                   </div>
-                  <div class="form-group">
+             @*     <div class="form-group">
                      <label asp-for="CVFile" class="control-label">Upload File</label>
                      <input asp-for="CVFile " class="form-control" />
                      <span asp-validation-for="CVFile" class="text-danger"></span>
-                  </div>
+                  </div>*@
                   <div class="form-group">
                      <label asp-for="Degree" class="control-label"></label>
                      <input asp-for="Degree " class="form-control" />
@@ -78,7 +78,7 @@
             <div class="row">
                <div class="col-lg-6">
                   <div class="form-group mt-3">
-                     <input type="submit" value="Create" class="btn btn-primary" />
+                     <input type="submit" value="Edit" class="btn btn-primary" />
                   </div>
                </div>
                <div class="col-lg-6">

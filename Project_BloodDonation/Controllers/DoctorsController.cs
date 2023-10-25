@@ -27,8 +27,6 @@ namespace Project_BloodDonation.Controllers
             this._hostEnvironment = hostEnvironment;
          this.userManager = userManager;
       }
-
-
       [Authorize]
         public async Task<IActionResult> Index()
         {
@@ -148,7 +146,7 @@ namespace Project_BloodDonation.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+         if (ModelState.IsValid)
             {            
                 try
                 {
@@ -157,11 +155,12 @@ namespace Project_BloodDonation.Controllers
                {
                   return NotFound();
                }
-                  existingObj.RegistrationNumber = doctor.RegistrationNumber;
+                  existingObj.RegistrationNumber = existingObj.RegistrationNumber;
                   existingObj.AreaOfConsultation = doctor.AreaOfConsultation;
                   existingObj.Institute = doctor.Institute;
                   existingObj.BMDCNO = doctor.BMDCNO;
-                  existingObj.CVFile = doctor.CVFile;
+                  //existingObj.CVFile = doctor.CVFile;
+                  //existingObj.CV = doctor.CV;
                   //existingObj.AreaOfConsultation = "AreaOfConsultation";
 
 
@@ -169,10 +168,11 @@ namespace Project_BloodDonation.Controllers
                _context.Entry(existingObj).Property(d => d.AreaOfConsultation).IsModified = true;
                _context.Entry(existingObj).Property(d => d.Institute).IsModified = true;
                _context.Entry(existingObj).Property(d => d.BMDCNO).IsModified = true;
-			    _context.Entry(existingObj).Property(d => d.CVFile).IsModified = true;
+			    //_context.Entry(existingObj).Property(d => d.CVFile).IsModified = true;
+       //        _context.Entry(existingObj).Property(d => d.CV).IsModified = true;
 
-					_context.Update(doctor);
-                    await _context.SaveChangesAsync();
+					await _context.SaveChangesAsync();
+                   // await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -186,8 +186,15 @@ namespace Project_BloodDonation.Controllers
                     }
                 }
                 return Redirect("~/Profile/MyProfile");
-            }
-            return View(doctor);
+            
+         }
+         else
+         {
+            var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.ErrorMessage));
+
+            ModelState.AddModelError("", string.Join(",", errors));
+         }
+         return View(doctor);
         }
        [Authorize]
         public async Task<IActionResult> Delete(int? id)
