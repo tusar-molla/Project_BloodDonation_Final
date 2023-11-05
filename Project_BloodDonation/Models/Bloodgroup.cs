@@ -35,7 +35,7 @@ namespace Project_BloodDonation.Models
         [StringLength(14), DisplayName("Smart ID")]
         public string? SmartCard { get; set; }
         public MemberGender? MemberGender { get; set; }
-      public string? Role { get; set; }
+      public string? Role {get; set;}
       [Column (TypeName ="nvarchar(100)")]
         [DisplayName("Image Name")]
         [ValidateNever]

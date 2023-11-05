@@ -13,7 +13,6 @@ using Project_BloodDonation.Models;
 
 namespace Project_BloodDonation.Controllers
 {
-
    public class MembersController : Controller
    {
       private readonly ApplicationDbContext _context;

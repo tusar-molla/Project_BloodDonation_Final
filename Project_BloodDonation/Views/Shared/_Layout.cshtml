@@ -53,8 +53,9 @@
          <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
                <li>  <a class="nav-links" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>               
-               <li> <a class="nav-links" asp-controller="Home" asp-action="SearchBlood">Get Doctor</a></li>
-               <li> <a class="nav-links" asp-controller="Home" asp-action="SearchBlood">Get Blood</a></li>
+               <li> <a class="nav-links" asp-controller="Doctors" asp-action="Index">Get Doctor</a></li>
+                    <li> <a class="nav-links" asp-controller="Home" asp-action="SearchBlood">Get Blood</a></li>
+                
 
                   @if (User.Identity.IsAuthenticated)
                   {

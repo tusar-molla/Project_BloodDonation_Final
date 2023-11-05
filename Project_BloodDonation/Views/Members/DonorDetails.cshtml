@@ -1,5 +1,4 @@
 ﻿@model Project_BloodDonation.Models.Member
-
 @{
    Layout = "~/Views/Shared/_LayoutProfile.cshtml";
 }
@@ -11,7 +10,7 @@
    <div class="row" id="donor_details">
          <div class="col-lg-5 donor_back">
           <div class="Donr_img">
-                        <img src="@("~/image/"+Model.ImageName)" class="w-100" asp-append-version="true" alt="Profile" height="350" width="300px" style="border: 5px #fff solid;" />
+           <img src="@("~/image/"+Model.ImageName)" class="w-100" asp-append-version="true" alt="Profile" height="350" width="300px" style="border: 5px #fff solid;" />
             </div>
             </div>
          <div class="col-lg-7 text-capitalize Donor_inner_back">
@@ -85,6 +84,11 @@
                                 <hr />
                   </div>           
           </div>
+               </div>
+               <div class="row">
+                   <div class="col-lg-6 text-end">
+                            <a class="btn btn-danger">Back</a>
+                   </div>
                </div>
             </div>
       </div>

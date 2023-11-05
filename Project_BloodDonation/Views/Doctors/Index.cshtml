@@ -3,14 +3,14 @@
     ViewData["Title"] = "Index";
 }
 @{
-   Layout = "~/Views/Shared/_LayoutProfile.cshtml";
+   Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
     <div class="container">
-   <main class="main" id="main">
       <div class="row">
+        <main class="main" id="main">
           <div class="col-lg-12">
          <p class="docindxmt">
-            <a asp-action="Create">Create New</a>
+          <a asp-action="DocCreateAdmin">Add Doctor</a>
          </p>                  
             <table class="table table-borderless datatable">
             <thead>
@@ -92,6 +92,6 @@
          </table>  
          
           </div>
+        </main>
       </div>
-   </main>
     </div>

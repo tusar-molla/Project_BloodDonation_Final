@@ -10,8 +10,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Project_BloodDonation.Data;
 using Project_BloodDonation.Models;
+using Project_BloodDonation.ViewModels;
 
 namespace Project_BloodDonation.Controllers
 {
@@ -19,13 +21,15 @@ namespace Project_BloodDonation.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostEnvironment;
-      private readonly UserManager<ApplicationUser> userManager;
+        private readonly UserManager<ApplicationUser> userManager;
+        //private readonly RoleManager<IdentityRole> _roleManager;
 
-      public DoctorsController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment, UserManager<ApplicationUser> userManager)
+      public DoctorsController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment, UserManager<ApplicationUser> userManager/*,RoleManager<IdentityRole> roleManager*/)
         {
             _context = context;
             this._hostEnvironment = hostEnvironment;
          this.userManager = userManager;
+            //_roleManager = roleManager;
       }
       [Authorize]
         public async Task<IActionResult> Index()
@@ -39,7 +43,59 @@ namespace Project_BloodDonation.Controllers
         
             return View();
         }
-      [Authorize]
+
+        public async Task<IActionResult> DocCreateAdmin() {
+
+            ViewBag.Role = new SelectList( _context.Roles.AsQueryable(),"Id","Name");  
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DocCreateAdmin(DoctorViewModels dvm)
+        {
+
+            try
+            {
+                
+              var   member = new Member
+                {
+                    FirstName = dvm.FirstName,
+                    LastName = dvm.LastName,
+                    Address = dvm.Address,
+                    Contact = dvm.Contact,
+                    Email = dvm.Email,
+                    Role = dvm.Role,
+                };
+
+                var doctors = new Doctor
+                {
+                    AreaOfConsultation = dvm.AreaOfConsultation,
+                    SpecialInterest = dvm.SpecialInterest,
+                    Institute = dvm.Institute
+                };
+                userManager.CreateAsync(new ApplicationUser {  Email=dvm.Email, UserName=dvm.Email}, "");
+                if (ModelState.IsValid)
+                {
+                    _context.Add(member);
+                    if (await _context.SaveChangesAsync()>0)
+                    {
+                        return Redirect("Admin/Dashboard");
+                    };
+                }
+            }
+
+            catch (Exception ex) {
+
+                ModelState.AddModelError("", ex.Message);
+            }
+           
+
+            return View();
+
+        }
+
+       
+        [Authorize]
       public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Doctors == null)
@@ -79,7 +135,7 @@ namespace Project_BloodDonation.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Doctor doctor)
+        public async Task<IActionResult> Create(Doctor doctor, DoctorViewModels dvm)
         {
             try
             {
@@ -113,7 +169,7 @@ namespace Project_BloodDonation.Controllers
             catch (Exception ex) {
 
                 ModelState.AddModelError("", ex.Message);
-            }   
+            }
             return View(doctor);
         }
         [Authorize]
@@ -124,7 +180,7 @@ namespace Project_BloodDonation.Controllers
          //return NotFound();
          //}
          // ApplicationUser user = await userManager.FindByEmailAsync(User.Identity.Name);
-         if (string.IsNullOrEmpty(User.Identity.Name) || _context.Doctors == null)
+          if (string.IsNullOrEmpty(User.Identity.Name) || _context.Doctors == null)
          {
             return NotFound();
          }
@@ -159,19 +215,23 @@ namespace Project_BloodDonation.Controllers
                   existingObj.AreaOfConsultation = doctor.AreaOfConsultation;
                   existingObj.Institute = doctor.Institute;
                   existingObj.BMDCNO = doctor.BMDCNO;
-                  //existingObj.CVFile = doctor.CVFile;
-                  //existingObj.CV = doctor.CV;
-                  //existingObj.AreaOfConsultation = "AreaOfConsultation";
-
+                  existingObj.Degree = doctor.Degree;
+                  existingObj.Designation = doctor.Designation;
+                  existingObj.DateOfBirth = doctor.DateOfBirth;
+                  existingObj.SpecialInterest = doctor.SpecialInterest;
+                    existingObj.CV = doctor.CV;
 
                _context.Entry(existingObj).Property(d=> d.RegistrationNumber).IsModified = true;
                _context.Entry(existingObj).Property(d => d.AreaOfConsultation).IsModified = true;
                _context.Entry(existingObj).Property(d => d.Institute).IsModified = true;
-               _context.Entry(existingObj).Property(d => d.BMDCNO).IsModified = true;
-			    //_context.Entry(existingObj).Property(d => d.CVFile).IsModified = true;
-       //        _context.Entry(existingObj).Property(d => d.CV).IsModified = true;
+               _context.Entry(existingObj).Property(d => d.BMDCNO).IsModified = true;			    
+               _context.Entry(existingObj).Property(d => d.CV).IsModified = true;
+               _context.Entry(existingObj).Property(d => d.Degree).IsModified = true;
+               _context.Entry(existingObj).Property(d => d.Designation).IsModified = true;
+               _context.Entry(existingObj).Property(d => d.DateOfBirth).IsModified = true;
+               _context.Entry(existingObj).Property(d => d.SpecialInterest ).IsModified = true;
 
-					await _context.SaveChangesAsync();
+                    await _context.SaveChangesAsync();
                    // await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

@@ -26,8 +26,8 @@ namespace Project_BloodDonation.Areas.Identity.Pages.Account
 
         public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, UserManager<ApplicationUser> userManager)
         {
-            _signInManager = signInManager;
-            _logger = logger;
+         _signInManager = signInManager;
+         _logger = logger;
          _userManager = userManager;
         }
 
@@ -102,7 +102,7 @@ namespace Project_BloodDonation.Areas.Identity.Pages.Account
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-         Input = new InputModel { Role=role };
+         Input = new InputModel {Role=role};
          
          ReturnUrl = returnUrl;
         }

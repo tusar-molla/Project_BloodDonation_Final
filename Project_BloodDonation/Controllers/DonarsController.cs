@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -85,37 +86,34 @@ namespace Project_BloodDonation.Controllers
             return View(donar);
         }
 
-      // GET: Donars/Edit/5
-      [Authorize]
-      public async Task<IActionResult> Edit(int? id)
+        // GET: Donars/Edit/5
+        [Authorize]
+        public async Task<IActionResult> Edit()
         {
-            if (id == null || _context.Donars == null)
-            {
-                return NotFound();
-            }
 
-            var donar = await _context.Donars.FindAsync(id);
-            if (donar == null)
+            if (string.IsNullOrEmpty(User.Identity.Name) || _context.Donars == null)
             {
                 return NotFound();
             }
-            ViewData["MemberId"] = new SelectList(_context.Members, "Id", "Id", donar.MemberId);
+            var member = await _context.Members.Where(u => u.Email.Equals(User.Identity.Name)).FirstOrDefaultAsync();
+            var donar = await _context.Donars.Where(d => d.MemberId.Equals(member.Id)).SingleOrDefaultAsync();
+
+            if (donar == null) {
+                return NotFound();
+            }
+            //ViewData["MemberId"] = new SelectList(_context.Members, "Id", "Id", donar.MemberId);
             return View(donar);
         }
-
-        // POST: Donars/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
       [Authorize]
-      public async Task<IActionResult> Edit(int id, [Bind("Id,DonarName,Weight,MemberId")] Donar donar)
+      public async Task<IActionResult> Edit(int id, Donar donar)
         {
             if (id != donar.Id)
             {
                 return NotFound();
             }
-
+            
             if (ModelState.IsValid)
             {
                 try
@@ -134,9 +132,9 @@ namespace Project_BloodDonation.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return Redirect("~/Profile/MyProfile");
             }
-            ViewData["MemberId"] = new SelectList(_context.Members, "Id", "Id", donar.MemberId);
+            //ViewData["MemberId"] = new SelectList(_context.Members, "Id", "Id", donar.MemberId);
             return View(donar);
         }
 
