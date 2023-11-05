@@ -75,6 +75,7 @@ namespace Project_BloodDonation.Controllers
                Contact = bvm.Contact,
                Email = bvm.Email,
                Role = bvm.Role,
+
             };
             _context.Members.Add(member);
             await _context.SaveChangesAsync();
