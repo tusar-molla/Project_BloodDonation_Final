@@ -1,4 +1,4 @@
-﻿@model Member
+﻿@model Project_BloodDonation.ViewModels.DoctorViewModels
 <h2 class="docindxmt text-center">Enter Doctor Information</h2>
 
 <div class="container">
@@ -25,6 +25,17 @@
                                 <label asp-for="Contact" class="control-label"></label>
                                 <input asp-for="Contact" class="form-control" />
                                 <span asp-validation-for="Contact" class="text-danger"></span>
+                            </div> 
+                            
+                            <div class="form-group">
+                                <label asp-for="AreaOfConsultation" class="control-label"></label>
+                                <input asp-for="AreaOfConsultation" class="form-control" />
+                                <span asp-validation-for="AreaOfConsultation" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="SpecialInterest" class="control-label"></label>
+                                <input asp-for="SpecialInterest" class="form-control" />
+                                <span asp-validation-for="SpecialInterest" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -40,6 +51,17 @@
                                     <option value="0">Select Role</option>
                                 </select>
                                 <span asp-validation-for="Role" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="PassWord" class="control-label"></label>
+                               <input asp-for="PassWord" class="form-control"/>
+                               <span asp-validation-for="PassWord" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Institute" class="control-label"></label>
+                                <input asp-for="Institute" class="form-control" />
+                                <span asp-validation-for="Institute" class="text-danger"></span>
                             </div>
                         </div>
                     </div>

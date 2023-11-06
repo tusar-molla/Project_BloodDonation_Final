@@ -54,11 +54,7 @@ namespace Project_BloodDonation.Controllers
             ModelState.AddModelError("", ex.Message);
          }
          return View();
-      }
-
-        // POST: BldrfrenceandPatientdtlsViewModels/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+      }    
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create( BldrfrenceandPatientdtlsViewModels bvm,string returnUrl=null)

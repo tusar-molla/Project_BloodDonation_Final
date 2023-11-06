@@ -49,7 +49,6 @@ namespace Project_BloodDonation.Controllers
             ViewBag.Role = new SelectList( _context.Roles.AsQueryable(),"Id","Name");  
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> DocCreateAdmin(DoctorViewModels dvm)
         {
@@ -75,7 +74,7 @@ namespace Project_BloodDonation.Controllers
                 };
                 userManager.CreateAsync(new ApplicationUser {  Email=dvm.Email, UserName=dvm.Email}, "");
                 if (ModelState.IsValid)
-                {
+               {
                     _context.Add(member);
                     if (await _context.SaveChangesAsync()>0)
                     {
@@ -110,10 +109,8 @@ namespace Project_BloodDonation.Controllers
             {
                 return NotFound();
             }
-
             return View(doctor);
         }
-
       // GET: Doctors/Create
       [Authorize]
       public IActionResult Create()
@@ -135,7 +132,7 @@ namespace Project_BloodDonation.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Doctor doctor, DoctorViewModels dvm)
+        public async Task<IActionResult> Create(Doctor doctor)
         {
             try
             {
