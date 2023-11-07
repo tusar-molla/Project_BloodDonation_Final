@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Project_BloodDonation.Areas.Identity.Pages.Account.Manage;
 using Project_BloodDonation.Data;
 using Project_BloodDonation.Models;
 using Project_BloodDonation.ViewModels;
@@ -43,7 +44,6 @@ namespace Project_BloodDonation.Controllers
         
             return View();
         }
-
         public async Task<IActionResult> DocCreateAdmin() {
 
             ViewBag.Role = new SelectList( _context.Roles.AsQueryable(),"Id","Name");  
@@ -55,8 +55,7 @@ namespace Project_BloodDonation.Controllers
 
             try
             {
-                
-              var   member = new Member
+                var member = new Member
                 {
                     FirstName = dvm.FirstName,
                     LastName = dvm.LastName,
@@ -65,6 +64,8 @@ namespace Project_BloodDonation.Controllers
                     Email = dvm.Email,
                     Role = dvm.Role,
                 };
+                _context.Members.Add(member);
+                await _context.SaveChangesAsync();
 
                 var doctors = new Doctor
                 {
@@ -72,28 +73,18 @@ namespace Project_BloodDonation.Controllers
                     SpecialInterest = dvm.SpecialInterest,
                     Institute = dvm.Institute
                 };
-                userManager.CreateAsync(new ApplicationUser {  Email=dvm.Email, UserName=dvm.Email}, "");
-                if (ModelState.IsValid)
-               {
-                    _context.Add(member);
-                    if (await _context.SaveChangesAsync()>0)
-                    {
-                        return Redirect("Admin/Dashboard");
-                    };
-                }
+                userManager.CreateAsync(new ApplicationUser { Email = dvm.Email, UserName = dvm.Email }, "");
+                _context.Add(doctors);
+                if (await _context.SaveChangesAsync() > 0)
+                    return Redirect("~/Admin/Dashboard");
             }
 
-            catch (Exception ex) {
+                  catch (Exception ex) {
 
                 ModelState.AddModelError("", ex.Message);
             }
-           
-
             return View();
-
         }
-
-       
         [Authorize]
       public async Task<IActionResult> Details(int? id)
         {
