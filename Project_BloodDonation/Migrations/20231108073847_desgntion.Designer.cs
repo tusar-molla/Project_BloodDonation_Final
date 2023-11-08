@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project_BloodDonation.Data;
 
@@ -11,9 +12,10 @@ using Project_BloodDonation.Data;
 namespace Project_BloodDonation.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231108073847_desgntion")]
+    partial class desgntion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -247,24 +249,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("ThanaId");
 
-                    b.ToTable("Areas", (string)null);
-                });
-
-            modelBuilder.Entity("Project_BloodDonation.Models.AreaOfConsultation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AreaOfConsultations", (string)null);
+                    b.ToTable("Areas");
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Bloodgroup", b =>
@@ -283,7 +268,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Bloodgroups", (string)null);
+                    b.ToTable("Bloodgroups");
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.BloodReqst", b =>
@@ -335,7 +320,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("ReferenceId");
 
-                    b.ToTable("BloodReqsts", (string)null);
+                    b.ToTable("BloodReqsts");
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Country", b =>
@@ -352,24 +337,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Countries", (string)null);
-                });
-
-            modelBuilder.Entity("Project_BloodDonation.Models.Degree", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Degrees", (string)null);
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Designation", b =>
@@ -390,7 +358,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Designations", (string)null);
+                    b.ToTable("Designations");
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Disease", b =>
@@ -415,7 +383,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Diseases", (string)null);
+                    b.ToTable("Diseases");
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.District", b =>
@@ -437,7 +405,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("DivisionId");
 
-                    b.ToTable("Districts", (string)null);
+                    b.ToTable("Districts");
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Division", b =>
@@ -459,7 +427,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("Divisions", (string)null);
+                    b.ToTable("Divisions");
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Doctor", b =>
@@ -470,12 +438,13 @@ namespace Project_BloodDonation.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AreaOfConsultationId")
-                        .HasColumnType("int");
+                    b.Property<string>("AreaOfConsultation")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("BMDCNO")
                         .IsRequired()
-                        .HasColumnType("nvarchar(40)");
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<string>("CV")
                         .HasColumnType("varchar(100)");
@@ -483,17 +452,20 @@ namespace Project_BloodDonation.Migrations
                     b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DegreeId")
-                        .HasColumnType("int");
+                    b.Property<string>("Degree")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(40)");
 
-                    b.Property<int>("DesignationId")
-                        .HasColumnType("int");
+                    b.Property<string>("DesignationId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<int?>("DoctorTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("InstitutionId")
-                        .HasColumnType("int");
+                    b.Property<string>("Institute")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("MemberId")
                         .HasColumnType("int");
@@ -502,26 +474,19 @@ namespace Project_BloodDonation.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(25)");
 
-                    b.Property<int>("SpecialInterestId")
-                        .HasColumnType("int");
+                    b.Property<string>("SpecialInterest")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(35)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AreaOfConsultationId");
-
-                    b.HasIndex("DegreeId");
 
                     b.HasIndex("DesignationId");
 
                     b.HasIndex("DoctorTypeId");
 
-                    b.HasIndex("InstitutionId");
-
                     b.HasIndex("MemberId");
 
-                    b.HasIndex("SpecialInterestId");
-
-                    b.ToTable("Doctors", (string)null);
+                    b.ToTable("Doctors");
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.DoctorType", b =>
@@ -543,7 +508,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DoctorTypes", (string)null);
+                    b.ToTable("DoctorTypes");
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Donar", b =>
@@ -564,24 +529,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("MemberId");
 
-                    b.ToTable("Donars", (string)null);
-                });
-
-            modelBuilder.Entity("Project_BloodDonation.Models.Institution", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Institutions", (string)null);
+                    b.ToTable("Donars");
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Member", b =>
@@ -650,7 +598,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("BloodgroupId");
 
-                    b.ToTable("Members", (string)null);
+                    b.ToTable("Members");
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.MemberDeseaseReports", b =>
@@ -678,7 +626,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("MemberDeseaseId");
 
-                    b.ToTable("MemberDeseaseReports", (string)null);
+                    b.ToTable("MemberDeseaseReports");
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.MembersDesease", b =>
@@ -701,7 +649,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("MemberId");
 
-                    b.ToTable("MembersDeseases", (string)null);
+                    b.ToTable("MembersDeseases");
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Patient", b =>
@@ -731,24 +679,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("MemberId");
 
-                    b.ToTable("patients", (string)null);
-                });
-
-            modelBuilder.Entity("Project_BloodDonation.Models.SpecialInterest", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SpecialInterests", (string)null);
+                    b.ToTable("patients");
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Thana", b =>
@@ -770,7 +701,7 @@ namespace Project_BloodDonation.Migrations
 
                     b.HasIndex("DistricId");
 
-                    b.ToTable("Thanas", (string)null);
+                    b.ToTable("Thanas");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -878,18 +809,6 @@ namespace Project_BloodDonation.Migrations
 
             modelBuilder.Entity("Project_BloodDonation.Models.Doctor", b =>
                 {
-                    b.HasOne("Project_BloodDonation.Models.AreaOfConsultation", "AreaOfConsultation")
-                        .WithMany()
-                        .HasForeignKey("AreaOfConsultationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Project_BloodDonation.Models.Degree", "Degree")
-                        .WithMany()
-                        .HasForeignKey("DegreeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Project_BloodDonation.Models.Designation", "Designation")
                         .WithMany()
                         .HasForeignKey("DesignationId")
@@ -900,37 +819,17 @@ namespace Project_BloodDonation.Migrations
                         .WithMany()
                         .HasForeignKey("DoctorTypeId");
 
-                    b.HasOne("Project_BloodDonation.Models.Institution", "Institution")
-                        .WithMany()
-                        .HasForeignKey("InstitutionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Project_BloodDonation.Models.Member", "Member")
                         .WithMany("Doctors")
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Project_BloodDonation.Models.SpecialInterest", "SpecialInterest")
-                        .WithMany()
-                        .HasForeignKey("SpecialInterestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AreaOfConsultation");
-
-                    b.Navigation("Degree");
-
                     b.Navigation("Designation");
 
                     b.Navigation("DoctorType");
 
-                    b.Navigation("Institution");
-
                     b.Navigation("Member");
-
-                    b.Navigation("SpecialInterest");
                 });
 
             modelBuilder.Entity("Project_BloodDonation.Models.Donar", b =>

@@ -24,11 +24,18 @@ namespace Project_BloodDonation.Data
         public DbSet<Country> Countries { get; set; }        
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<DoctorType> DoctorTypes { get; set; }
+        public DbSet<Designation> Designations { get; set; }
+        public DbSet<Institution> Institutions { get; set; }
+        public DbSet<Degree> Degrees { get; set; }
+        public DbSet<SpecialInterest> SpecialInterests { get; set; }
+        public DbSet<AreaOfConsultation> AreaOfConsultations { get; set; }
         public DbSet<Disease> Diseases { get; set; }
         public DbSet<MembersDesease> MembersDeseases { get; set; }
         public DbSet<Donar> Donars { get; set; }
         public DbSet<Patient> patients { get; set; }
         public DbSet<MemberDeseaseReports> MemberDeseaseReports { get; set; }
-        public  DbSet<BloodReqst> BloodReqsts { get; set; }
-   }
+        public  DbSet<BloodReqst> BloodReqsts { get; set; }   
+   
+
+    }
 }
