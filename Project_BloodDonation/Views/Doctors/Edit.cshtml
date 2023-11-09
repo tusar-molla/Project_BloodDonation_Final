@@ -4,9 +4,7 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h1>Edit</h1>
-
 <h4>Doctor</h4>
 <hr />
 <div class="container">
@@ -24,24 +22,30 @@
                      <input asp-for="DateOfBirth" class="form-control" />
                      <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                   </div>
-        @*          <div class="form-group">
+
+                 <div class="form-group mt-3">
                      <label asp-for="DoctorTypeId" class="control-label"></label>
                      <select asp-for="DoctorTypeId" class="form-control" asp-items="@ViewBag.DoctorType">
                         <option value="0" selected>Select Doctor Type</option>
                      </select>
                      <span asp-validation-for="DoctorType" class="text-danger"></span>
-                  </div>*@
-   @*                <div class="form-group">
-                     <label asp-for="Designation" class="control-label"></label>
-                     <input asp-for="Designation" class="form-control" />
-                     <span asp-validation-for="Designation" class="text-danger"></span>
-                  </div> *@
-                @*   <div class="form-group">
-                     <label asp-for="Institute" class="control-label"></label>
-                     <input asp-for="Institute" class="form-control" />
-                     <span asp-validation-for="Institute" class="text-danger"></span>
-                  </div> *@
-                  <div class="form-group">
+                  </div>
+
+                        <div class="form-group mt-3">
+                            <label asp-for="DesignationId" class="control-label"></label>
+                            <select asp-for="DesignationId" class="form-control" asp-items="@ViewBag.Designation">
+                                <option value="0" selected>Select Doctor Type</option>
+                            </select>
+                            <span asp-validation-for="DesignationId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="InstitutionId" class="control-label"></label>
+                            <select asp-for="InstitutionId" class="form-control" asp-items="@ViewBag.Institution">
+                                <option value="0" selected>Select Doctor Type</option>
+                            </select>
+                            <span asp-validation-for="InstitutionId" class="text-danger"></span>
+                        </div>
+                  <div class="form-group mt-3">
                      <label asp-for="BMDCNO" class="control-label"></label>
                      <input asp-for="BMDCNO" class="form-control" />
                      <span asp-validation-for="BMDCNO" class="text-danger"></span>
@@ -53,44 +57,51 @@
                      <input asp-for="RegistrationNumber" class="form-control" />
                      <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
                   </div>
-             @*     <div class="form-group">
-                     <label asp-for="CVFile" class="control-label">Upload File</label>
-                     <input asp-for="CVFile " class="form-control" />
-                     <span asp-validation-for="CVFile" class="text-danger"></span>
-                  </div>*@
-         @*          <div class="form-group">
-                     <label asp-for="Degree" class="control-label"></label>
-                     <input asp-for="Degree " class="form-control" />
-                     <span asp-validation-for="Degree" class="text-danger"></span>
-                  </div>
-                  <div class="form-group">
-                     <label asp-for="AreaOfConsultation" class="control-label"></label>
-                     <input asp-for="AreaOfConsultation" class="form-control" />
-                     <span asp-validation-for="AreaOfConsultation" class="text-danger"></span>
-                  </div>
-                  <div class="form-group">
-                     <label asp-for="SpecialInterest" class="control-label"></label>
-                     <input asp-for="SpecialInterest" class="form-control" />
-                     <span asp-validation-for="SpecialInterest" class="text-danger"></span>
-                  </div> *@
+               @*   <div class="form-group">
+                     <label asp-for="cvfile" class="control-label">upload file</label>
+                     <input asp-for="cvfile " class="form-control" />
+                     <span asp-validation-for="cvfile" class="text-danger"></span> *@
+                 
+                        <div class="form-group mt-3">
+                            <label asp-for="DegreeId" class="control-label"></label>
+                            <select asp-for="DegreeId" class="form-control" asp-items="@ViewBag.Degree">
+                                <option value="0" selected>Select Doctor Type</option>
+                            </select>
+                            <span asp-validation-for="DegreeId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="AreaOfConsultationId" class="control-label"></label>
+                            <select asp-for="AreaOfConsultationId" class="form-control" asp-items="@ViewBag.AreaOfConsulting">
+                                <option value="0" selected>Select Doctor Type</option>
+                            </select>
+                            <span asp-validation-for="AreaOfConsultationId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="SpecialInterestId" class="control-label"></label>
+                            <select asp-for="SpecialInterestId" class="form-control" asp-items="@ViewBag.SpecialInterest">
+                                <option value="0" selected>Select Doctor Type</option>
+                            </select>
+                            <span asp-validation-for="SpecialInterestId" class="text-danger"></span>
+                        </div>
                </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group mt-3">
+                            <input type="submit" value="Edit" class="btn btn-primary" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group mt-3">
+                            <a asp-action="Index" class="btn btn-success">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
             </div>
-            <div class="row">
-               <div class="col-lg-6">
-                  <div class="form-group mt-3">
-                     <input type="submit" value="Edit" class="btn btn-primary" />
-                  </div>
-               </div>
-               <div class="col-lg-6">
-                  <div class="form-group mt-3">
-                     <a asp-action="Index" class="btn btn-success">Back to List</a>
-                  </div>
-               </div>
-            </div>
-         </form>
       </div>
    </div>
-</div>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

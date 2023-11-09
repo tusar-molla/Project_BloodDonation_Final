@@ -8,7 +8,7 @@ namespace Project_BloodDonation.ViewModels
         public string AreaOfConsultation {get; set;}
         public string SpecialInterest {get; set;}
         public string Institute { get; set; }
-
+        
         public int MemberId {get; set;}
         public string FirstName {get; set;}
         public string LastName {get; set;}

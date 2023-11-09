@@ -2,12 +2,13 @@
 
 <div class="tab-content pt-2">
    <div class="tab-pane fade show active profile-overview" id="profile-overview">
-@* <div class="row">
-        <div class="col-lg-5 col-md-5 label">Designation :</div>
-    <div class="col-lg-7 col-md-7">@Model.Designation</div>
-</div> *@
+       <div class="row">
+            <div class="col-lg-5 col-md-4 label ">@Html.DisplayNameFor(model=> model.DoctorType)</div>
+            <div class="col-lg-7 col-md-8 Reg_no">@Model.DoctorTypeId</div>
+        </div>
+
 <div class="row">
-    <div class="col-lg-5 col-md-4 label ">Registrastion No :</div>
+    <div class="col-lg-5 col-md-4 label ">Registrastion No:</div>
     <div class="col-lg-7 col-md-8 Reg_no">@Model.RegistrationNumber</div>
 </div>
     <div class="row">
@@ -16,21 +17,25 @@
     </div>
     <div class="row">
         <div class="col-lg-5 col-md-4 label ">@Html.DisplayNameFor(model=> model.Degree)</div>
-        <div class="col-lg-7 col-md-8">@Model.Degree</div>
+        <div class="col-lg-7 col-md-8">@Model.DegreeId</div>
     </div>
     <div class="row">
         <div class="col-lg-5 col-md-4 label ">@Html.DisplayNameFor(model=> model.Institution)</div>
-        <div class="col-lg-7 col-md-8">@Model.Institution</div>
+        <div class="col-lg-7 col-md-8">@Model.InstitutionId</div>
     </div>
     <div class="row">
         <div class="col-lg-5 col-md-5 label ">@Html.DisplayNameFor(model=> model.AreaOfConsultation)</div>
-        <div class="col-lg-7 col-md-7">@Model.AreaOfConsultation</div>
+        <div class="col-lg-7 col-md-7">@Model.AreaOfConsultationId</div>
     </div>
     <div class="row">
         <div class="col-lg-5 col-md-4 label ">@Html.DisplayNameFor(model=> model.SpecialInterest)</div>
-        <div class="col-lg-7 col-md-8">@Model.SpecialInterest</div>
+        <div class="col-lg-7 col-md-8">@Model.SpecialInterestId</div>
     </div>
-</div>
-</div>
 
+        <div class="row">
+            <div class="col-lg-5 col-md-4 label ">@Html.DisplayNameFor(model=> model.Designation)</div>
+            <div class="col-lg-7 col-md-8">@Model.DesignationId</div>
+        </div>
+</div>
+</div>
 <!-- End Profile Edit Form -->

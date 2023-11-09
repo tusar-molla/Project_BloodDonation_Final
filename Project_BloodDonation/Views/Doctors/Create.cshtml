@@ -22,7 +22,7 @@
                             <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group mt-3">
                             <label asp-for="DoctorTypeId" class="control-label"></label>
                             <select asp-for="DoctorTypeId" class="form-control" asp-items="@ViewBag.DoctorType">
                                 <option value="0" selected>Select Doctor Type</option>
@@ -30,20 +30,23 @@
                             <span asp-validation-for="DoctorType" class="text-danger"></span>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group mt-3">
                             <label asp-for="DesignationId" class="control-label"></label>
                             <select asp-for="DesignationId" class="form-control" asp-items="@ViewBag.Designation">
                                 <option value="0" selected>Select Designation</option>
                             </select>
                             <span asp-validation-for="DesignationId" class="text-danger"></span>
-                        </div> 
-            
-                 @*  <div class="form-group">
-                     <label asp-for="Institute" class="control-label"></label>
-                     <input asp-for="Institute" class="form-control" />
-                     <span asp-validation-for="Institute" class="text-danger"></span>
-                  </div> *@
-                  <div class="form-group">
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label asp-for="SpecialInterestId" class="control-label"></label>
+                            <select asp-for="SpecialInterestId" class="form-control" asp-items="@ViewBag.SpecialInterest">
+                                <option value="0" selected>Select SpecialInterest</option>
+                            </select>
+                            <span asp-validation-for="SpecialInterestId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-3">
                      <label asp-for="BMDCNO" class="control-label"></label>
                      <input asp-for="BMDCNO" class="form-control" />
                      <span asp-validation-for="BMDCNO" class="text-danger"></span>
@@ -51,41 +54,49 @@
          </div>
 
                     <div class="col-lg-6">                    
-                        <div class="form-group">
+                        <div class="form-group mt-3">
                             <label asp-for="RegistrationNumber" class="control-label"></label>
                             <input asp-for="RegistrationNumber" class="form-control" />
                             <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
                         </div>
                    
-              <div class="form-group">
-                            <label asp-for="CVFile" class="control-label">Upload File</label>
+              <div class="form-group mt-3">
+                            <label asp-for="CVFile" class="control-label">Upload Your CV</label>
                             <input asp-for="CVFile " class="form-control" />
                             <span asp-validation-for="CVFile" class="text-danger"></span>
                         </div>
 
-          @*         <div class="form-group">
-                     <label asp-for="Degree" class="control-label"></label>
-                     <input asp-for="Degree " class="form-control" />
-                     <span asp-validation-for="Degree" class="text-danger"></span>
-                  </div>
-                  <div class="form-group">
-                     <label asp-for="AreaOfConsultation" class="control-label"></label>
-                     <input asp-for="AreaOfConsultation" class="form-control" />
-                     <span asp-validation-for="AreaOfConsultation" class="text-danger"></span>
-                  </div>
-                  <div class="form-group">
-                     <label asp-for="SpecialInterest" class="control-label"></label>
-                     <input asp-for="SpecialInterest" class="form-control" />
-                     <span asp-validation-for="SpecialInterest" class="text-danger"></span>
-                  </div>
-                    </div> *@
+                        <div class="form-group mt-3">
+                            <label asp-for="DegreeId" class="control-label"></label>
+                            <select asp-for="DegreeId" class="form-control" asp-items="@ViewBag.Degree">
+                                <option value="0" selected>Select Degree</option>
+                            </select>
+                            <span asp-validation-for="DegreeId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="AreaOfConsultationId" class="control-label"></label>
+                            <select asp-for="AreaOfConsultationId" class="form-control" asp-items="@ViewBag.AreaOfConsulting">
+                                <option value="0" selected>Select AreaOfConsulting</option>
+                            </select>
+                            <span asp-validation-for="AreaOfConsultationId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label asp-for="InstitutionId" class="control-label"></label>
+                            <select asp-for="InstitutionId" class="form-control" asp-items="@ViewBag.Institution">
+                                <option value="0" selected>Select Institution</option>
+                            </select>
+                            <span asp-validation-for="InstitutionId" class="text-danger"></span>
+                        </div>
+
+                    </div>
             </div>
             <div class="row">     
                   <div class="form-group mt-3">
                      <input type="submit" value="Create" class="btn btn-primary" />
                   </div>            
                   <div class="form-group mt-3">
-                     <a asp-action="Index" class="btn btn-success">Back to List</a>
+                     <a asp-action="Index" class="btn btn-danger">Back to List</a>
                   </div>
             </div>
          </form>
